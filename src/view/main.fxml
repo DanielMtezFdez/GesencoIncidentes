@@ -1,15 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="807.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.17359050445103857" layoutY="-1.0" orientation="VERTICAL" prefHeight="676.0" prefWidth="1107.0">
+      <SplitPane dividerPositions="0.09565217391304348" layoutY="-1.0" orientation="VERTICAL" prefHeight="807.0" prefWidth="1315.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="97.0" prefWidth="1308.0" style="-fx-background-color: #f34e67;" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView fx:id="TablaIncidente" layoutY="9.0" prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="ColEmpleado" prefWidth="106.0" text="Empleado" />
+                      <TableColumn fx:id="ColTipoIncidente" prefWidth="232.0" text="Tipo Incidente" />
+                        <TableColumn fx:id="ColNivelUrgencia" prefWidth="169.0" text="Nivel urgencia" />
+                        <TableColumn fx:id="ColFechaInicio" prefWidth="179.0" text="Comunicación vía" />
+                        <TableColumn fx:id="ColTipoComunicacion" prefWidth="111.0" text="¿Completado?" />
+                    </columns>
+                  </TableView>
+                <AnchorPane layoutX="800.0" layoutY="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="725.0" prefWidth="514.0" style="-fx-background-color: #a2D479;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="799.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <JFXTextArea layoutX="30.0" layoutY="380.0" prefHeight="266.0" prefWidth="450.0" text="ASDDDDDDDDDDDDDDD&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D" />
+                        <JFXButton layoutX="30.0" layoutY="670.0" prefHeight="30.0" prefWidth="150.0" ripplerFill="RED" style="-fx-background-color: #FFF;" text="Editar" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="670.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="329.0" layoutY="670.0" prefHeight="30.0" prefWidth="150.0" ripplerFill="RED" style="-fx-background-color: #FFF;" text="Completar" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="670.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <Label layoutX="30.0" layoutY="60.0" text="Creado por:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="300.0" layoutY="60.0" prefHeight="17.0" prefWidth="150.0" text="GES-0001">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="100.0" text="Tipo Incidente:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="180.0" text="Nivel de urgencia:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="220.0" text="Creación de incidente:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="260.0" text="Fecha inicio de acción:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="300.0" text="Fecha finalización:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="14.0" prefHeight="25.0" prefWidth="500.0" text="Este es el título del incidente" AnchorPane.rightAnchor="7.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="300.0" layoutY="100.0" prefHeight="17.0" prefWidth="150.0" text="TIPO" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="300.0" layoutY="140.0" prefWidth="150.0" text="TELEFONICA" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="300.0" layoutY="180.0" prefWidth="150.0" text="SUPER URGENTE" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="300.0" layoutY="220.0" prefWidth="150.0" text="18-02-2019" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="300.0" layoutY="260.0" prefWidth="150.0" text="18-02-2019" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="300.0" layoutY="300.0" prefWidth="150.0" text="NO FINALIZADO" textAlignment="RIGHT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="140.0" text="Tipo Incidente:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="464.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/ic_user.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="30.0" layoutY="340.0" text="Descripción:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </children>
