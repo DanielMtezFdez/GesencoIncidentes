@@ -26,8 +26,9 @@ public class ConnectFireBird {
     }
 
     public static void main(String[] args) {
-        String url = "jdbc:firebirdsql:localhost/3050:D:\\DISTR K\\HORIZONT\\Database";
+        String url = "jdbc:firebirdsql:localhost/3050:D:\\DISTR K\\HORIZONT\\Database\\HORIZONT.FDB";
         String user = "";
         String pass = "";
+        new ConnectFireBird(url, user, pass);
     }
 }
