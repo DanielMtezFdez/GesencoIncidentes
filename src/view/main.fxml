@@ -18,7 +18,7 @@
         <items>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="TablaIncidente" fixedCellSize="5.0" layoutY="9.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="TablaIncidente" fixedCellSize="6.0" layoutY="9.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn prefWidth="175.0" text="Título" />
                       <TableColumn fx:id="ColEmpleado" prefWidth="100.0" text="Empleado" />
