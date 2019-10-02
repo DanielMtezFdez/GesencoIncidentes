@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,7 +15,14 @@
 
 <AnchorPane prefWidth="1315.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1313.0" style="-fx-background-color: #f34e67;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1313.0" style="-fx-background-color: #f34e67;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXComboBox layoutX="133.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" promptText="Seleccionar campo" />
+            <Label layoutX="20.0" layoutY="22.0" text="BUSCAR POR:" />
+            <JFXTextField layoutX="424.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" />
+            <JFXButton layoutX="813.0" layoutY="11.0" prefHeight="39.0" prefWidth="200.0" style="-fx-background-color: #fff;" text="AÑADIR INCIDENTE" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="11.0" />
+            <JFXButton layoutX="1090.0" layoutY="10.0" prefWidth="200.0" style="-fx-background-color: #fff;" text="AÑADIR EMPLEADO" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="10.0" />
+         </children></AnchorPane>
       <SplitPane layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="746.0" prefWidth="1315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
         <items>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0">
