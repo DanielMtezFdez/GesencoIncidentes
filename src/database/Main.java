@@ -2,6 +2,7 @@ package database;
 
 import model.Comunidad;
 import model.Empleado;
+import model.Incidente;
 
 import java.util.ArrayList;
 
@@ -14,10 +15,18 @@ public class Main {
 //            System.out.println(c);
 //        }
 
-        ArrayList<Empleado> empleados = EmpleadoDAO.getEmpleados();
-        for (Empleado e : empleados){
-            System.out.println(e);
+//        ArrayList<Empleado> empleados = EmpleadoDAO.getEmpleados();
+//        for (Empleado e : empleados){
+//            System.out.println(e);
+//        }
+
+//        EmpleadoDAO.createEmpleado("Test", "Idea");
+
+        ArrayList<Incidente> incidentes = IncidenteDAO.getIncidentes();
+        for (Incidente i : incidentes){
+            System.out.println(i);
         }
+
     }
 
 }

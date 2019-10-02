@@ -23,7 +23,7 @@ public class EmpleadoDAO {
 
         ArrayList<Empleado> empleados = new ArrayList<>();
 
-        String sql = "SELECT * FROM EMPLEADO ORDER BY CODEMPLEADO;";
+        sql = "SELECT * FROM EMPLEADO ORDER BY CODEMPLEADO;";
 
         empleado = null;
 
@@ -39,6 +39,29 @@ public class EmpleadoDAO {
         }
 
         return empleados;
+    }
+
+    public static void createEmpleado(String nombre, String apellido) {
+        empleado = new Empleado(nombre, apellido);
+
+        sql = "INSERT INTO EMPLEADO (NOMBRE, APELLIDO) VALUES (?, ?);";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+
+            int afectados = ps.executeUpdate();
+
+            if (afectados == 1) {
+                System.out.println("Éxito");
+            } else {
+                System.out.println("Error");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

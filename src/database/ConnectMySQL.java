@@ -15,7 +15,7 @@ public class ConnectMySQL {
     // Constructor
     private ConnectMySQL() {
         String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/gesenco";
+        String url = "jdbc:mysql://localhost:3306/gesenco?zeroDateTimeBehavior=convertToNull";
         String user = "gesenco";
         String pass = "gesenco";
 
