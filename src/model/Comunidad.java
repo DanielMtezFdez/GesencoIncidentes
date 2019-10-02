@@ -14,6 +14,14 @@ public class Comunidad {
 
 
 
+    @Override
+    public String toString() {
+        return "Comunidad{" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
+
     // GETTERS AND SETTERS
     public String getCodigo() {
         return codigo;
