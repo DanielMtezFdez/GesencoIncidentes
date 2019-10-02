@@ -1,4 +1,4 @@
-package database_firebird;
+package database;
 
 import java.sql.*;
 
@@ -57,25 +57,4 @@ public class ConnectFireBird {
         }
     }
 
-
-
-//    private static Connection ConnectionFireBird(String url, String user, String pass) {
-//        try {
-//            Class.forName("org.firebirdsql.jdbc.FBDriver");
-//            System.out.println("Driver registrado");
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("Error registrando el Driver");
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            con = DriverManager.getConnection(url, user, pass);
-//            System.out.println("Conexión exitosa");
-//        } catch (SQLException e) {
-//            System.out.println("Error al realizar la conexión");
-//            e.printStackTrace();
-//        }
-//
-//        return con;
-//    }
 }

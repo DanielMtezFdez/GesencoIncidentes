@@ -8,6 +8,13 @@ public class Empleado {
 
     }
 
+
+    public Empleado(String nombre, String apellidos) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+    }
+
+
     public Empleado(String codigo, String nombre, String apellidos) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -15,6 +22,14 @@ public class Empleado {
     }
 
 
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                '}';
+    }
 
     // GETTERS AND SETTERS
     public String getCodigo() {

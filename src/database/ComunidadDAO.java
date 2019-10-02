@@ -1,4 +1,4 @@
-package database_firebird;
+package database;
 
 import model.Comunidad;
 
