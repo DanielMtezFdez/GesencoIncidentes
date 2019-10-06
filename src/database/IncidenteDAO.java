@@ -36,9 +36,28 @@ public class IncidenteDAO {
                 String tipoJunta = rs.getString(3);
                 String titulo = rs.getString(4);
                 String descripcion = rs.getString(5);
-                Date fechaAlta = rs.getTimestamp(6);
-                Date fechaJunta = rs.getTimestamp(7);
-                Date fechaFin = rs.getTimestamp(8);
+
+                String fechaAlta;
+                if(rs.getTimestamp(6) == null){
+                    fechaAlta = "";
+                } else {
+                    fechaAlta = rs.getTimestamp(6).toString();
+                }
+
+                String fechaJunta;
+                if(rs.getTimestamp(7) == null){
+                    fechaJunta = "";
+                } else {
+                    fechaJunta = rs.getTimestamp(7).toString();
+                }
+
+                String fechaFin;
+                if(rs.getTimestamp(8) == null){
+                    fechaFin = "";
+                } else {
+                    fechaFin = rs.getTimestamp(8).toString();
+                }
+
                 String tipoIncidente = rs.getString(9);
                 String tipoComunicado = rs.getString(10);
                 String completo = rs.getString(11);

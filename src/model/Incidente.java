@@ -5,21 +5,27 @@ import java.util.Date;
 public class Incidente {
     private String codEmpleado, tipoJunta;
     private String titulo, descripcion;
-    private Date fechaAlta, fechaJunta, fechaFin;
+    private String fechaAlta, fechaJunta, fechaFin;
     private String tipoIncidente, tipoComunicado, completo;
 
     public Incidente() {
 
     }
 
-    public Incidente(String codEmpleado, String tipoJunta, String titulo, String descripcion, Date fechaAlta, Date fechaJunta, Date fechaFin, String tipoIncidente, String tipoComunicado, String completo) {
+    public Incidente(String codEmpleado, String tipoJunta, String titulo, String descripcion, String fechaAlta, String fechaJunta, String fechaFin, String tipoIncidente, String tipoComunicado, String completo) {
         this.codEmpleado = codEmpleado;
         this.tipoJunta = tipoJunta;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaAlta = fechaAlta;
         this.fechaJunta = fechaJunta;
-        this.fechaFin = fechaFin;
+
+        if(fechaFin.equals("")) {
+            this.fechaFin = "NO FINALIZADO";
+        } else {
+            this.fechaFin = fechaFin;
+        }
+
         this.tipoIncidente = tipoIncidente;
         this.tipoComunicado = tipoComunicado;
         this.completo = completo;
@@ -77,27 +83,27 @@ public class Incidente {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaAlta() {
+    public String getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(Date fechaAlta) {
+    public void setFechaAlta(String fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public Date getFechaJunta() {
+    public String getFechaJunta() {
         return fechaJunta;
     }
 
-    public void setFechaJunta(Date fechaJunta) {
+    public void setFechaJunta(String fechaJunta) {
         this.fechaJunta = fechaJunta;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 

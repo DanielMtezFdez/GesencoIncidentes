@@ -4,19 +4,23 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import database.IncidenteDAO;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Incidente;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -31,10 +35,10 @@ public class MainController implements Initializable {
     private JFXButton btnAñadirIncidente, btnAñadirEmpleado, btnInciEditar, btnInciCompletar;
 
     @FXML
-    private TableView<Incidente> TablaIncidente;
+    private TableView<Incidente> tablaIncidente;
 
     @FXML
-    private TableColumn<?, ?> colTItulo, colEmpleado, colTipoIncidente, colNivelUrgencia, colFechaInicio, colTipoComunicacion;
+    private TableColumn<Incidente, String> colTitulo, colEmpleado, colTipoIncidente, colNivelUrgencia, colComunicacionVia, colCompleto;
 
     @FXML
     private JFXTextArea inciDescripcion;
@@ -55,6 +59,8 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fillCamposBusqueda();
+
+        inicializarTablaIncidentes();
     }
 
 
@@ -62,7 +68,7 @@ public class MainController implements Initializable {
      * Created 06/10/2019 by dmartinez
      * Relleana el ComboBox con los diferentes campos
      */
-    public void fillCamposBusqueda() {
+    private void fillCamposBusqueda() {
         ArrayList<String> campos = new ArrayList<>();
         campos.add("Titulo");
         campos.add("Empleado");
@@ -83,39 +89,82 @@ public class MainController implements Initializable {
     }
 
 
-
-
-
-
-
-
     @FXML
     void añadirEmpleado(ActionEvent event) {
-
+        // TODO
     }
 
     @FXML
     void añadirIncidente(ActionEvent event) {
-
+        // TODO
     }
 
     @FXML
     void completarIncidente(ActionEvent event) {
-
+        // TODO
     }
 
     @FXML
     void editarIncidente(ActionEvent event) {
+        Incidente incidente = new Incidente();
+
+        incidente.setCodEmpleado(inciEmpleado.getText());
+        incidente.setTipoJunta(inciTipoJunta.getText());
+        incidente.setTitulo(inciTitulo.getText());
+        incidente.setDescripcion(inciDescripcion.getText());
+        incidente.setFechaAlta(inciCreacion.getText());
+        incidente.setFechaJunta(inciFechaInicioAccion.getText());
+        incidente.setFechaFin(inciFechaFinalizacion.getText());
+        incidente.setTipoIncidente(inciNivelUrgencia.getText());
+        incidente.setTipoComunicado(inciComunicadoVia.getText());
+        incidente.setCompleto(inciEmpleado.getText());
+
+        incidentes.set(posicionIncidenteTabla, incidente);
+        // TODO GUARDAR EN BD
 
     }
 
     @FXML
     void filtrarBusqueda(MouseEvent event) {
-
+        // TODO
     }
 
     @FXML
     void mostrarEmpleado(MouseEvent event) {
+        // TODO
+    }
+
+
+    private void inicializarTablaIncidentes() {
+        colTitulo.setCellValueFactory(new PropertyValueFactory<Incidente, String>("titulo"));
+        colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codEmpleado"));
+        colTipoIncidente.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoIncidente"));
+        colNivelUrgencia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("nivelUrgencia"));
+        colComunicacionVia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoComunicado"));
+        colCompleto.setCellValueFactory(new PropertyValueFactory<Incidente, String>("completo"));
+
+        ArrayList<Incidente> incidentes = IncidenteDAO.getIncidentes();
+        ObservableList<Incidente> listaIncidentes = FXCollections.observableArrayList(incidentes);
+        tablaIncidente.setItems(listaIncidentes);
+
+    }
+
+    @FXML
+    void test(MouseEvent event) {
+        System.out.println("1");
+        List<Incidente> tabla = tablaIncidente.getSelectionModel().getSelectedItems();
+
+        Incidente incidente = tablaIncidente.getSelectionModel().getSelectedItem();
+        System.out.println(incidente.getTipoIncidente());
+
+        // Se establecen los labels con los datos correspondientes
+        inciEmpleado.setText(incidente.getCodEmpleado());
+        inciTitulo.setText(incidente.getTitulo());
+        inciTipoJunta.setText(incidente.getTipoJunta());
+        inciComunicadoVia.setText(incidente.getTipoComunicado());
+        inciNivelUrgencia.setText(incidente.getTipoIncidente());
+        inciFechaInicioAccion.setText(incidente.getFechaAlta());
+        inciFechaFinalizacion.setText(incidente.getFechaFin());
 
     }
 }
