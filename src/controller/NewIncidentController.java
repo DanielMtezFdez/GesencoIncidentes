@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -34,6 +35,32 @@ public class NewIncidentController implements Initializable {
         rellenarCBTipoJunta();
         rellenarCBNivelUrgencia();
     }
+
+    /**
+     * Created 12/10/2019 by dmartinez
+     *
+     * Recoge el texto de los diferentes campos y crea un Incidente y lo almacena en la base de datos
+     *
+     * @param event
+     */
+    @FXML
+    void crearIncidente(ActionEvent event) {
+        String descripcion = taDescripcion.getText();
+        String titulo = tfTitulo.getText();
+        String empleado = cbEmpleado.getSelectionModel().getSelectedItem();
+        String tipoJunta = cbTipoJunta.getSelectionModel().getSelectedItem();
+        String nivelUrgencia = cbNivelUrgencia.getSelectionModel().getSelectedItem();
+        String fechaJunta = dateFechaIncidencia.getValue().toString();
+
+//        System.out.println(descripcion);
+//        System.out.println(titulo);
+//        System.out.println(empleado);
+//        System.out.println(tipoJunta);
+//        System.out.println(nivelUrgencia);
+//        System.out.println(fechaJunta);
+
+    }
+
 
 
     /**
