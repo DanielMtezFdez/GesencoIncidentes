@@ -1,12 +1,14 @@
 package controller;
 
 import com.jfoenix.controls.*;
+import database.EmpleadoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import model.Empleado;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -56,6 +58,8 @@ public class NewIncidentController implements Initializable {
         String nivelUrgencia = cbNivelUrgencia.getSelectionModel().getSelectedItem();
         String fechaJunta = dateFechaIncidencia.getValue().toString();
 
+        String fechaJuntaFormatted = fechaJunta.replace("/", "-");
+
 //        System.out.println(descripcion);
 //        System.out.println(titulo);
 //        System.out.println(empleado);
@@ -74,16 +78,15 @@ public class NewIncidentController implements Initializable {
      */
     private void rellenarCBNivelUrgencia() {
         ArrayList<String> campos = new ArrayList<>();
-        campos.add("");
+        campos.add("Superurgente");
+        campos.add("Urgente");
+        campos.add("Normal");
 
         ObservableList<String> lista_campos = FXCollections.observableArrayList();
 
-        for(String campo : campos) {
-            lista_campos.add(campo);
-        }
+        lista_campos.addAll(campos);
 
         cbNivelUrgencia.setItems(lista_campos);
-        cbNivelUrgencia.setPromptText("Selecciona campo");
     }
 
 
@@ -93,16 +96,17 @@ public class NewIncidentController implements Initializable {
      */
     private void rellenarCBTipoJunta() {
         ArrayList<String> campos = new ArrayList<>();
-        campos.add("");
+        campos.add("Junta ordinaria");
+        campos.add("Junta extraordinaria");
+        campos.add("Oficina");
+        campos.add("Telefono");
+        campos.add("Administracion");
 
         ObservableList<String> lista_campos = FXCollections.observableArrayList();
 
-        for(String campo : campos) {
-            lista_campos.add(campo);
-        }
+        lista_campos.addAll(campos);
 
         cbTipoJunta.setItems(lista_campos);
-        cbTipoJunta.setPromptText("Selecciona campo");
     }
 
 
@@ -111,15 +115,15 @@ public class NewIncidentController implements Initializable {
      * Rellena el ComboBox de empleados con los diferentes campos
      */
     private void rellenarCBEmpleados() {
-        ArrayList<String> campos = new ArrayList<>();
-        campos.add("");
+        ArrayList<Empleado> empleados = EmpleadoDAO.getEmpleados();
 
-        ObservableList<String> lista_campos = FXCollections.observableArrayList();
+        ObservableList<String> lista_empleados = FXCollections.observableArrayList();
 
-        lista_campos.addAll(campos);
+        for(Empleado empleado : empleados) {
+            lista_empleados.add(empleado.getCodigo());
+        }
 
-        cbEmpleado.setItems(lista_campos);
-        cbEmpleado.setPromptText("Selecciona campo");
+        cbEmpleado.setItems(lista_empleados);
     }
 
 

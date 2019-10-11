@@ -13,22 +13,22 @@ public class Incidente {
     }
 
     public Incidente(String codEmpleado, String tipoJunta, String titulo, String descripcion, String fechaAlta, String fechaJunta, String fechaFin, String tipoIncidente, String tipoComunicado, String completo) {
-        this.codEmpleado = codEmpleado;
-        this.tipoJunta = tipoJunta;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fechaAlta = fechaAlta;
-        this.fechaJunta = fechaJunta;
+        this.codEmpleado = codEmpleado.toLowerCase();
+        this.tipoJunta = tipoJunta.toLowerCase();
+        this.titulo = titulo.toLowerCase();
+        this.descripcion = descripcion.toLowerCase();
+        this.fechaAlta = fechaAlta.toLowerCase();
+        this.fechaJunta = fechaJunta.toLowerCase();
 
         if(fechaFin.equals("")) {
             this.fechaFin = "NO FINALIZADO";
         } else {
-            this.fechaFin = fechaFin;
+            this.fechaFin = fechaFin.toLowerCase();
         }
 
-        this.tipoIncidente = tipoIncidente;
-        this.tipoComunicado = tipoComunicado;
-        this.completo = completo;
+        this.tipoIncidente = tipoIncidente.toLowerCase();
+        this.tipoComunicado = tipoComunicado.toLowerCase();
+        this.completo = completo.toLowerCase();
     }
 
 
