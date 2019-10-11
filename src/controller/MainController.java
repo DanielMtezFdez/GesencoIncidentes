@@ -6,16 +6,18 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import database.IncidenteDAO;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import model.Incidente;
 
 import java.net.URL;
@@ -32,7 +34,7 @@ public class MainController implements Initializable {
     private JFXTextField buscarPorCampo;
 
     @FXML
-    private JFXButton btnAñadirIncidente, btnAñadirEmpleado, btnInciEditar, btnInciCompletar;
+    private JFXButton btnAñadirEmpleado, btnInciEditar, btnInciCompletar;
 
     @FXML
     private TableView<Incidente> tablaIncidente;
@@ -54,6 +56,8 @@ public class MainController implements Initializable {
 
     ObservableList<Incidente> incidentes;
     private int posicionIncidenteTabla;
+
+    private Stage crearIncidenciaStage;
 
 
     @Override
@@ -88,15 +92,36 @@ public class MainController implements Initializable {
 
     }
 
-
-    @FXML
-    void añadirEmpleado(ActionEvent event) {
-        // TODO
-    }
-
+    /**
+     * Created 12/10/2019 by dmartinez
+     *
+     * Enseña la ventana de creación de incidentes
+     *
+     * @param event
+     */
     @FXML
     void añadirIncidente(ActionEvent event) {
-        // TODO
+        try {
+            if(crearIncidenciaStage == null) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/view/crearIncidente.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+
+                // Creación del Stage para el PlayLauncher
+                crearIncidenciaStage = new Stage();
+                NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
+
+                Scene scene = new Scene(page);
+
+                crearIncidenciaStage.setScene(scene);
+                crearIncidenciaStage.show();
+            } else {
+                crearIncidenciaStage.toFront();
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

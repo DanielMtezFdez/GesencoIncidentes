@@ -6,12 +6,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NewIncidentController implements Initializable {
+
+    // mainPlayStage para tener acceso desde otras clases
+    private static Stage crearIncidenteStage;
 
     @FXML
     private JFXTextArea taDescripcion;
@@ -60,6 +64,7 @@ public class NewIncidentController implements Initializable {
 //        System.out.println(fechaJunta);
 
     }
+
 
 
 
@@ -118,8 +123,22 @@ public class NewIncidentController implements Initializable {
     }
 
 
+//    countries = CountryDAO.getCountries();
+//    ObservableList<String> country_list = FXCollections.observableArrayList();
+//        for(Country country : countries){
+//        country_list.add(country.getName());
+//    }
+//        cbCountryRegister.setItems(country_list);
+//        cbCountryRegister.setPromptText("Select country");
 
 
 
+    public static Stage getCrearIncidenteStage() {
+        return crearIncidenteStage;
+    }
+
+    public static void setCrearIncidenteStage(Stage crearIncidenteStage) {
+        NewIncidentController.crearIncidenteStage = crearIncidenteStage;
+    }
 
 }
