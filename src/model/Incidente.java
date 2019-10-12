@@ -3,18 +3,17 @@ package model;
 import java.util.Date;
 
 public class Incidente {
-    private String codEmpleado, tipoJunta;
+    private String codEmpleado;
     private String titulo, descripcion;
     private String fechaAlta, fechaJunta, fechaFin;
-    private String tipoIncidente, tipoComunicado, completo;
+    private String nivelUrgencia, tipoComunicado, completo;
 
     public Incidente() {
 
     }
 
-    public Incidente(String codEmpleado, String tipoJunta, String titulo, String descripcion, String fechaAlta, String fechaJunta, String fechaFin, String tipoIncidente, String tipoComunicado, String completo) {
+    public Incidente(String codEmpleado, String titulo, String descripcion, String fechaAlta, String fechaJunta, String fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
         this.codEmpleado = codEmpleado.toLowerCase();
-        this.tipoJunta = tipoJunta.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
         this.fechaAlta = fechaAlta.toLowerCase();
@@ -26,7 +25,7 @@ public class Incidente {
             this.fechaFin = fechaFin.toLowerCase();
         }
 
-        this.tipoIncidente = tipoIncidente.toLowerCase();
+        this.nivelUrgencia = nivelUrgencia.toLowerCase();
         this.tipoComunicado = tipoComunicado.toLowerCase();
         this.completo = completo.toLowerCase();
     }
@@ -38,13 +37,12 @@ public class Incidente {
     public String toString() {
         return "Incidente{" +
                 "codEmpleado='" + codEmpleado + '\'' +
-                ", tipoJunta='" + tipoJunta + '\'' +
                 ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaAlta=" + fechaAlta +
                 ", fechaJunta=" + fechaJunta +
                 ", fechaFin=" + fechaFin +
-                ", tipoIncidente='" + tipoIncidente + '\'' +
+                ", tipoIncidente='" + nivelUrgencia + '\'' +
                 ", tipoComunicado='" + tipoComunicado + '\'' +
                 ", completo='" + completo + '\'' +
                 '}';
@@ -57,14 +55,6 @@ public class Incidente {
 
     public void setCodEmpleado(String codEmpleado) {
         this.codEmpleado = codEmpleado;
-    }
-
-    public String getTipoJunta() {
-        return tipoJunta;
-    }
-
-    public void setTipoJunta(String tipoJunta) {
-        this.tipoJunta = tipoJunta;
     }
 
     public String getTitulo() {
@@ -107,12 +97,12 @@ public class Incidente {
         this.fechaFin = fechaFin;
     }
 
-    public String getTipoIncidente() {
-        return tipoIncidente;
+    public String getNivelUrgencia() {
+        return nivelUrgencia;
     }
 
-    public void setTipoIncidente(String tipoIncidente) {
-        this.tipoIncidente = tipoIncidente;
+    public void setNivelUrgencia(String tipoIncidente) {
+        this.nivelUrgencia = tipoIncidente;
     }
 
     public String getTipoComunicado() {
