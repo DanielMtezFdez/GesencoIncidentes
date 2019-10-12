@@ -19,14 +19,14 @@ public class Incidente {
         this.fechaAlta = fechaAlta.toLowerCase();
         this.fechaJunta = fechaJunta.toLowerCase();
 
-        if(fechaFin.equals("")) {
+        if(fechaFin.equals(" ")) {
             this.fechaFin = "NO FINALIZADO";
         } else {
             this.fechaFin = fechaFin.toLowerCase();
         }
 
         this.nivelUrgencia = nivelUrgencia.toLowerCase();
-        this.tipoComunicado = tipoComunicado.toLowerCase();
+        this.tipoComunicado = tipoComunicado.toLowerCase().replace(" ", "_");
         this.completo = completo.toLowerCase();
     }
 

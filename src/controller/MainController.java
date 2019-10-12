@@ -34,7 +34,7 @@ public class MainController implements Initializable {
     private JFXTextField buscarPorCampo;
 
     @FXML
-    private JFXButton btnAñadirEmpleado, btnInciEditar, btnInciCompletar;
+    private JFXButton btnInciEditar, btnInciCompletar;
 
     @FXML
     private TableView<Incidente> tablaIncidente;
@@ -46,10 +46,10 @@ public class MainController implements Initializable {
     private JFXTextArea inciDescripcion;
 
     @FXML
-    private Label inciEmpleado, inciTitulo, inciTipoJunta, inciComunicadoVia, inciNivelUrgencia, inciCreacion, inciFechaInicioAccion, inciFechaFinalizacion;
+    private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia,  inciFechaJunta, inciFechaFinalizacion;
 
     @FXML
-    private ImageView inciShowEmpleado, btnSearch;
+    private ImageView btnSearch;
 
 
     ArrayList<String> camposDeBusqueda;
@@ -137,7 +137,7 @@ public class MainController implements Initializable {
         incidente.setTitulo(inciTitulo.getText());
         incidente.setDescripcion(inciDescripcion.getText());
         incidente.setFechaAlta(inciCreacion.getText());
-        incidente.setFechaJunta(inciFechaInicioAccion.getText());
+        incidente.setFechaJunta(inciFechaJunta.getText());
         incidente.setFechaFin(inciFechaFinalizacion.getText());
         incidente.setNivelUrgencia(inciNivelUrgencia.getText());
         incidente.setTipoComunicado(inciComunicadoVia.getText());
@@ -153,13 +153,8 @@ public class MainController implements Initializable {
         // TODO
     }
 
-    @FXML
-    void mostrarEmpleado(MouseEvent event) {
-        // TODO
-    }
 
-
-    private void inicializarTablaIncidentes() {
+    public void inicializarTablaIncidentes() {
         colTitulo.setCellValueFactory(new PropertyValueFactory<Incidente, String>("titulo"));
         colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codEmpleado"));
         colTipoIncidente.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoIncidente"));
@@ -170,12 +165,10 @@ public class MainController implements Initializable {
         ArrayList<Incidente> incidentes = IncidenteDAO.getIncidentes();
         ObservableList<Incidente> listaIncidentes = FXCollections.observableArrayList(incidentes);
         tablaIncidente.setItems(listaIncidentes);
-
     }
 
     @FXML
-    void test(MouseEvent event) {
-        System.out.println("1");
+    void mostrarIncidente(MouseEvent event) {
         List<Incidente> tabla = tablaIncidente.getSelectionModel().getSelectedItems();
 
         Incidente incidente = tablaIncidente.getSelectionModel().getSelectedItem();
@@ -186,7 +179,8 @@ public class MainController implements Initializable {
         inciTitulo.setText(incidente.getTitulo());
         inciComunicadoVia.setText(incidente.getTipoComunicado());
         inciNivelUrgencia.setText(incidente.getNivelUrgencia());
-        inciFechaInicioAccion.setText(incidente.getFechaAlta());
+        inciCreacion.setText(incidente.getFechaAlta());
+        inciFechaJunta.setText(incidente.getFechaJunta());
         inciFechaFinalizacion.setText(incidente.getFechaFin());
 
     }

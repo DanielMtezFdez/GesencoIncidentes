@@ -2,12 +2,12 @@ package controller;
 
 import com.jfoenix.controls.*;
 import database.EmpleadoDAO;
+import database.IncidenteDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Empleado;
 import model.Incidente;
@@ -36,6 +36,8 @@ public class NewIncidentController implements Initializable {
     @FXML
     private JFXButton btnGuardar;
 
+    private MainController mainController;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,24 +56,17 @@ public class NewIncidentController implements Initializable {
     @FXML
     void crearIncidente(ActionEvent event) {
 
-
         Incidente incidente = checkFields();
 
         if(incidente != null) {
-            // TODO guardamos en base de datos. Actualizamos lista. Cerramos pestaña
+            // TODO Actualizamos lista
+
+            boolean creationOK = IncidenteDAO.registerIncident(incidente);
 
             // obtenemos la ventana y la cerramos
             Stage stage = (Stage) ((JFXButton)event.getSource()).getScene().getWindow();
             stage.close();
         }
-
-
-//        System.out.println(descripcion);
-//        System.out.println(titulo);
-//        System.out.println(empleado);
-//        System.out.println(tipoJunta);
-//        System.out.println(nivelUrgencia);
-//        System.out.println(fechaJunta);
 
     }
 
