@@ -134,13 +134,12 @@ public class MainController implements Initializable {
         Incidente incidente = new Incidente();
 
         incidente.setCodEmpleado(inciEmpleado.getText());
-        incidente.setTipoJunta(inciTipoJunta.getText());
         incidente.setTitulo(inciTitulo.getText());
         incidente.setDescripcion(inciDescripcion.getText());
         incidente.setFechaAlta(inciCreacion.getText());
         incidente.setFechaJunta(inciFechaInicioAccion.getText());
         incidente.setFechaFin(inciFechaFinalizacion.getText());
-        incidente.setTipoIncidente(inciNivelUrgencia.getText());
+        incidente.setNivelUrgencia(inciNivelUrgencia.getText());
         incidente.setTipoComunicado(inciComunicadoVia.getText());
         incidente.setCompleto(inciEmpleado.getText());
 
@@ -180,14 +179,13 @@ public class MainController implements Initializable {
         List<Incidente> tabla = tablaIncidente.getSelectionModel().getSelectedItems();
 
         Incidente incidente = tablaIncidente.getSelectionModel().getSelectedItem();
-        System.out.println(incidente.getTipoIncidente());
+        System.out.println(incidente.getNivelUrgencia());
 
         // Se establecen los labels con los datos correspondientes
         inciEmpleado.setText(incidente.getCodEmpleado());
         inciTitulo.setText(incidente.getTitulo());
-        inciTipoJunta.setText(incidente.getTipoJunta());
         inciComunicadoVia.setText(incidente.getTipoComunicado());
-        inciNivelUrgencia.setText(incidente.getTipoIncidente());
+        inciNivelUrgencia.setText(incidente.getNivelUrgencia());
         inciFechaInicioAccion.setText(incidente.getFechaAlta());
         inciFechaFinalizacion.setText(incidente.getFechaFin());
 

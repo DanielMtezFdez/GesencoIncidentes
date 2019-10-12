@@ -33,35 +33,34 @@ public class IncidenteDAO {
             rs = stmt.executeQuery(sql);
             while(rs.next()){
                 String codEmpleado = rs.getString(2);
-                String tipoJunta = rs.getString(3);
-                String titulo = rs.getString(4);
-                String descripcion = rs.getString(5);
+                String titulo = rs.getString(3);
+                String descripcion = rs.getString(4);
 
                 String fechaAlta;
-                if(rs.getTimestamp(6) == null){
+                if(rs.getTimestamp(5) == null){
                     fechaAlta = "";
                 } else {
-                    fechaAlta = rs.getTimestamp(6).toString();
+                    fechaAlta = rs.getTimestamp(5).toString();
                 }
 
                 String fechaJunta;
-                if(rs.getTimestamp(7) == null){
+                if(rs.getTimestamp(6) == null){
                     fechaJunta = "";
                 } else {
-                    fechaJunta = rs.getTimestamp(7).toString();
+                    fechaJunta = rs.getTimestamp(6).toString();
                 }
 
                 String fechaFin;
-                if(rs.getTimestamp(8) == null){
+                if(rs.getTimestamp(7) == null){
                     fechaFin = "";
                 } else {
-                    fechaFin = rs.getTimestamp(8).toString();
+                    fechaFin = rs.getTimestamp(7).toString();
                 }
 
-                String tipoIncidente = rs.getString(9);
-                String tipoComunicado = rs.getString(10);
-                String completo = rs.getString(11);
-                incidente = new Incidente(codEmpleado, tipoJunta, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, tipoIncidente, tipoComunicado, completo);
+                String nivelUrgencia = rs.getString(8);
+                String tipoComunicado = rs.getString(9);
+                String completo = rs.getString(10);
+                incidente = new Incidente(codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {
