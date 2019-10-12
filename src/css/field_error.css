@@ -1,0 +1,5 @@
+.error_field {
+    -fx-background-color: #f44336;
+    -fx-text-inner-color: #fff;
+    -fx-prompt-text-fill: #fff;
+}

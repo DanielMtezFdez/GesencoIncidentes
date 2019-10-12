@@ -7,8 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Empleado;
+import model.Incidente;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -51,14 +53,18 @@ public class NewIncidentController implements Initializable {
      */
     @FXML
     void crearIncidente(ActionEvent event) {
-        String descripcion = taDescripcion.getText();
-        String titulo = tfTitulo.getText();
-        String empleado = cbEmpleado.getSelectionModel().getSelectedItem();
-        String tipoJunta = cbTipoJunta.getSelectionModel().getSelectedItem();
-        String nivelUrgencia = cbNivelUrgencia.getSelectionModel().getSelectedItem();
-        String fechaJunta = dateFechaIncidencia.getValue().toString();
 
-        String fechaJuntaFormatted = fechaJunta.replace("/", "-");
+
+        Incidente incidente = checkFields();
+
+        if(incidente != null) {
+            // TODO guardamos en base de datos. Actualizamos lista. Cerramos pestaña
+
+            // obtenemos la ventana y la cerramos
+            Stage stage = (Stage) ((JFXButton)event.getSource()).getScene().getWindow();
+            stage.close();
+        }
+
 
 //        System.out.println(descripcion);
 //        System.out.println(titulo);
@@ -69,7 +75,106 @@ public class NewIncidentController implements Initializable {
 
     }
 
+    private Incidente checkFields() {
 
+        String descripcion = "";
+        String titulo = "";
+        String empleado = "";
+        String tipoJunta = "";
+        String nivelUrgencia = "";
+        String fechaJuntaFormatted = "";
+
+        boolean descripcionOK = false;
+        boolean tituloOK = false;
+        boolean empleadoOK = false;
+        boolean tipoJuntaOK = false;
+        boolean nivelUrgenciaOK = false;
+        boolean fechaJuntaFormattedOK = false;
+
+        if (taDescripcion.getText().trim().equals("")) {
+            // campo vacio
+            taDescripcion.getStyleClass().add("error_field");
+            taDescripcion.setPromptText("CAMPO VACÍO");
+        } else {
+            descripcion = taDescripcion.getText();
+            descripcionOK = true;
+
+            // Eliminamos filtros de error
+            taDescripcion.getStyleClass().remove("error_field");
+        }
+
+        if (tfTitulo.getText().trim().equals("")) {
+            // campo vacio
+            tfTitulo.getStyleClass().add("error_field");
+            tfTitulo.setPromptText("CAMPO VACÍO");
+        } else {
+            titulo = tfTitulo.getText();
+            tituloOK = true;
+
+            // Eliminamos filtros de error
+            tfTitulo.getStyleClass().remove("error_field");
+        }
+
+        if (cbEmpleado.getSelectionModel().getSelectedItem() == null) {
+            // campo vacio
+            cbEmpleado.getStyleClass().add("error_field");
+            cbEmpleado.setPromptText("CAMPO VACÍO");
+
+            //TODO chequear si usuario está en BD
+
+        } else {
+            empleado = cbEmpleado.getSelectionModel().getSelectedItem();
+            empleadoOK = true;
+
+            // Eliminamos filtros de error
+            cbEmpleado.getStyleClass().remove("error_field");
+        }
+
+        if (cbTipoJunta.getSelectionModel().getSelectedItem() == null) {
+            // campo vacio
+            cbTipoJunta.getStyleClass().add("error_field");
+            cbTipoJunta.setPromptText("CAMPO VACÍO");
+        } else {
+            tipoJunta = cbTipoJunta.getSelectionModel().getSelectedItem();
+            tipoJuntaOK = true;
+
+            // Eliminamos filtros de error
+            cbTipoJunta.getStyleClass().remove("error_field");
+        }
+
+        if (cbNivelUrgencia.getSelectionModel().getSelectedItem() == null) {
+            // campo vacio
+            cbNivelUrgencia.getStyleClass().add("error_field");
+            cbNivelUrgencia.setPromptText("CAMPO VACÍO");
+        } else {
+            nivelUrgencia = cbNivelUrgencia.getSelectionModel().getSelectedItem();
+            nivelUrgenciaOK = true;
+
+            // Eliminamos filtros de error
+            cbNivelUrgencia.getStyleClass().remove("error_field");
+        }
+
+        if (dateFechaIncidencia.getValue() == null) {
+            // campo vacio
+            dateFechaIncidencia.getStyleClass().add("error_field");
+            dateFechaIncidencia.setPromptText("CAMPO VACÍO");
+        } else {
+            String fechaJunta = dateFechaIncidencia.getValue().toString();
+            fechaJuntaFormatted = fechaJunta.replace("/", "-");
+            fechaJuntaFormattedOK = true;
+
+            // Eliminamos filtros de error
+            dateFechaIncidencia.getStyleClass().remove("error_field");
+        }
+
+        if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaFormattedOK) {
+            Incidente incidente = new Incidente(empleado, titulo, descripcion, "", fechaJuntaFormatted, "", nivelUrgencia, tipoJunta, "no");
+            System.out.println(incidente.toString());
+            return incidente;
+        } else {
+            return null;
+        }
+    }
 
 
     /**
@@ -125,15 +230,6 @@ public class NewIncidentController implements Initializable {
 
         cbEmpleado.setItems(lista_empleados);
     }
-
-
-//    countries = CountryDAO.getCountries();
-//    ObservableList<String> country_list = FXCollections.observableArrayList();
-//        for(Country country : countries){
-//        country_list.add(country.getName());
-//    }
-//        cbCountryRegister.setItems(country_list);
-//        cbCountryRegister.setPromptText("Select country");
 
 
 

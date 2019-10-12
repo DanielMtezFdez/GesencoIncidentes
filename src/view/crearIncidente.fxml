@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewIncidentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/field_error.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewIncidentController">
    <children>
-      <JFXTextArea fx:id="taDescripcion" focusColor="#b71c1c" layoutX="310.0" layoutY="145.0" prefHeight="299.0" prefWidth="370.0" promptText="Escribe aquí la descripción..." style="-fx-background-color: #eee;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0">
+      <JFXTextArea fx:id="taDescripcion" focusColor="#b71c1c" layoutX="310.0" layoutY="145.0" prefHeight="299.0" prefWidth="370.0" promptText="Escribe aquí la descripción..." AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></JFXTextArea>
