@@ -49,7 +49,7 @@ public class MainController implements Initializable {
     private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia,  inciFechaJunta, inciFechaFinalizacion;
 
     @FXML
-    private ImageView btnSearch;
+    private ImageView btnSearch, btnRefresh;
 
 
     ArrayList<String> camposDeBusqueda;
@@ -154,7 +154,7 @@ public class MainController implements Initializable {
     }
 
 
-    public void inicializarTablaIncidentes() {
+    private void inicializarTablaIncidentes() {
         colTitulo.setCellValueFactory(new PropertyValueFactory<Incidente, String>("titulo"));
         colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codEmpleado"));
         colTipoIncidente.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoIncidente"));
@@ -182,6 +182,12 @@ public class MainController implements Initializable {
         inciCreacion.setText(incidente.getFechaAlta());
         inciFechaJunta.setText(incidente.getFechaJunta());
         inciFechaFinalizacion.setText(incidente.getFechaFin());
+        inciDescripcion.setText(incidente.getDescripcion());
 
+    }
+
+    @FXML
+    void recargarTabla(MouseEvent event) {
+        inicializarTablaIncidentes();
     }
 }

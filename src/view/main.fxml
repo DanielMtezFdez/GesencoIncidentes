@@ -32,8 +32,13 @@
                   <Image url="@../img/ic_search.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="btnRefresh" fitHeight="40.0" fitWidth="40.0" layoutX="803.0" layoutY="11.0" onMouseClicked="#recargarTabla" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ic_refresh.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
-      <SplitPane layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="746.0" prefWidth="1315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <SplitPane layoutY="78.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="1315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
         <items>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -52,7 +57,7 @@
                   </TableView>
                 <AnchorPane layoutX="800.0" layoutY="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="514.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="799.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXTextArea fx:id="inciDescripcion" layoutX="30.0" layoutY="380.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="450.0" text="ASDDDDDDDDDDDDDDD&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D&#10;D" />
+                        <JFXTextArea fx:id="inciDescripcion" layoutX="30.0" layoutY="380.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="450.0" />
                         <JFXButton fx:id="btnInciEditar" layoutX="30.0" layoutY="670.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#editarIncidente" prefHeight="30.0" prefWidth="150.0" ripplerFill="BLACK" style="-fx-background-color: #b71c1c;" text="Editar" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -98,7 +103,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="inciTitulo" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0" text="Este es el título del incidente" AnchorPane.rightAnchor="7.0">
+                        <Label fx:id="inciTitulo" alignment="CENTER" contentDisplay="CENTER" layoutX="155.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" text="Este es el título del incidente" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <font>
                               <Font size="16.0" />
                            </font>
