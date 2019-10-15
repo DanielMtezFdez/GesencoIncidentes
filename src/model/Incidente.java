@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class Incidente {
+    private int idIncidente;
     private String codEmpleado;
     private String titulo, descripcion;
     private String fechaAlta, fechaJunta, fechaFin;
@@ -16,6 +17,25 @@ public class Incidente {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
+        this.fechaAlta = fechaAlta.toLowerCase();
+        this.fechaJunta = fechaJunta.toLowerCase();
+
+        if(fechaFin.equals(" ")) {
+            this.fechaFin = "NO FINALIZADO";
+        } else {
+            this.fechaFin = fechaFin.toLowerCase();
+        }
+
+        this.nivelUrgencia = nivelUrgencia.toLowerCase();
+        this.tipoComunicado = tipoComunicado.toLowerCase().replace(" ", "_");
+        this.completo = completo.toLowerCase();
+    }
+
+    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, String fechaAlta, String fechaJunta, String fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
+        this.idIncidente = idIncidente;
+        this.codEmpleado = codEmpleado.toLowerCase();
+        this.titulo = titulo.toLowerCase();
+        this.descripcion = descripcion;
         this.fechaAlta = fechaAlta.toLowerCase();
         this.fechaJunta = fechaJunta.toLowerCase();
 
@@ -119,5 +139,13 @@ public class Incidente {
 
     public void setCompleto(String completo) {
         this.completo = completo;
+    }
+
+    public int getIdIncidente() {
+        return idIncidente;
+    }
+
+    public void setIdIncidente(int idIncidente) {
+        this.idIncidente = idIncidente;
     }
 }

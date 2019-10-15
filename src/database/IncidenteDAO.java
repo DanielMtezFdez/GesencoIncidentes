@@ -60,7 +60,7 @@ public class IncidenteDAO {
 
         ArrayList<Incidente> incidentes = new ArrayList<>();
 
-        String sql = "SELECT * FROM INCIDENTE ORDER BY IDINCIDENTE;";
+        sql = "SELECT * FROM INCIDENTE ORDER BY IDINCIDENTE;";
 
         incidente = null;
 
@@ -68,6 +68,7 @@ public class IncidenteDAO {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
             while(rs.next()){
+                int idIncidente = rs.getInt(1);
                 String codEmpleado = rs.getString(2);
                 String titulo = rs.getString(3);
                 String descripcion = rs.getString(4);
@@ -82,7 +83,7 @@ public class IncidenteDAO {
                     fechaFin="NO FINALIZADO";
                 }
 
-                incidente = new Incidente(codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo);
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {
@@ -90,5 +91,30 @@ public class IncidenteDAO {
         }
 
         return incidentes;
+    }
+
+    /**
+     * Created 15/10/2019 by dmartinez
+     *
+     * Recoge la descripcion modificada y el id del incidente y la modifica en la base de datos
+     *
+     * @param idIncidente int con el id del incidente
+     * @param descripcionModificada String con la descripción del incidente modificada
+     */
+    public static void editarIncidente(int idIncidente, String descripcionModificada) {
+        sql = "UPDATE INCIDENTE SET Descripcion = '" + descripcionModificada + "' WHERE IdIncidente = " + idIncidente;
+
+        try {
+            stmt = conn.createStatement();
+            int filas = stmt.executeUpdate(sql);
+
+            if (filas > 0) {
+                System.out.println("Actualizado correctamente");
+            } else {
+                System.out.println("Problema con la actualización");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

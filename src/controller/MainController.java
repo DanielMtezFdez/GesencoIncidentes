@@ -56,6 +56,7 @@ public class MainController implements Initializable {
 
     ObservableList<Incidente> incidentes;
     private int posicionIncidenteTabla;
+    private Incidente incidenteSeleccionado;
 
     private Stage crearIncidenciaStage;
 
@@ -129,23 +130,20 @@ public class MainController implements Initializable {
         // TODO
     }
 
+    /**
+     * Created 15/10/2019 by dmartinez
+     *
+     * Recoge la descripcion editada y hace un Update en la base de datos con el ID del incidente seleccionado
+     *
+     * @param event
+     */
     @FXML
     void editarIncidente(ActionEvent event) {
-        Incidente incidente = new Incidente();
 
-        incidente.setCodEmpleado(inciEmpleado.getText());
-        incidente.setTitulo(inciTitulo.getText());
-        incidente.setDescripcion(inciDescripcion.getText());
-        incidente.setFechaAlta(inciCreacion.getText());
-        incidente.setFechaJunta(inciFechaJunta.getText());
-        incidente.setFechaFin(inciFechaFinalizacion.getText());
-        incidente.setNivelUrgencia(inciNivelUrgencia.getText());
-        incidente.setTipoComunicado(inciComunicadoVia.getText());
-        incidente.setCompleto(inciEmpleado.getText());
+        String descripcionModificada = inciDescripcion.getText();
 
-        incidentes.set(posicionIncidenteTabla, incidente);
-        // TODO GUARDAR EN BD
-
+        IncidenteDAO.editarIncidente(incidenteSeleccionado.getIdIncidente(), descripcionModificada);
+        inicializarTablaIncidentes();
     }
 
     @FXML
@@ -171,18 +169,18 @@ public class MainController implements Initializable {
     void mostrarIncidente(MouseEvent event) {
         List<Incidente> tabla = tablaIncidente.getSelectionModel().getSelectedItems();
 
-        Incidente incidente = tablaIncidente.getSelectionModel().getSelectedItem();
-        System.out.println(incidente.getNivelUrgencia());
+        incidenteSeleccionado = tablaIncidente.getSelectionModel().getSelectedItem();
+        System.out.println(incidenteSeleccionado.getIdIncidente());
 
         // Se establecen los labels con los datos correspondientes
-        inciEmpleado.setText(incidente.getCodEmpleado());
-        inciTitulo.setText(incidente.getTitulo());
-        inciComunicadoVia.setText(incidente.getTipoComunicado());
-        inciNivelUrgencia.setText(incidente.getNivelUrgencia());
-        inciCreacion.setText(incidente.getFechaAlta());
-        inciFechaJunta.setText(incidente.getFechaJunta());
-        inciFechaFinalizacion.setText(incidente.getFechaFin());
-        inciDescripcion.setText(incidente.getDescripcion());
+        inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado());
+        inciTitulo.setText(incidenteSeleccionado.getTitulo());
+        inciComunicadoVia.setText(incidenteSeleccionado.getTipoComunicado());
+        inciNivelUrgencia.setText(incidenteSeleccionado.getNivelUrgencia());
+        inciCreacion.setText(incidenteSeleccionado.getFechaAlta());
+        inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta());
+        inciFechaFinalizacion.setText(incidenteSeleccionado.getFechaFin());
+        inciDescripcion.setText(incidenteSeleccionado.getDescripcion());
 
     }
 
