@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,11 +12,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefWidth="1315.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
-    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1313.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="1321.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXComboBox fx:id="cbFiltroCampos" focusColor="#b71c1c" layoutX="144.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" promptText="Seleccionar campo" />
             <Label layoutX="20.0" layoutY="22.0" text="BUSCAR POR:">
@@ -38,7 +40,7 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <SplitPane layoutY="78.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="1315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
+      <SplitPane layoutY="92.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="714.0" prefWidth="1321.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
         <items>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -153,5 +155,87 @@
                </children></AnchorPane>
         </items>
       </SplitPane>
+      <HBox layoutY="64.0" prefHeight="30.0" prefWidth="806.0">
+         <children>
+            <Label fx:id="lblFiltroTitulo" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Filtrotitulo">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btnDeleteFiltroTitulo" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroTitulo" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ic_delete.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="lblFiltroEmpleado" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btnDeleteFiltroEmpleado" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroEmpleado" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ic_delete.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="lblFiltroTipoIncidente" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btnDeleteFiltroTipoIncidente" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroTipoIncidente" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ic_delete.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="lblFiltroNivelUrgencia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btnDeleteFiltroNivelUrgencia" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroNivelUrgencia" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ic_delete.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="lblFiltroComunicacionVia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btnDeleteFiltroComunicacionVia" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroComunicacionVia" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ic_delete.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="lblFiltroCompleto" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btnDeleteFiltroCompleto" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroCompleto" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ic_delete.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

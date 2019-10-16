@@ -51,6 +51,12 @@ public class MainController implements Initializable {
     @FXML
     private ImageView btnSearch, btnRefresh;
 
+    @FXML
+    private Label lblFiltroTitulo, lblFiltroEmpleado, lblFiltroTipoIncidente, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
+
+    @FXML
+    private ImageView btnDeleteFiltroTitulo, btnDeleteFiltroEmpleado, btnDeleteFiltroTipoIncidente, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto;
+
 
     ArrayList<String> camposDeBusqueda;
 
@@ -203,5 +209,37 @@ public class MainController implements Initializable {
     @FXML
     void recargarTabla(MouseEvent event) {
         inicializarTablaIncidentes();
+    }
+
+
+
+    @FXML
+    void deleteFiltroCompleto(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteFiltroComunicacionVia(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteFiltroEmpleado(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteFiltroNivelUrgencia(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteFiltroTipoIncidente(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteFiltroTitulo(MouseEvent event) {
+
     }
 }
