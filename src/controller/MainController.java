@@ -125,9 +125,20 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Created 16/10/2019 by dmartinez
+     *
+     * Funcion llamada al pulsar la tecla "Completar". Llama al método de IncidenteDAO que marca como completo en la base de datos el incidente en cuestión
+     * Al acabar la actualización, actualiza la tabla de datos
+     *
+     * @param event
+     */
     @FXML
     void completarIncidente(ActionEvent event) {
-        // TODO
+
+        IncidenteDAO.completarIncidente(incidenteSeleccionado.getIdIncidente());
+
+        inicializarTablaIncidentes();
     }
 
     /**
@@ -170,16 +181,21 @@ public class MainController implements Initializable {
         List<Incidente> tabla = tablaIncidente.getSelectionModel().getSelectedItems();
 
         incidenteSeleccionado = tablaIncidente.getSelectionModel().getSelectedItem();
-        System.out.println(incidenteSeleccionado.getIdIncidente());
 
         // Se establecen los labels con los datos correspondientes
         inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado());
         inciTitulo.setText(incidenteSeleccionado.getTitulo());
         inciComunicadoVia.setText(incidenteSeleccionado.getTipoComunicado());
         inciNivelUrgencia.setText(incidenteSeleccionado.getNivelUrgencia());
-        inciCreacion.setText(incidenteSeleccionado.getFechaAlta());
-        inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta());
-        inciFechaFinalizacion.setText(incidenteSeleccionado.getFechaFin());
+        inciCreacion.setText(incidenteSeleccionado.getFechaAlta().toString());
+        inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta().toString());
+
+        if(incidenteSeleccionado.getCompleto().equals("si")){
+            inciFechaFinalizacion.setText(incidenteSeleccionado.getFechaFin().toString());
+        } else {
+            inciFechaFinalizacion.setText("NO FINALIZADO");
+        }
+
         inciDescripcion.setText(incidenteSeleccionado.getDescripcion());
 
     }

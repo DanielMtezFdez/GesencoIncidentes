@@ -1,29 +1,35 @@
 package model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Incidente {
     private int idIncidente;
     private String codEmpleado;
     private String titulo, descripcion;
-    private String fechaAlta, fechaJunta, fechaFin;
+    private Timestamp fechaAlta, fechaJunta, fechaFin;
     private String nivelUrgencia, tipoComunicado, completo;
 
     public Incidente() {
 
     }
 
-    public Incidente(String codEmpleado, String titulo, String descripcion, String fechaAlta, String fechaJunta, String fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
+    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
-        this.fechaAlta = fechaAlta.toLowerCase();
-        this.fechaJunta = fechaJunta.toLowerCase();
+        this.fechaAlta = fechaAlta;
 
-        if(fechaFin.equals(" ")) {
-            this.fechaFin = "NO FINALIZADO";
+        if(fechaJunta != null) {
+            this.fechaJunta = fechaJunta;
         } else {
-            this.fechaFin = fechaFin.toLowerCase();
+            this.fechaJunta = null;
+        }
+
+        if(fechaFin != null) {
+            this.fechaFin = fechaFin;
+        } else {
+            this.fechaFin = null;
         }
 
         this.nivelUrgencia = nivelUrgencia.toLowerCase();
@@ -31,20 +37,14 @@ public class Incidente {
         this.completo = completo.toLowerCase();
     }
 
-    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, String fechaAlta, String fechaJunta, String fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
+    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
         this.idIncidente = idIncidente;
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion;
-        this.fechaAlta = fechaAlta.toLowerCase();
-        this.fechaJunta = fechaJunta.toLowerCase();
-
-        if(fechaFin.equals(" ")) {
-            this.fechaFin = "NO FINALIZADO";
-        } else {
-            this.fechaFin = fechaFin.toLowerCase();
-        }
-
+        this.fechaAlta = fechaAlta;
+        this.fechaJunta = fechaJunta;
+        this.fechaFin = fechaFin;
         this.nivelUrgencia = nivelUrgencia.toLowerCase();
         this.tipoComunicado = tipoComunicado.toLowerCase().replace(" ", "_");
         this.completo = completo.toLowerCase();
@@ -93,27 +93,27 @@ public class Incidente {
         this.descripcion = descripcion;
     }
 
-    public String getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(String fechaAlta) {
+    public void setFechaAlta(Timestamp fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public String getFechaJunta() {
+    public Timestamp getFechaJunta() {
         return fechaJunta;
     }
 
-    public void setFechaJunta(String fechaJunta) {
+    public void setFechaJunta(Timestamp fechaJunta) {
         this.fechaJunta = fechaJunta;
     }
 
-    public String getFechaFin() {
+    public Timestamp getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(Timestamp fechaFin) {
         this.fechaFin = fechaFin;
     }
 

@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -50,7 +51,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="dateFechaIncidencia" defaultColor="#b71c1c" layoutX="30.0" layoutY="450.0" prefHeight="25.0" prefWidth="233.0" promptText="Fecha incidencia" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="420.0" />
+      <JFXDatePicker fx:id="dateFechaIncidencia" defaultColor="#b71c1c" layoutX="30.0" layoutY="450.0" prefHeight="25.0" prefWidth="233.0" promptText="Fecha incidencia" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="420.0" />
       <JFXButton fx:id="btnGuardar" layoutX="609.0" layoutY="467.0" onAction="#crearIncidente" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #b71c1c;" text="GUARDAR" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0" />
+      <JFXTimePicker fx:id="timeFechaIncidencia" defaultColor="#b71c1c" layoutX="30.0" layoutY="444.0" prefHeight="25.0" prefWidth="233.0" AnchorPane.bottomAnchor="25.0" />
    </children>
 </AnchorPane>

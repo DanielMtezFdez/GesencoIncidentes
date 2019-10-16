@@ -38,7 +38,7 @@ public class IncidenteDAO {
             ps.setString(1, incidente.getCodEmpleado());
             ps.setString(2, incidente.getTitulo());
             ps.setString(3, incidente.getDescripcion());
-            ps.setString(4, incidente.getFechaJunta());
+            ps.setTimestamp(4, incidente.getFechaJunta());
             ps.setString(5, incidente.getNivelUrgencia());
             ps.setString(6, incidente.getTipoComunicado());
             ps.setString(7, incidente.getCompleto());
@@ -72,16 +72,25 @@ public class IncidenteDAO {
                 String codEmpleado = rs.getString(2);
                 String titulo = rs.getString(3);
                 String descripcion = rs.getString(4);
-                String fechaAlta = rs.getTimestamp(5).toString();
-                String fechaJunta = rs.getString(6);
-                String fechaFin = fechaFin = rs.getString(7);
+                Timestamp fechaAlta = rs.getTimestamp(5);
+
+                Timestamp fechaJunta;
+                if(rs.getTimestamp(6) != null){
+                    fechaJunta = rs.getTimestamp(6);
+                } else {
+                    fechaJunta = null;
+                }
+
+                Timestamp fechaFin;
+                if(rs.getTimestamp(7) != null){
+                    fechaFin = rs.getTimestamp(7);
+                } else {
+                    fechaFin = null;
+                }
+
                 String nivelUrgencia = rs.getString(8);
                 String tipoComunicado = rs.getString(9);
                 String completo = rs.getString(10);
-
-                if(completo.equals("no")) {
-                    fechaFin="NO FINALIZADO";
-                }
 
                 incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo);
                 incidentes.add(incidente);
@@ -103,6 +112,30 @@ public class IncidenteDAO {
      */
     public static void editarIncidente(int idIncidente, String descripcionModificada) {
         sql = "UPDATE INCIDENTE SET Descripcion = '" + descripcionModificada + "' WHERE IdIncidente = " + idIncidente;
+
+        try {
+            stmt = conn.createStatement();
+            int filas = stmt.executeUpdate(sql);
+
+            if (filas > 0) {
+                System.out.println("Actualizado correctamente");
+            } else {
+                System.out.println("Problema con la actualización");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Created 16/10/2019 by dmartinez
+     *
+     * Establece el campo en la base de datos de completo a "si"
+     *
+     * @param idIncidente int con el id del incidente seleccionado
+     */
+    public static void completarIncidente(int idIncidente) {
+        sql = "UPDATE INCIDENTE SET FechaFin = now(), Completo = 'si' WHERE IdIncidente = " + idIncidente;
 
         try {
             stmt = conn.createStatement();

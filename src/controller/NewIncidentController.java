@@ -13,7 +13,12 @@ import model.Empleado;
 import model.Incidente;
 
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class NewIncidentController implements Initializable {
@@ -35,6 +40,9 @@ public class NewIncidentController implements Initializable {
 
     @FXML
     private JFXButton btnGuardar;
+
+    @FXML
+    private JFXTimePicker timeFechaIncidencia;
 
     private MainController mainController;
 
@@ -77,14 +85,14 @@ public class NewIncidentController implements Initializable {
         String empleado = "";
         String tipoJunta = "";
         String nivelUrgencia = "";
-        String fechaJuntaFormatted = "";
+        Timestamp fechaJuntaCasted = null;
 
         boolean descripcionOK = false;
         boolean tituloOK = false;
         boolean empleadoOK = false;
         boolean tipoJuntaOK = false;
         boolean nivelUrgenciaOK = false;
-        boolean fechaJuntaFormattedOK = false;
+        boolean fechaJuntaOK = false;
 
         if (taDescripcion.getText().trim().equals("")) {
             // campo vacio
@@ -155,15 +163,34 @@ public class NewIncidentController implements Initializable {
             dateFechaIncidencia.setPromptText("CAMPO VACÍO");
         } else {
             String fechaJunta = dateFechaIncidencia.getValue().toString();
-            fechaJuntaFormatted = fechaJunta.replace("/", "-");
-            fechaJuntaFormattedOK = true;
-
+            String fechaJuntaFormatted = fechaJunta.replace("/", "-");
             // Eliminamos filtros de error
             dateFechaIncidencia.getStyleClass().remove("error_field");
+
+            if(timeFechaIncidencia.getValue() == null){
+                // campo vacio
+                timeFechaIncidencia.getStyleClass().add("error_field");
+                timeFechaIncidencia.setPromptText("CAMPO VACÍO");
+            } else {
+                DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD hh:mm");
+                Date date = null;
+                try {
+                    date = formatter.parse(fechaJuntaFormatted + " " + timeFechaIncidencia.getValue());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                fechaJuntaCasted = new Timestamp(date.getTime());
+                fechaJuntaOK = true;
+
+                // Eliminamos filtros de error
+                dateFechaIncidencia.getStyleClass().remove("error_field");
+            }
+
+
         }
 
-        if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaFormattedOK) {
-            Incidente incidente = new Incidente(empleado, titulo, descripcion, "", fechaJuntaFormatted, "", nivelUrgencia, tipoJunta, "no");
+        if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaOK) {
+            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no");
             System.out.println(incidente.toString());
             return incidente;
         } else {
