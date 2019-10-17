@@ -24,7 +24,7 @@ public class IncidenteDAO {
 
     public static boolean registerIncident(Incidente incidente) {
 
-        sql = "INSERT INTO incidente (CodEmpleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -162,7 +162,7 @@ public class IncidenteDAO {
         Set<String> mapKeys = listaFiltros.keySet();
 
         for(String key : mapKeys) {
-            sql += " WHERE " + key + " = " + listaFiltros.get(key) + " ";
+            sql += " WHERE " + key + " = '" + listaFiltros.get(key) + "' ";
         }
 
         sql += " ORDER BY FECHAJUNTA;";
