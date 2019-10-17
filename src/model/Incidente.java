@@ -6,6 +6,7 @@ import java.util.Date;
 public class Incidente {
     private int idIncidente;
     private String codEmpleado;
+    private String codComunidad;
     private String titulo, descripcion;
     private Timestamp fechaAlta, fechaJunta, fechaFin;
     private String nivelUrgencia, tipoComunicado, completo;
@@ -14,7 +15,7 @@ public class Incidente {
 
     }
 
-    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
+    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo, String codComunidad) {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
@@ -35,9 +36,10 @@ public class Incidente {
         this.nivelUrgencia = nivelUrgencia.toLowerCase();
         this.tipoComunicado = tipoComunicado.toLowerCase().replace(" ", "_");
         this.completo = completo.toLowerCase();
+        this.codComunidad = codComunidad;
     }
 
-    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo) {
+    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo, String codComunidad) {
         this.idIncidente = idIncidente;
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
@@ -48,10 +50,10 @@ public class Incidente {
         this.nivelUrgencia = nivelUrgencia.toLowerCase();
         this.tipoComunicado = tipoComunicado.toLowerCase().replace(" ", "_");
         this.completo = completo.toLowerCase();
+        this.codComunidad = codComunidad;
     }
 
 
-    
 
     @Override
     public String toString() {
@@ -62,9 +64,10 @@ public class Incidente {
                 ", fechaAlta=" + fechaAlta +
                 ", fechaJunta=" + fechaJunta +
                 ", fechaFin=" + fechaFin +
-                ", tipoIncidente='" + nivelUrgencia + '\'' +
+                ", nivelUrgencia='" + nivelUrgencia + '\'' +
                 ", tipoComunicado='" + tipoComunicado + '\'' +
                 ", completo='" + completo + '\'' +
+                ", codComunidad='" + codComunidad + '\'' +
                 '}';
     }
 
@@ -147,5 +150,14 @@ public class Incidente {
 
     public void setIdIncidente(int idIncidente) {
         this.idIncidente = idIncidente;
+    }
+
+
+    public String getCodComunidad() {
+        return codComunidad;
+    }
+
+    public void setCodComunidad(String codComunidad) {
+        this.codComunidad = codComunidad;
     }
 }

@@ -24,7 +24,7 @@ public class IncidenteDAO {
 
     public static boolean registerIncident(Incidente incidente) {
 
-        sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo, Comunidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -44,6 +44,7 @@ public class IncidenteDAO {
             ps.setString(5, incidente.getNivelUrgencia());
             ps.setString(6, incidente.getTipoComunicado());
             ps.setString(7, incidente.getCompleto());
+            ps.setString(8, incidente.getCodComunidad());
 
             ps.executeUpdate();
 
@@ -93,8 +94,9 @@ public class IncidenteDAO {
                 String nivelUrgencia = rs.getString(8);
                 String tipoComunicado = rs.getString(9);
                 String completo = rs.getString(10);
+                String comunidad = rs.getString(11);
 
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo);
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo, comunidad);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {
@@ -113,7 +115,7 @@ public class IncidenteDAO {
      * @param descripcionModificada String con la descripción del incidente modificada
      */
     public static void editarIncidente(int idIncidente, String descripcionModificada) {
-        sql = "UPDATE INCIDENTE SET Descripcion = '" + descripcionModificada + "' WHERE IdIncidente = " + idIncidente;
+        sql = String.format("UPDATE INCIDENTE SET Descripcion = '%s' WHERE IdIncidente = %d", descripcionModificada, idIncidente);
 
         try {
             stmt = conn.createStatement();
@@ -160,9 +162,16 @@ public class IncidenteDAO {
 
         // Obtenemos todas las llaves del Map
         Set<String> mapKeys = listaFiltros.keySet();
+        int iterations = 0;
 
         for(String key : mapKeys) {
-            sql += " WHERE " + key + " = '" + listaFiltros.get(key) + "' ";
+            iterations +=1;
+            if (iterations == 1) {
+                sql += " WHERE " + key + " = '" + listaFiltros.get(key) + "' ";
+            } else {
+                sql += " AND " + key + " = '" + listaFiltros.get(key) + "' ";
+            }
+
         }
 
         sql += " ORDER BY FECHAJUNTA;";
@@ -194,15 +203,14 @@ public class IncidenteDAO {
                 String nivelUrgencia = rs.getString(8);
                 String tipoComunicado = rs.getString(9);
                 String completo = rs.getString(10);
+                String comunidad = rs.getString(11);
 
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo);
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo, comunidad);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        System.out.println("SOY EL JODIDO AMO");
 
         return incidentes;
     }

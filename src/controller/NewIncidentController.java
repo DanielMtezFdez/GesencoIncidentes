@@ -30,7 +30,7 @@ public class NewIncidentController implements Initializable {
     private JFXTextArea taDescripcion;
 
     @FXML
-    private JFXTextField tfTitulo;
+    private JFXTextField tfTitulo, tfComunidad;
 
     @FXML
     private JFXComboBox<String> cbEmpleado, cbTipoJunta, cbNivelUrgencia;
@@ -86,6 +86,7 @@ public class NewIncidentController implements Initializable {
         String tipoJunta = "";
         String nivelUrgencia = "";
         Timestamp fechaJuntaCasted = null;
+        String comunidad = "";
 
         boolean descripcionOK = false;
         boolean tituloOK = false;
@@ -93,6 +94,7 @@ public class NewIncidentController implements Initializable {
         boolean tipoJuntaOK = false;
         boolean nivelUrgenciaOK = false;
         boolean fechaJuntaOK = false;
+        boolean comunidadOK = false;
 
         if (taDescripcion.getText().trim().equals("")) {
             // campo vacio
@@ -186,12 +188,21 @@ public class NewIncidentController implements Initializable {
                 dateFechaIncidencia.getStyleClass().remove("error_field");
             }
 
+            if(tfComunidad.getText().equals("")){
+                // campo vacio
+                tfComunidad.getStyleClass().add("error_field");
+                tfComunidad.setPromptText("CAMPO VACÍO");
+                //TODO chequear si está en BD
+            } else {
+                comunidad = tfComunidad.getText();
+                comunidadOK = true;
+            }
+
 
         }
 
         if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaOK) {
-            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no");
-            System.out.println(incidente.toString());
+            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad);
             return incidente;
         } else {
             return null;

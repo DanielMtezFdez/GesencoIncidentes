@@ -42,7 +42,7 @@ public class MainController implements Initializable {
     private TableView<Incidente> tablaIncidente;
 
     @FXML
-    private TableColumn<Incidente, String> colTitulo;
+    private TableColumn<Incidente, String> colComunidad;
     @FXML
     private TableColumn<Incidente, String> colEmpleado;
     @FXML
@@ -58,16 +58,16 @@ public class MainController implements Initializable {
     private JFXTextArea inciDescripcion;
 
     @FXML
-    private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia,  inciFechaJunta, inciFechaFinalizacion;
+    private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia,  inciFechaJunta, inciFechaFinalizacion, inciComunidad;
 
     @FXML
     private ImageView btnSearch, btnRefresh;
 
     @FXML
-    private Label lblFiltroTitulo, lblFiltroEmpleado, lblFiltroFechaJunta, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
+    private Label lblFiltroComunidad, lblFiltroEmpleado, lblFiltroFechaJunta, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
 
     @FXML
-    private ImageView btnDeleteFiltroTitulo, btnDeleteFiltroEmpleado, btnDeleteFiltroFechaJunta, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto;
+    private ImageView btnDeleteFiltroComunidad, btnDeleteFiltroEmpleado, btnDeleteFiltroFechaJunta, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto;
 
     // Campos de filtro
     private int cantidadFiltros;
@@ -95,7 +95,7 @@ public class MainController implements Initializable {
      */
     private void fillCamposBusqueda() {
         ArrayList<String> campos = new ArrayList<>();
-        campos.add("Titulo");
+        campos.add("Comunidad");
         campos.add("Empleado");
         campos.add("Nivel urgencia");
         campos.add("Fecha junta");
@@ -185,6 +185,36 @@ public class MainController implements Initializable {
 
         cantidadFiltros += 1;
 
+        switch (filtroAplicado) {
+            case "comunidad":
+                lblFiltroComunidad.setText(filtroCampoAplicado);
+                break;
+
+            case "empleado":
+                lblFiltroEmpleado.setText(filtroCampoAplicado);
+                break;
+
+            case "nivelurgencia":
+                lblFiltroNivelUrgencia.setText(filtroCampoAplicado);
+                break;
+
+            case "fechajunta":
+                lblFiltroFechaJunta.setText(filtroCampoAplicado);
+                break;
+
+            case "tipocomunicado":
+                lblFiltroComunicacionVia.setText(filtroCampoAplicado);
+                break;
+
+            case "completo":
+                lblFiltroCompleto.setText(filtroCampoAplicado);
+                break;
+
+            default:
+                break;
+        }
+
+
         inicializarTablaIncidentes();
 
     }
@@ -192,7 +222,7 @@ public class MainController implements Initializable {
 
     private void inicializarTablaIncidentes() {
 
-        colTitulo.setCellValueFactory(new PropertyValueFactory<Incidente, String>("titulo"));
+        colComunidad.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codComunidad"));
         colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codEmpleado"));
         colFechaJunta.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaJunta"));
         colNivelUrgencia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("nivelUrgencia"));
@@ -216,13 +246,17 @@ public class MainController implements Initializable {
 
         incidenteSeleccionado = tablaIncidente.getSelectionModel().getSelectedItem();
 
+        if(incidenteSeleccionado == null) {
+            return;
+        }
         // Se establecen los labels con los datos correspondientes
-        inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado());
+        inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado().toUpperCase());
         inciTitulo.setText(incidenteSeleccionado.getTitulo());
-        inciComunicadoVia.setText(incidenteSeleccionado.getTipoComunicado());
-        inciNivelUrgencia.setText(incidenteSeleccionado.getNivelUrgencia());
+        inciComunicadoVia.setText(incidenteSeleccionado.getTipoComunicado().replace("_", " ").toUpperCase());
+        inciNivelUrgencia.setText(incidenteSeleccionado.getNivelUrgencia().replace("_", " ").toUpperCase());
         inciCreacion.setText(incidenteSeleccionado.getFechaAlta().toString());
         inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta().toString());
+        inciComunidad.setText(incidenteSeleccionado.getCodComunidad().toUpperCase());
 
         if(incidenteSeleccionado.getCompleto().equals("si")){
             inciFechaFinalizacion.setText(incidenteSeleccionado.getFechaFin().toString());
@@ -248,7 +282,7 @@ public class MainController implements Initializable {
         listaFiltros.remove("completo");
 
         // Recarga de la tabla
-//        inicializarTablaIncidentes();
+        inicializarTablaIncidentes();
     }
 
 
@@ -259,7 +293,7 @@ public class MainController implements Initializable {
         listaFiltros.remove("tipocomunicado");
 
         // Recarga de la tabla
-//        inicializarTablaIncidentes();
+        inicializarTablaIncidentes();
     }
 
 
@@ -270,7 +304,7 @@ public class MainController implements Initializable {
         listaFiltros.remove("empleado");
 
         // Recarga de la tabla
-//        inicializarTablaIncidentes();
+        inicializarTablaIncidentes();
     }
 
 
@@ -281,7 +315,7 @@ public class MainController implements Initializable {
         listaFiltros.remove("nivelurgencia");
 
         // Recarga de la tabla
-//        inicializarTablaIncidentes();
+        inicializarTablaIncidentes();
     }
 
 
@@ -292,17 +326,17 @@ public class MainController implements Initializable {
         listaFiltros.remove("fechajunta");
 
         // Recarga de la tabla
-//        inicializarTablaIncidentes();
+        inicializarTablaIncidentes();
     }
 
 
     @FXML
-    void deleteFiltroTitulo(MouseEvent event) {
-        lblFiltroTitulo.setText("");
+    void deleteFiltroComunidad(MouseEvent event) {
+        lblFiltroComunidad.setText("");
         cantidadFiltros -= 1;
-        listaFiltros.remove("titulo");
+        listaFiltros.remove("comunidad");
 
         // Recarga de la tabla
-//        inicializarTablaIncidentes();
+        inicializarTablaIncidentes();
     }
 }
