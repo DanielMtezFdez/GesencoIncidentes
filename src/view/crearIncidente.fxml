@@ -59,6 +59,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="tfComunidad" focusColor="#b71c1c" layoutX="30.0" layoutY="97.0" prefHeight="25.0" prefWidth="233.0" promptText="Codigo comunidad" AnchorPane.bottomAnchor="350.0" />
+      <JFXComboBox fx:id="cbComunidad" editable="true" focusColor="#b71c1c" layoutX="41.0" layoutY="163.0" prefHeight="25.0" prefWidth="233.0" promptText="Codigo comunidad" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="30.0" />
    </children>
 </AnchorPane>

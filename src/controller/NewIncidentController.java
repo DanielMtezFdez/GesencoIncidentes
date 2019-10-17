@@ -8,8 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import model.Comunidad;
 import model.Empleado;
 import model.Incidente;
 
@@ -31,10 +33,10 @@ public class NewIncidentController implements Initializable {
     private JFXTextArea taDescripcion;
 
     @FXML
-    private JFXTextField tfTitulo, tfComunidad;
+    private JFXTextField tfTitulo;
 
     @FXML
-    private JFXComboBox<String> cbEmpleado, cbTipoJunta, cbNivelUrgencia;
+    private JFXComboBox<String> cbEmpleado, cbTipoJunta, cbNivelUrgencia, cbComunidad;
 
     @FXML
     private JFXDatePicker dateFechaIncidencia;
@@ -52,7 +54,21 @@ public class NewIncidentController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         rellenarCBEmpleados();
         rellenarCBTipoJunta();
+        rellenarCBComunidades();
         rellenarCBNivelUrgencia();
+    }
+
+    private void rellenarCBComunidades() {
+        ArrayList<Comunidad> comunidades = ComunidadDAO.getComunidades();
+
+        ObservableList<String> listaComunidades = FXCollections.observableArrayList();
+
+        for(Comunidad comunidad : comunidades) {
+            listaComunidades.add(comunidad.getCodigo());
+        }
+
+        cbComunidad.setItems(listaComunidades);
+
     }
 
     /**
@@ -193,17 +209,17 @@ public class NewIncidentController implements Initializable {
                 dateFechaIncidencia.getStyleClass().remove("error_field");
             }
 
-            if(tfComunidad.getText().equals("")){
+            if(cbComunidad.getSelectionModel().getSelectedItem().equals("")){
                 // campo vacio
-                tfComunidad.getStyleClass().add("error_field");
-                tfComunidad.setPromptText("CAMPO VACÍO");
+                cbComunidad.getStyleClass().add("error_field");
+                cbComunidad.setPromptText("CAMPO VACÍO");
                 //TODO chequear si está en BD
-            } else if (!ComunidadDAO.checkComunidad(tfComunidad.getText())) {
+            } else if (!ComunidadDAO.checkComunidad(cbComunidad.getSelectionModel().getSelectedItem())) {
                 // no está en bd
-                tfComunidad.getStyleClass().add("error_field");
-                tfComunidad.setPromptText("CAMPO ERRÓNEO");
+                cbComunidad.getStyleClass().add("error_field");
+                cbComunidad.setPromptText("CAMPO ERRÓNEO");
             } else {
-                comunidad = tfComunidad.getText();
+                comunidad = cbComunidad.getSelectionModel().getSelectedItem();
                 comunidadOK = true;
             }
 
