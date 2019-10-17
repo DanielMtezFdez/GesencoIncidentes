@@ -5,6 +5,8 @@ import model.Incidente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
 public class IncidenteDAO {
 
@@ -60,7 +62,7 @@ public class IncidenteDAO {
 
         ArrayList<Incidente> incidentes = new ArrayList<>();
 
-        sql = "SELECT * FROM INCIDENTE ORDER BY IDINCIDENTE;";
+        sql = "SELECT * FROM INCIDENTE ORDER BY FECHAJUNTA;";
 
         incidente = null;
 
@@ -149,5 +151,59 @@ public class IncidenteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<Incidente> getIncidentesConFiltro(Map<String,?> listaFiltros) {
+
+        ArrayList<Incidente> incidentes = new ArrayList<>();
+        sql = "SELECT * FROM INCIDENTE ";
+
+        // Obtenemos todas las llaves del Map
+        Set<String> mapKeys = listaFiltros.keySet();
+
+        for(String key : mapKeys) {
+            sql += " WHERE " + key + " = " + listaFiltros.get(key) + " ";
+        }
+
+        sql += " ORDER BY FECHAJUNTA;";
+
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                int idIncidente = rs.getInt(1);
+                String codEmpleado = rs.getString(2);
+                String titulo = rs.getString(3);
+                String descripcion = rs.getString(4);
+                Timestamp fechaAlta = rs.getTimestamp(5);
+
+                Timestamp fechaJunta;
+                if(rs.getTimestamp(6) != null){
+                    fechaJunta = rs.getTimestamp(6);
+                } else {
+                    fechaJunta = null;
+                }
+
+                Timestamp fechaFin;
+                if(rs.getTimestamp(7) != null){
+                    fechaFin = rs.getTimestamp(7);
+                } else {
+                    fechaFin = null;
+                }
+
+                String nivelUrgencia = rs.getString(8);
+                String tipoComunicado = rs.getString(9);
+                String completo = rs.getString(10);
+
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo);
+                incidentes.add(incidente);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SOY EL JODIDO AMO");
+
+        return incidentes;
     }
 }

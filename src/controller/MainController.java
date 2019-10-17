@@ -21,8 +21,10 @@ import javafx.stage.Stage;
 import model.Incidente;
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -40,7 +42,17 @@ public class MainController implements Initializable {
     private TableView<Incidente> tablaIncidente;
 
     @FXML
-    private TableColumn<Incidente, String> colTitulo, colEmpleado, colTipoIncidente, colNivelUrgencia, colComunicacionVia, colCompleto;
+    private TableColumn<Incidente, String> colTitulo;
+    @FXML
+    private TableColumn<Incidente, String> colEmpleado;
+    @FXML
+    private TableColumn<Incidente, Timestamp> colFechaJunta;
+    @FXML
+    private TableColumn<Incidente, String> colNivelUrgencia;
+    @FXML
+    private TableColumn<Incidente, String> colComunicacionVia;
+    @FXML
+    private TableColumn<Incidente, String> colCompleto;
 
     @FXML
     private JFXTextArea inciDescripcion;
@@ -52,16 +64,15 @@ public class MainController implements Initializable {
     private ImageView btnSearch, btnRefresh;
 
     @FXML
-    private Label lblFiltroTitulo, lblFiltroEmpleado, lblFiltroTipoIncidente, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
+    private Label lblFiltroTitulo, lblFiltroEmpleado, lblFiltroFechaJunta, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
 
     @FXML
-    private ImageView btnDeleteFiltroTitulo, btnDeleteFiltroEmpleado, btnDeleteFiltroTipoIncidente, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto;
+    private ImageView btnDeleteFiltroTitulo, btnDeleteFiltroEmpleado, btnDeleteFiltroFechaJunta, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto;
 
+    // Campos de filtro
+    private int cantidadFiltros;
+    private Map<String, String> listaFiltros = new HashMap<String, String>();;
 
-    ArrayList<String> camposDeBusqueda;
-
-    ObservableList<Incidente> incidentes;
-    private int posicionIncidenteTabla;
     private Incidente incidenteSeleccionado;
 
     private Stage crearIncidenciaStage;
@@ -71,8 +82,11 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         fillCamposBusqueda();
 
+        cantidadFiltros = 0;
+
         inicializarTablaIncidentes();
     }
+
 
 
     /**
@@ -83,16 +97,14 @@ public class MainController implements Initializable {
         ArrayList<String> campos = new ArrayList<>();
         campos.add("Titulo");
         campos.add("Empleado");
-        campos.add("TipoIncidente");
-        campos.add("NivelUrgencia");
-        campos.add("FechaInicio");
-        campos.add("TipoComunicacion");
+        campos.add("Nivel urgencia");
+        campos.add("Fecha junta");
+        campos.add("Tipo comunicado");
+        campos.add("Completo");
 
         ObservableList<String> lista_campos = FXCollections.observableArrayList();
 
-        for(String campo : campos) {
-            lista_campos.add(campo);
-        }
+        lista_campos.addAll(campos);
 
         cbFiltroCampos.setItems(lista_campos);
         cbFiltroCampos.setPromptText("Selecciona campo");
@@ -165,26 +177,42 @@ public class MainController implements Initializable {
 
     @FXML
     void filtrarBusqueda(MouseEvent event) {
-        // TODO
+
+        String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem().replace(" ", "").toLowerCase();
+        String filtroCampoAplicado = buscarPorCampo.getText();
+
+        listaFiltros.put(filtroAplicado, filtroCampoAplicado);
+
+        cantidadFiltros += 1;
+
+        inicializarTablaIncidentes();
+
     }
 
 
     private void inicializarTablaIncidentes() {
+
         colTitulo.setCellValueFactory(new PropertyValueFactory<Incidente, String>("titulo"));
         colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codEmpleado"));
-        colTipoIncidente.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoIncidente"));
+        colFechaJunta.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaJunta"));
         colNivelUrgencia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("nivelUrgencia"));
         colComunicacionVia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoComunicado"));
         colCompleto.setCellValueFactory(new PropertyValueFactory<Incidente, String>("completo"));
 
-        ArrayList<Incidente> incidentes = IncidenteDAO.getIncidentes();
+        ArrayList<Incidente> incidentes;
+
+        if(cantidadFiltros == 0) {
+            incidentes = IncidenteDAO.getIncidentes();
+        } else {
+            incidentes = IncidenteDAO.getIncidentesConFiltro(listaFiltros);
+        }
+
         ObservableList<Incidente> listaIncidentes = FXCollections.observableArrayList(incidentes);
         tablaIncidente.setItems(listaIncidentes);
     }
 
     @FXML
     void mostrarIncidente(MouseEvent event) {
-        List<Incidente> tabla = tablaIncidente.getSelectionModel().getSelectedItems();
 
         incidenteSeleccionado = tablaIncidente.getSelectionModel().getSelectedItem();
 
@@ -206,40 +234,75 @@ public class MainController implements Initializable {
 
     }
 
+
     @FXML
     void recargarTabla(MouseEvent event) {
         inicializarTablaIncidentes();
     }
 
 
-
     @FXML
     void deleteFiltroCompleto(MouseEvent event) {
+        lblFiltroCompleto.setText("");
+        cantidadFiltros -= 1;
+        listaFiltros.remove("completo");
 
+        // Recarga de la tabla
+//        inicializarTablaIncidentes();
     }
+
 
     @FXML
     void deleteFiltroComunicacionVia(MouseEvent event) {
+        lblFiltroComunicacionVia.setText("");
+        cantidadFiltros -= 1;
+        listaFiltros.remove("tipocomunicado");
 
+        // Recarga de la tabla
+//        inicializarTablaIncidentes();
     }
+
 
     @FXML
     void deleteFiltroEmpleado(MouseEvent event) {
+        lblFiltroEmpleado.setText("");
+        cantidadFiltros -= 1;
+        listaFiltros.remove("empleado");
 
+        // Recarga de la tabla
+//        inicializarTablaIncidentes();
     }
+
 
     @FXML
     void deleteFiltroNivelUrgencia(MouseEvent event) {
+        lblFiltroNivelUrgencia.setText("");
+        cantidadFiltros -= 1;
+        listaFiltros.remove("nivelurgencia");
 
+        // Recarga de la tabla
+//        inicializarTablaIncidentes();
     }
+
 
     @FXML
-    void deleteFiltroTipoIncidente(MouseEvent event) {
+    void deleteFiltroFechaJunta(MouseEvent event) {
+        lblFiltroFechaJunta.setText("");
+        cantidadFiltros -= 1;
+        listaFiltros.remove("fechajunta");
 
+        // Recarga de la tabla
+//        inicializarTablaIncidentes();
     }
+
 
     @FXML
     void deleteFiltroTitulo(MouseEvent event) {
+        lblFiltroTitulo.setText("");
+        cantidadFiltros -= 1;
+        listaFiltros.remove("titulo");
 
+        // Recarga de la tabla
+//        inicializarTablaIncidentes();
     }
 }

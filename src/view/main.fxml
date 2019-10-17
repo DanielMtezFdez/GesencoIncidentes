@@ -48,7 +48,7 @@
                     <columns>
                         <TableColumn fx:id="colTitulo" prefWidth="175.0" text="Título" />
                       <TableColumn fx:id="colEmpleado" prefWidth="100.0" text="Empleado" />
-                      <TableColumn fx:id="colTipoIncidente" prefWidth="125.0" text="Tipo Incidente" />
+                      <TableColumn fx:id="colFechaJunta" prefWidth="125.0" text="Fecha de junta" />
                         <TableColumn fx:id="colNivelUrgencia" prefWidth="150.0" text="Nivel urgencia" />
                         <TableColumn fx:id="colComunicacionVia" prefWidth="162.0" text="Comunicación vía" />
                         <TableColumn fx:id="colCompleto" prefWidth="104.0" text="Completo" />
@@ -157,7 +157,7 @@
       </SplitPane>
       <HBox layoutY="64.0" prefHeight="30.0" prefWidth="806.0">
          <children>
-            <Label fx:id="lblFiltroTitulo" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Filtrotitulo">
+            <Label fx:id="lblFiltroTitulo" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                <font>
                   <Font size="11.0" />
                </font>
@@ -170,7 +170,7 @@
                   <Insets />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="lblFiltroEmpleado" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+            <Label fx:id="lblFiltroEmpleado" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                <font>
                   <Font size="11.0" />
                </font>
@@ -183,12 +183,12 @@
                   <Insets />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="lblFiltroTipoIncidente" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+            <Label fx:id="lblFiltroFechaJunta" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
-            <ImageView fx:id="btnDeleteFiltroTipoIncidente" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroTipoIncidente" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnDeleteFiltroFechaJunta" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroFechaJunta" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/ic_delete.png" />
                </image>
@@ -196,7 +196,7 @@
                   <Insets />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="lblFiltroNivelUrgencia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+            <Label fx:id="lblFiltroNivelUrgencia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                <font>
                   <Font size="11.0" />
                </font>
@@ -209,7 +209,7 @@
                   <Insets />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="lblFiltroComunicacionVia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+            <Label fx:id="lblFiltroComunicacionVia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                <font>
                   <Font size="11.0" />
                </font>
@@ -222,7 +222,7 @@
                   <Insets />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="lblFiltroCompleto" alignment="CENTER" prefHeight="100.0" prefWidth="120.0" text="Label">
+            <Label fx:id="lblFiltroCompleto" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                <font>
                   <Font size="11.0" />
                </font>
