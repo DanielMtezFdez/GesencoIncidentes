@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import model.Comunidad;
@@ -64,7 +63,7 @@ public class NewIncidentController implements Initializable {
         ObservableList<String> listaComunidades = FXCollections.observableArrayList();
 
         for(Comunidad comunidad : comunidades) {
-            listaComunidades.add(comunidad.getCodigo());
+            listaComunidades.add(comunidad.getNombre());
         }
 
         cbComunidad.setItems(listaComunidades);
