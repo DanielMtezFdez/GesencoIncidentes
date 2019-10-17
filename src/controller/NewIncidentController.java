@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.*;
+import database.ComunidadDAO;
 import database.EmpleadoDAO;
 import database.IncidenteDAO;
 import javafx.collections.FXCollections;
@@ -127,6 +128,10 @@ public class NewIncidentController implements Initializable {
 
             //TODO chequear si usuario está en BD
 
+        } else if (!EmpleadoDAO.checkEmpleado(cbEmpleado.getSelectionModel().getSelectedItem())){
+            // no está en bd
+            cbEmpleado.getStyleClass().add("error_field");
+            cbEmpleado.setPromptText("CAMPO ERRÓNEO");
         } else {
             empleado = cbEmpleado.getSelectionModel().getSelectedItem();
             empleadoOK = true;
@@ -193,6 +198,10 @@ public class NewIncidentController implements Initializable {
                 tfComunidad.getStyleClass().add("error_field");
                 tfComunidad.setPromptText("CAMPO VACÍO");
                 //TODO chequear si está en BD
+            } else if (!ComunidadDAO.checkComunidad(tfComunidad.getText())) {
+                // no está en bd
+                tfComunidad.getStyleClass().add("error_field");
+                tfComunidad.setPromptText("CAMPO ERRÓNEO");
             } else {
                 comunidad = tfComunidad.getText();
                 comunidadOK = true;

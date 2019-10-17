@@ -64,4 +64,23 @@ public class EmpleadoDAO {
         }
     }
 
+    public static boolean checkEmpleado(String selectedItem) {
+
+        boolean empleadoInDB = false;
+
+        sql = "SELECT * FROM EMPLEADO";
+
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            if(rs.next()) {
+                empleadoInDB = true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return empleadoInDB;
+    }
 }

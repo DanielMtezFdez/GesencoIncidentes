@@ -16,16 +16,11 @@ public class ComunidadDAO {
     private static String sql;
     private static Connection conn = ConnectFireBird.getConnection();
 
-    private static Comunidad comunidad;
-
-
-
-
     public static ArrayList<Comunidad> getComunidades() {
 
         ArrayList<Comunidad> comunidades = new ArrayList<>();
 
-        String sql = "SELECT CODIGO, NOMBRE FROM COMUNID ORDER BY CODIGO;";
+        sql = "SELECT CODIGO, NOMBRE FROM COMUNID ORDER BY CODIGO;";
 
         Comunidad c = null;
 
@@ -43,31 +38,28 @@ public class ComunidadDAO {
         return comunidades;
     }
 
+    public static boolean checkComunidad(String codComunidad) {
+
+        boolean codInDB = false;
+
+        sql = "SELECT * FROM COMUNID";
+
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            if(rs.next()){
+                codInDB = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return codInDB;
+    }
 
 
-//    public static void obtenerCodigos(){
-//        Connection con = ConnectFireBird.ConnectionFireBird(url, user, pass);
-//
-//        try {
-//            if(con == null){
-//                System.out.println("Conexión fallida");
-//            }
-//
-//            Statement st = con.createStatement();
-//            ResultSet rs = st.executeQuery("SELECT * FROM COMUNID WHERE NOMBRE='C.P. Julio Camba 10'");
-//
-//            System.out.println("Empezamos RS");
-//            while(rs.next()){
-//                System.out.println(rs.getString(1));
-//                System.out.println(rs.getString(2));
-//            }
-//            System.out.println("Terminado");
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
 
 }
