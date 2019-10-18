@@ -98,7 +98,8 @@ public class MainController implements Initializable {
         campos.add("Comunidad");
         campos.add("Empleado");
         campos.add("Nivel urgencia");
-        campos.add("Fecha junta");
+        campos.add("Fecha junta antes de");
+        campos.add("Fecha junta despues de");
         campos.add("Tipo comunicado");
         campos.add("Completo");
 
@@ -198,8 +199,12 @@ public class MainController implements Initializable {
                 lblFiltroNivelUrgencia.setText(filtroCampoAplicado);
                 break;
 
-            case "fechajunta":
-                lblFiltroFechaJunta.setText(filtroCampoAplicado);
+            case "fechajuntaantesde":
+                lblFiltroFechaJunta.setText("Antes de " + filtroCampoAplicado);
+                break;
+
+            case "fechajuntadespuesde":
+                lblFiltroFechaJunta.setText("Despues de " + filtroCampoAplicado);
                 break;
 
             case "tipocomunicado":
@@ -323,7 +328,14 @@ public class MainController implements Initializable {
     void deleteFiltroFechaJunta(MouseEvent event) {
         lblFiltroFechaJunta.setText("");
         cantidadFiltros -= 1;
-        listaFiltros.remove("fechajunta");
+        if(listaFiltros.containsKey("fechajuntaantesde")) {
+            listaFiltros.remove("fechajuntaantesde");
+        }
+
+        if(listaFiltros.containsKey("fechajuntadespuesde")) {
+            listaFiltros.remove("fechajuntadespuesde");
+        }
+
 
         // Recarga de la tabla
         inicializarTablaIncidentes();

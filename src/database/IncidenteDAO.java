@@ -167,9 +167,22 @@ public class IncidenteDAO {
         for(String key : mapKeys) {
             iterations +=1;
             if (iterations == 1) {
-                sql += " WHERE " + key + " = '" + listaFiltros.get(key) + "' ";
+                if(key.equals("fechajuntaantesde")){
+                    sql += " WHERE FechaJunta <= '" + listaFiltros.get(key) + "' ";
+                } else if (key.equals("fechajuntadespuesde")) {
+                    sql += " WHERE FechaJunta >= '" + listaFiltros.get(key) + "' ";
+                } else {
+                    sql += " WHERE " + key + " = '" + listaFiltros.get(key) + "' ";
+                }
             } else {
-                sql += " AND " + key + " = '" + listaFiltros.get(key) + "' ";
+                if(key.equals("fechajuntaantes_e")){
+                    sql += " AND FechaJunta <= '" + listaFiltros.get(key) + "' ";
+                } else if (key.equals("fechajuntadespuesde")) {
+                    sql += " AND FechaJunta >= '" + listaFiltros.get(key) + "' ";
+                }else {
+                    sql += " AND " + key + " = '" + listaFiltros.get(key) + "' ";
+                }
+
             }
 
         }
