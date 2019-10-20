@@ -14,7 +14,7 @@ public class EmpleadoDAO {
     private static PreparedStatement ps;
     private static ResultSet rs;
     private static String sql;
-    private static Connection conn = ConnectMySQL.getConnection();
+    private static Connection conn = ConnectAccess.getConnection();
 
     private static Empleado empleado;
 

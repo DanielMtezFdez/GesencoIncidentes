@@ -2,9 +2,11 @@ package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -22,7 +24,11 @@ public class Main extends Application {
         primaryStage.getIcons().add(icon);
 
         primaryStage.setScene(new Scene(root, 1315, 807));
-        primaryStage.setResizable(false);
+//        primaryStage.setResizable(false);
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getBounds();
+        primaryStage.setWidth(bounds.getWidth());
+        primaryStage.setHeight(bounds.getHeight());
         primaryStage.show();
     }
 

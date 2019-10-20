@@ -3,6 +3,7 @@ package database;
 import model.Incidente;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class IncidenteDAO {
     private static PreparedStatement ps;
     private static ResultSet rs;
     private static String sql;
-    private static Connection conn = ConnectMySQL.getConnection();
+    private static Connection conn = ConnectAccess.getConnection();
 
     private static Incidente incidente;
 
@@ -139,7 +140,11 @@ public class IncidenteDAO {
      * @param idIncidente int con el id del incidente seleccionado
      */
     public static void completarIncidente(int idIncidente) {
-        sql = "UPDATE INCIDENTE SET FechaFin = now(), Completo = 'si' WHERE IdIncidente = " + idIncidente;
+
+        LocalDateTime localDate = LocalDateTime.now();
+
+        String fechaActualFormatted = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear() + " " + localDate.getHour() + ":" + localDate.getMinute() + ":" + localDate.getSecond();
+        sql = String.format("UPDATE INCIDENTE SET FechaFin = '%s', Completo = 'si' WHERE IdIncidente = %s", fechaActualFormatted,idIncidente);
 
         try {
             stmt = conn.createStatement();
