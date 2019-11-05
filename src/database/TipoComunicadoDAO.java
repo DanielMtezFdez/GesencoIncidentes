@@ -24,7 +24,7 @@ public class TipoComunicadoDAO {
 
         ArrayList<TipoComunicado> tiposComunicados = new ArrayList<>();
 
-        sql = "SELECT * FROM EMPLEADO ORDER BY ID;";
+        sql = "SELECT * FROM TIPOCOMUNICADO ORDER BY ID;";
 
         tipoComunicado = null;
 
