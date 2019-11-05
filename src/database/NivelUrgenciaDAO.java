@@ -1,7 +1,6 @@
 package database;
 
 import model.NivelUrgencia;
-import model.TipoComunicado;
 
 import java.sql.*;
 import java.util.ArrayList;

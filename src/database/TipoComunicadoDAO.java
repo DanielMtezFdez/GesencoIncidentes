@@ -1,7 +1,5 @@
 package database;
 
-
-import model.Empleado;
 import model.TipoComunicado;
 
 import java.sql.*;
