@@ -7,15 +7,15 @@ public class Incidente {
     private int idIncidente;
     private String codEmpleado;
     private String codComunidad;
-    private String titulo, descripcion;
+    private String titulo, descripcion,completo;
     private Timestamp fechaAlta, fechaJunta, fechaFin;
-    private String nivelUrgencia, tipoComunicado, completo;
+    private int nivelUrgencia, tipoComunicado;
 
     public Incidente() {
 
     }
 
-    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo, String codComunidad) {
+    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad) {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
@@ -33,13 +33,13 @@ public class Incidente {
             this.fechaFin = null;
         }
 
-        this.nivelUrgencia = nivelUrgencia.toLowerCase();
-        this.tipoComunicado = tipoComunicado.toLowerCase().replace(" ", "_");
+        this.nivelUrgencia = nivelUrgencia;
+        this.tipoComunicado = tipoComunicado;
         this.completo = completo.toLowerCase();
         this.codComunidad = codComunidad;
     }
 
-    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, String nivelUrgencia, String tipoComunicado, String completo, String codComunidad) {
+    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad) {
         this.idIncidente = idIncidente;
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
@@ -47,8 +47,8 @@ public class Incidente {
         this.fechaAlta = fechaAlta;
         this.fechaJunta = fechaJunta;
         this.fechaFin = fechaFin;
-        this.nivelUrgencia = nivelUrgencia.toLowerCase();
-        this.tipoComunicado = tipoComunicado.toLowerCase().replace(" ", "_");
+        this.nivelUrgencia = nivelUrgencia;
+        this.tipoComunicado = tipoComunicado;
         this.completo = completo.toLowerCase();
         this.codComunidad = codComunidad;
     }
@@ -70,6 +70,7 @@ public class Incidente {
                 ", codComunidad='" + codComunidad + '\'' +
                 '}';
     }
+
 
     //Getters y setters
     public String getCodEmpleado() {
@@ -120,19 +121,19 @@ public class Incidente {
         this.fechaFin = fechaFin;
     }
 
-    public String getNivelUrgencia() {
+    public int getNivelUrgencia() {
         return nivelUrgencia;
     }
 
-    public void setNivelUrgencia(String tipoIncidente) {
+    public void setNivelUrgencia(int tipoIncidente) {
         this.nivelUrgencia = tipoIncidente;
     }
 
-    public String getTipoComunicado() {
+    public int getTipoComunicado() {
         return tipoComunicado;
     }
 
-    public void setTipoComunicado(String tipoComunicado) {
+    public void setTipoComunicado(int tipoComunicado) {
         this.tipoComunicado = tipoComunicado;
     }
 

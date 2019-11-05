@@ -3,11 +3,11 @@ package database;
 import model.Incidente;
 
 import java.sql.*;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.Date;
 
 public class IncidenteDAO {
 
@@ -42,8 +42,8 @@ public class IncidenteDAO {
             ps.setString(2, incidente.getTitulo());
             ps.setString(3, incidente.getDescripcion());
             ps.setTimestamp(4, incidente.getFechaJunta());
-            ps.setString(5, incidente.getNivelUrgencia());
-            ps.setString(6, incidente.getTipoComunicado());
+            ps.setInt(5, incidente.getNivelUrgencia());
+            ps.setInt(6, incidente.getTipoComunicado());
             ps.setString(7, incidente.getCompleto());
             ps.setString(8, incidente.getCodComunidad());
 
@@ -92,8 +92,8 @@ public class IncidenteDAO {
                     fechaFin = null;
                 }
 
-                String nivelUrgencia = rs.getString(8);
-                String tipoComunicado = rs.getString(9);
+                int nivelUrgencia = rs.getInt(8);
+                int tipoComunicado = rs.getInt(9);
                 String completo = rs.getString(10);
                 String comunidad = rs.getString(11);
 
@@ -141,13 +141,17 @@ public class IncidenteDAO {
      */
     public static void completarIncidente(int idIncidente) {
 
-        LocalDateTime localDate = LocalDateTime.now();
+        Date currentDate = new Date();
 
-        String fechaActualFormatted = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear() + " " + localDate.getHour() + ":" + localDate.getMinute() + ":" + localDate.getSecond();
-        sql = String.format("UPDATE INCIDENTE SET FechaFin = '%s', Completo = 'si' WHERE IdIncidente = %s", fechaActualFormatted,idIncidente);
+        SimpleDateFormat format = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+
+        System.out.println(format.format(currentDate));
+
+        sql = String.format("UPDATE INCIDENTE SET FechaFin = %s, Completo = 'si' WHERE IdIncidente = %s", currentDate, idIncidente);
 
         try {
             stmt = conn.createStatement();
+
             int filas = stmt.executeUpdate(sql);
 
             if (filas > 0) {
@@ -218,8 +222,8 @@ public class IncidenteDAO {
                     fechaFin = null;
                 }
 
-                String nivelUrgencia = rs.getString(8);
-                String tipoComunicado = rs.getString(9);
+                int nivelUrgencia = rs.getInt(8);
+                int tipoComunicado = rs.getInt(9);
                 String completo = rs.getString(10);
                 String comunidad = rs.getString(11);
 

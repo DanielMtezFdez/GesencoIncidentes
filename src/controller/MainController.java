@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import database.IncidenteDAO;
+import database.NivelUrgenciaDAO;
+import database.TipoComunicadoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -257,8 +259,8 @@ public class MainController implements Initializable {
         // Se establecen los labels con los datos correspondientes
         inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado().toUpperCase());
         inciTitulo.setText(incidenteSeleccionado.getTitulo());
-        inciComunicadoVia.setText(incidenteSeleccionado.getTipoComunicado().replace("_", " ").toUpperCase());
-        inciNivelUrgencia.setText(incidenteSeleccionado.getNivelUrgencia().replace("_", " ").toUpperCase());
+        inciComunicadoVia.setText(TipoComunicadoDAO.getTipoById(incidenteSeleccionado.getTipoComunicado()));
+        inciNivelUrgencia.setText(NivelUrgenciaDAO.getNivelUrgenciaByID(incidenteSeleccionado.getNivelUrgencia()));
         inciCreacion.setText(incidenteSeleccionado.getFechaAlta().toString());
         inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta().toString());
         inciComunidad.setText(incidenteSeleccionado.getCodComunidad().toUpperCase());

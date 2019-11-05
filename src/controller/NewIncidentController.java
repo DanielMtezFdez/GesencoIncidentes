@@ -1,18 +1,14 @@
 package controller;
 
 import com.jfoenix.controls.*;
-import database.ComunidadDAO;
-import database.EmpleadoDAO;
-import database.IncidenteDAO;
+import database.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-import model.Comunidad;
-import model.Empleado;
-import model.Incidente;
+import model.*;
 
 import java.net.URL;
 import java.sql.Timestamp;
@@ -99,8 +95,8 @@ public class NewIncidentController implements Initializable {
         String descripcion = "";
         String titulo = "";
         String empleado = "";
-        String tipoJunta = "";
-        String nivelUrgencia = "";
+        int tipoJunta = 0;
+        int nivelUrgencia = 0;
         Timestamp fechaJuntaCasted = null;
         String comunidad = "";
 
@@ -160,7 +156,8 @@ public class NewIncidentController implements Initializable {
             cbTipoJunta.getStyleClass().add("error_field");
             cbTipoJunta.setPromptText("CAMPO VACÍO");
         } else {
-            tipoJunta = cbTipoJunta.getSelectionModel().getSelectedItem();
+//            tipoJunta = cbTipoJunta.getSelectionModel().getSelectedItem();
+            tipoJunta = TipoComunicadoDAO.getIdByTipo(cbTipoJunta.getSelectionModel().getSelectedItem());
             tipoJuntaOK = true;
 
             // Eliminamos filtros de error
@@ -172,7 +169,7 @@ public class NewIncidentController implements Initializable {
             cbNivelUrgencia.getStyleClass().add("error_field");
             cbNivelUrgencia.setPromptText("CAMPO VACÍO");
         } else {
-            nivelUrgencia = cbNivelUrgencia.getSelectionModel().getSelectedItem();
+            nivelUrgencia = NivelUrgenciaDAO.getIdByNivelUrgencia(cbNivelUrgencia.getSelectionModel().getSelectedItem());
             nivelUrgenciaOK = true;
 
             // Eliminamos filtros de error
@@ -239,14 +236,13 @@ public class NewIncidentController implements Initializable {
      * Rellena el ComboBox de niveles de urgencia con los diferentes campos
      */
     private void rellenarCBNivelUrgencia() {
-        ArrayList<String> campos = new ArrayList<>();
-        campos.add("Superurgente");
-        campos.add("Urgente");
-        campos.add("Normal");
+        ArrayList<NivelUrgencia> nivelesUrgencia = NivelUrgenciaDAO.getNivelesUrgencia();
 
         ObservableList<String> lista_campos = FXCollections.observableArrayList();
 
-        lista_campos.addAll(campos);
+        for(NivelUrgencia nivelUrgencia : nivelesUrgencia) {
+            lista_campos.add(nivelUrgencia.getNivelUrgencia());
+        }
 
         cbNivelUrgencia.setItems(lista_campos);
     }
@@ -257,16 +253,13 @@ public class NewIncidentController implements Initializable {
      * Rellena el ComboBox de tipos de junta con los diferentes campos
      */
     private void rellenarCBTipoJunta() {
-        ArrayList<String> campos = new ArrayList<>();
-        campos.add("Junta ordinaria");
-        campos.add("Junta extraordinaria");
-        campos.add("Oficina");
-        campos.add("Telefono");
-        campos.add("Administracion");
+        ArrayList<TipoComunicado> tiposComunicados = TipoComunicadoDAO.getTiposComunicados();
 
         ObservableList<String> lista_campos = FXCollections.observableArrayList();
 
-        lista_campos.addAll(campos);
+        for(TipoComunicado tipoComunicado : tiposComunicados) {
+            lista_campos.add(tipoComunicado.getTipoComunicado());
+        }
 
         cbTipoJunta.setItems(lista_campos);
     }
