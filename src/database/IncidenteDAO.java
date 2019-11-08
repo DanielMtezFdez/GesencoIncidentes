@@ -140,24 +140,24 @@ public class IncidenteDAO {
      */
     public static void completarIncidente(int idIncidente) {
 
+        sql = "UPDATE incidente SET fechafin=?, Completo=? WHERE IdIncidente=?";
+
         java.util.Date date = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        sql = String.format("UPDATE INCIDENTE SET FechaFin =?, Completo = 'si' WHERE IdIncidente =?");
-
-        try {
+        try{
             ps = conn.prepareStatement(sql);
-
             ps.setDate(1, sqlDate);
-            ps.setInt(2, idIncidente);
+            ps.setString(2, "si");
+            ps.setInt(3, idIncidente);
+            int res = ps.executeUpdate();
 
-            int filas = stmt.executeUpdate(sql);
-
-            if (filas > 0) {
-                System.out.println("Actualizado correctamente");
+            if(res == 0) {
+                System.out.println("error");
             } else {
-                System.out.println("Problema con la actualización");
+                System.out.println(res);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

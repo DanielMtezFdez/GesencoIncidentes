@@ -9,7 +9,7 @@ public class Incidente {
     private String codComunidad;
     private String titulo, descripcion,completo;
     private Timestamp fechaAlta, fechaJunta, fechaFin;
-    private int nivelUrgencia, tipoComunicado;
+    private int nivelUrgencia, tipoComunicado, tipoReparacion;
 
     public Incidente() {
 
@@ -160,5 +160,14 @@ public class Incidente {
 
     public void setCodComunidad(String codComunidad) {
         this.codComunidad = codComunidad;
+    }
+
+
+    public int getTipoReparacion() {
+        return tipoReparacion;
+    }
+
+    public void setTipoReparacion(int tipoReparacion) {
+        this.tipoReparacion = tipoReparacion;
     }
 }

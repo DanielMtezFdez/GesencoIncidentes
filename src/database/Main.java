@@ -24,13 +24,13 @@ public class Main {
 
     public static void getFecha(){
 
-        sql = "SELECT * FROM fechafin";
+        sql = "SELECT * FROM incidente WHERE IdIncidente=1";
 
         try{
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
             while(rs.next()){
-                System.out.println(rs.getString(2));
+                System.out.println(rs.getString("fechafin") + " - " + rs.getString("completo"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class Main {
     }
 
     public static void updateFecha() {
-        sql = "UPDATE fechafin SET fechafin=? WHERE Id=1";
+        sql = "UPDATE incidente SET fechafin=?, Completo=? WHERE IdIncidente=?";
 
         java.util.Date date = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -47,6 +47,8 @@ public class Main {
         try{
             ps = conn.prepareStatement(sql);
             ps.setDate(1, sqlDate);
+            ps.setString(2, "si");
+            ps.setInt(3, 1);
             int res = ps.executeUpdate();
 
             if(res == 0) {

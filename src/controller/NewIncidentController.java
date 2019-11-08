@@ -59,7 +59,7 @@ public class NewIncidentController implements Initializable {
         ObservableList<String> listaComunidades = FXCollections.observableArrayList();
 
         for(Comunidad comunidad : comunidades) {
-            listaComunidades.add(comunidad.getNombre());
+            listaComunidades.add(comunidad.getCodigo());
         }
 
         cbComunidad.setItems(listaComunidades);
