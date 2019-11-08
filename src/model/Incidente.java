@@ -15,7 +15,7 @@ public class Incidente {
 
     }
 
-    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad) {
+    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion) {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
@@ -37,9 +37,10 @@ public class Incidente {
         this.tipoComunicado = tipoComunicado;
         this.completo = completo.toLowerCase();
         this.codComunidad = codComunidad;
+        this.tipoReparacion = tipoReparacion;
     }
 
-    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad) {
+    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion) {
         this.idIncidente = idIncidente;
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
@@ -51,6 +52,7 @@ public class Incidente {
         this.tipoComunicado = tipoComunicado;
         this.completo = completo.toLowerCase();
         this.codComunidad = codComunidad;
+        this.tipoReparacion = tipoReparacion;
     }
 
 
@@ -68,6 +70,7 @@ public class Incidente {
                 ", tipoComunicado='" + tipoComunicado + '\'' +
                 ", completo='" + completo + '\'' +
                 ", codComunidad='" + codComunidad + '\'' +
+                ", tipoReparacion='" + tipoReparacion + '\'' +
                 '}';
     }
 

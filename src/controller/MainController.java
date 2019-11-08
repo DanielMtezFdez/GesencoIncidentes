@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXTextField;
 import database.IncidenteDAO;
 import database.NivelUrgenciaDAO;
 import database.TipoComunicadoDAO;
+import database.TipoReparacionDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,7 +61,7 @@ public class MainController implements Initializable {
     private JFXTextArea inciDescripcion;
 
     @FXML
-    private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia,  inciFechaJunta, inciFechaFinalizacion, inciComunidad;
+    private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia,  inciFechaJunta, inciFechaFinalizacion, inciComunidad, inciTipoReparacion;
 
     @FXML
     private ImageView btnSearch, btnRefresh;
@@ -264,6 +265,7 @@ public class MainController implements Initializable {
         inciCreacion.setText(incidenteSeleccionado.getFechaAlta().toString());
         inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta().toString());
         inciComunidad.setText(incidenteSeleccionado.getCodComunidad().toUpperCase());
+        inciTipoReparacion.setText(TipoReparacionDAO.getTipoById(incidenteSeleccionado.getTipoReparacion()));
 
         if(incidenteSeleccionado.getCompleto().equals("si")){
             inciFechaFinalizacion.setText(incidenteSeleccionado.getFechaFin().toString());

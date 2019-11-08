@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import model.*;
 
 import java.net.URL;
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,7 +32,7 @@ public class NewIncidentController implements Initializable {
     private JFXTextField tfTitulo;
 
     @FXML
-    private JFXComboBox<String> cbEmpleado, cbTipoJunta, cbNivelUrgencia, cbComunidad;
+    private JFXComboBox<String> cbEmpleado, cbTipoJunta, cbNivelUrgencia, cbComunidad, cbTipoReparacion;
 
     @FXML
     private JFXDatePicker dateFechaIncidencia;
@@ -51,20 +52,9 @@ public class NewIncidentController implements Initializable {
         rellenarCBTipoJunta();
         rellenarCBComunidades();
         rellenarCBNivelUrgencia();
+        rellenarCBTipoReparacion();
     }
 
-    private void rellenarCBComunidades() {
-        ArrayList<Comunidad> comunidades = ComunidadDAO.getComunidades();
-
-        ObservableList<String> listaComunidades = FXCollections.observableArrayList();
-
-        for(Comunidad comunidad : comunidades) {
-            listaComunidades.add(comunidad.getCodigo());
-        }
-
-        cbComunidad.setItems(listaComunidades);
-
-    }
 
     /**
      * Created 12/10/2019 by dmartinez
@@ -99,6 +89,7 @@ public class NewIncidentController implements Initializable {
         int nivelUrgencia = 0;
         Timestamp fechaJuntaCasted = null;
         String comunidad = "";
+        int tipoReparacion = 0;
 
         boolean descripcionOK = false;
         boolean tituloOK = false;
@@ -107,6 +98,7 @@ public class NewIncidentController implements Initializable {
         boolean nivelUrgenciaOK = false;
         boolean fechaJuntaOK = false;
         boolean comunidadOK = false;
+
 
         if (taDescripcion.getText().trim().equals("")) {
             // campo vacio
@@ -144,7 +136,7 @@ public class NewIncidentController implements Initializable {
             cbEmpleado.getStyleClass().add("error_field");
             cbEmpleado.setPromptText("CAMPO ERRÓNEO");
         } else {
-            empleado = cbEmpleado.getSelectionModel().getSelectedItem();
+            empleado = cbEmpleado.getSelectionModel().getSelectedItem().split(" ")[0];
             empleadoOK = true;
 
             // Eliminamos filtros de error
@@ -215,15 +207,22 @@ public class NewIncidentController implements Initializable {
                 cbComunidad.getStyleClass().add("error_field");
                 cbComunidad.setPromptText("CAMPO ERRÓNEO");
             } else {
-                comunidad = cbComunidad.getSelectionModel().getSelectedItem();
+                comunidad = cbComunidad.getSelectionModel().getSelectedItem().split(" ")[0];
                 comunidadOK = true;
+            }
+
+            if(cbTipoReparacion.getSelectionModel().getSelectedItem().equals("")) {
+                tipoReparacion = 1;
+            } else {
+                int tipoReparacionFormatted = Integer.parseInt(cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0]);
+                tipoReparacion = tipoReparacionFormatted;
             }
 
 
         }
 
-        if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaOK) {
-            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad);
+        if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaOK && comunidadOK) {
+            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad, tipoReparacion);
             return incidente;
         } else {
             return null;
@@ -275,12 +274,37 @@ public class NewIncidentController implements Initializable {
         ObservableList<String> lista_empleados = FXCollections.observableArrayList();
 
         for(Empleado empleado : empleados) {
-            lista_empleados.add(empleado.getCodigo());
+            lista_empleados.add(empleado.getCodigo() + " - " + empleado.getNombre() + " " + empleado.getApellidos());
         }
 
         cbEmpleado.setItems(lista_empleados);
     }
 
+
+    private void rellenarCBTipoReparacion() {
+        ArrayList<TipoReparacion> tiposReparaciones = TipoReparacionDAO.getTiposReparaciones();
+
+        ObservableList<String> listaTiposReparaciones = FXCollections.observableArrayList();
+
+        for(TipoReparacion tr : tiposReparaciones) {
+            listaTiposReparaciones.add(tr.getId() + " - " + tr.gettipoReparacion());
+        }
+
+        cbTipoReparacion.setItems(listaTiposReparaciones);
+    }
+
+    private void rellenarCBComunidades() {
+        ArrayList<Comunidad> comunidades = ComunidadDAO.getComunidades();
+
+        ObservableList<String> listaComunidades = FXCollections.observableArrayList();
+
+        for(Comunidad comunidad : comunidades) {
+            listaComunidades.add(comunidad.getCodigo() + " - " + comunidad.getNombre());
+        }
+
+        cbComunidad.setItems(listaComunidades);
+
+    }
 
 
     public static Stage getCrearIncidenteStage() {

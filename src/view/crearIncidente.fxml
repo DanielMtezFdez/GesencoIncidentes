@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/field_error.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewIncidentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="736.0" stylesheets="@../css/field_error.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewIncidentController">
    <children>
       <JFXTextArea fx:id="taDescripcion" focusColor="#b71c1c" layoutX="310.0" layoutY="128.0" prefHeight="299.0" prefWidth="370.0" promptText="Escribe aquí la descripción..." AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="128.0">
          <opaqueInsets>
@@ -22,31 +22,31 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="tfTitulo" focusColor="#b71c1c" layoutX="32.0" layoutY="58.0" prefHeight="25.0" prefWidth="649.0" promptText="Titulo" AnchorPane.bottomAnchor="420.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-      <Label layoutX="32.0" layoutY="34.0" text="TITULO" AnchorPane.bottomAnchor="450.0" AnchorPane.leftAnchor="30.0">
+      <JFXTextField fx:id="tfTitulo" focusColor="#b71c1c" layoutX="32.0" layoutY="58.0" prefHeight="25.0" prefWidth="649.0" promptText="Titulo" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="60.0" />
+      <Label layoutX="32.0" layoutY="34.0" text="TITULO" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cbEmpleado" editable="true" focusColor="#b71c1c" layoutX="31.0" layoutY="153.0" prefHeight="25.0" prefWidth="233.0" promptText="Codigo empleado" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="30.0" />
-      <Label layoutX="31.0" layoutY="123.0" text="CODIGO EMPLEADO" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="30.0">
+      <JFXComboBox fx:id="cbEmpleado" editable="true" focusColor="#b71c1c" layoutX="31.0" layoutY="153.0" prefHeight="25.0" prefWidth="233.0" promptText="Codigo empleado" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="220.0" />
+      <Label layoutX="31.0" layoutY="123.0" text="CODIGO EMPLEADO" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="190.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="225.0" text="TIPO DE JUNTA" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="30.0">
+      <Label layoutX="30.0" layoutY="225.0" text="TIPO DE JUNTA" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="270.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cbTipoJunta" focusColor="#b71c1c" layoutX="30.0" layoutY="247.0" prefHeight="25.0" prefWidth="233.0" promptText="Tipo de junta" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="30.0" />
-      <Label layoutX="32.0" layoutY="312.0" text="NIVEL URGENCIA" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="30.0">
+      <JFXComboBox fx:id="cbTipoJunta" focusColor="#b71c1c" layoutX="30.0" layoutY="247.0" prefHeight="25.0" prefWidth="233.0" promptText="Tipo de junta" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="300.0" />
+      <Label layoutX="32.0" layoutY="312.0" text="NIVEL URGENCIA" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="350.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cbNivelUrgencia" focusColor="#b71c1c" layoutX="32.0" layoutY="334.0" prefHeight="25.0" prefWidth="233.0" promptText="Nivel de urgencia" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="30.0" />
-      <Label layoutX="30.0" layoutY="400.0" text="FECHA DE LA INCIDENCIA" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0">
+      <JFXComboBox fx:id="cbNivelUrgencia" focusColor="#b71c1c" layoutX="32.0" layoutY="334.0" prefHeight="25.0" prefWidth="233.0" promptText="Nivel de urgencia" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="380.0" />
+      <Label layoutX="30.0" layoutY="400.0" text="FECHA DE LA INCIDENCIA" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="510.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -54,11 +54,17 @@
       <JFXDatePicker fx:id="dateFechaIncidencia" defaultColor="#b71c1c" layoutX="30.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" promptText="Fecha incidencia" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" />
       <JFXButton fx:id="btnGuardar" layoutX="609.0" layoutY="467.0" onAction="#crearIncidente" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #b71c1c;" text="GUARDAR" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0" />
       <JFXTimePicker fx:id="timeFechaIncidencia" defaultColor="#b71c1c" layoutX="263.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="270.0" />
-      <Label layoutX="30.0" layoutY="77.0" text="Comunidad" AnchorPane.bottomAnchor="380.0">
+      <Label layoutX="30.0" layoutY="77.0" text="Comunidad" AnchorPane.topAnchor="110.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cbComunidad" editable="true" focusColor="#b71c1c" layoutX="41.0" layoutY="163.0" prefHeight="25.0" prefWidth="233.0" promptText="Codigo comunidad" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="30.0" />
+      <JFXComboBox fx:id="cbComunidad" editable="true" focusColor="#b71c1c" layoutX="41.0" layoutY="163.0" prefHeight="25.0" prefWidth="233.0" promptText="Codigo comunidad" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="140.0" />
+      <Label layoutX="42.0" layoutY="322.0" text="TIPO REPARACION" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="430.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbTipoReparacion" editable="true" focusColor="#b71c1c" layoutX="42.0" layoutY="344.0" prefHeight="25.0" prefWidth="233.0" promptText="Tipo reparacion" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="460.0" />
    </children>
 </AnchorPane>
