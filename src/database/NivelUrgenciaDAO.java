@@ -2,7 +2,11 @@ package database;
 
 import model.NivelUrgencia;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NivelUrgenciaDAO {
@@ -23,7 +27,7 @@ public class NivelUrgenciaDAO {
 
         ArrayList<NivelUrgencia> nivelesUrgencia = new ArrayList<>();
 
-        sql = "SELECT * FROM EMPLEADO ORDER BY ID;";
+        sql = "SELECT * FROM NivelUrgencia ORDER BY Id;";
 
         nivelUrgencia = null;
 
@@ -63,7 +67,7 @@ public class NivelUrgenciaDAO {
     public static int getIdByNivelUrgencia(String selectedItem) {
         int resultado = 0;
 
-        sql = String.format("SELECT Id FROM NIVELURGENCIA WHERE NivelUrgencia = %s;", selectedItem);
+        sql = String.format("SELECT Id FROM NIVELURGENCIA WHERE NivelUrgencia = '%s;'", selectedItem);
 
         try{
             stmt = conn.createStatement();

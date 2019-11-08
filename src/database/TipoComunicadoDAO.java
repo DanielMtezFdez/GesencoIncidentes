@@ -63,7 +63,7 @@ public class TipoComunicadoDAO {
     public static int getIdByTipo(String selectedItem) {
         int resultado = 0;
 
-        sql = String.format("SELECT Id FROM TIPOCOMUNICADO WHERE TipoComunicado = %s;", selectedItem);
+        sql = String.format("SELECT Id FROM TIPOCOMUNICADO WHERE TipoComunicado = '%s';", selectedItem);
 
         try{
             stmt = conn.createStatement();

@@ -3,11 +3,9 @@ package database;
 import model.Incidente;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
-import java.util.Date;
 
 public class IncidenteDAO {
 
@@ -25,23 +23,24 @@ public class IncidenteDAO {
 
     public static boolean registerIncident(Incidente incidente) {
 
+
         sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo, Comunidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ps = conn.prepareStatement(sql);
 
-            System.out.println(incidente.getCodEmpleado());
-            System.out.println(incidente.getTitulo());
-            System.out.println(incidente.getDescripcion());
-            System.out.println(incidente.getFechaJunta());
-            System.out.println(incidente.getNivelUrgencia());
-            System.out.println(incidente.getTipoComunicado());
-            System.out.println(incidente.getCompleto());
+            // formateo de fecha
+
+            Timestamp fechaJunta = incidente.getFechaJunta();
+            java.util.Date date = new Date(fechaJunta.getTime());
+            System.out.println(date);
+
+            //
 
             ps.setString(1, incidente.getCodEmpleado());
             ps.setString(2, incidente.getTitulo());
             ps.setString(3, incidente.getDescripcion());
-            ps.setTimestamp(4, incidente.getFechaJunta());
+            ps.setDate(4, new java.sql.Date(date.getTime()));
             ps.setInt(5, incidente.getNivelUrgencia());
             ps.setInt(6, incidente.getTipoComunicado());
             ps.setString(7, incidente.getCompleto());
@@ -141,16 +140,16 @@ public class IncidenteDAO {
      */
     public static void completarIncidente(int idIncidente) {
 
-        Date currentDate = new Date();
+        java.util.Date date = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-
-        System.out.println(format.format(currentDate));
-
-        sql = String.format("UPDATE INCIDENTE SET FechaFin = %s, Completo = 'si' WHERE IdIncidente = %s", currentDate, idIncidente);
+        sql = String.format("UPDATE INCIDENTE SET FechaFin =?, Completo = 'si' WHERE IdIncidente =?");
 
         try {
-            stmt = conn.createStatement();
+            ps = conn.prepareStatement(sql);
+
+            ps.setDate(1, sqlDate);
+            ps.setInt(2, idIncidente);
 
             int filas = stmt.executeUpdate(sql);
 

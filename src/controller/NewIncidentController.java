@@ -157,7 +157,7 @@ public class NewIncidentController implements Initializable {
             cbTipoJunta.setPromptText("CAMPO VACÍO");
         } else {
 //            tipoJunta = cbTipoJunta.getSelectionModel().getSelectedItem();
-            tipoJunta = TipoComunicadoDAO.getIdByTipo(cbTipoJunta.getSelectionModel().getSelectedItem());
+            tipoJunta = TipoComunicadoDAO.getIdByTipo(cbTipoJunta.getSelectionModel().getSelectedItem()) + 1;
             tipoJuntaOK = true;
 
             // Eliminamos filtros de error
@@ -169,7 +169,7 @@ public class NewIncidentController implements Initializable {
             cbNivelUrgencia.getStyleClass().add("error_field");
             cbNivelUrgencia.setPromptText("CAMPO VACÍO");
         } else {
-            nivelUrgencia = NivelUrgenciaDAO.getIdByNivelUrgencia(cbNivelUrgencia.getSelectionModel().getSelectedItem());
+            nivelUrgencia = NivelUrgenciaDAO.getIdByNivelUrgencia(cbNivelUrgencia.getSelectionModel().getSelectedItem()) + 1;
             nivelUrgenciaOK = true;
 
             // Eliminamos filtros de error
