@@ -211,7 +211,7 @@ public class NewIncidentController implements Initializable {
                 comunidadOK = true;
             }
 
-            if(cbTipoReparacion.getSelectionModel().getSelectedItem().equals("")) {
+            if(cbTipoReparacion.getSelectionModel().getSelectedItem() == null) {
                 tipoReparacion = 1;
             } else {
                 int tipoReparacionFormatted = Integer.parseInt(cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0]);
