@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -133,6 +134,10 @@ public class MainController implements Initializable {
                 // Creación del Stage para el PlayLauncher
                 crearIncidenciaStage = new Stage();
                 NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
+
+                Image icon = new Image("img/logo_gesenco.jpg");
+                crearIncidenciaStage.getIcons().add(icon);
+                crearIncidenciaStage.setTitle("Creación incidencia");
 
                 Scene scene = new Scene(page);
 
