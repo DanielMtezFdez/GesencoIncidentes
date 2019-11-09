@@ -1,7 +1,5 @@
 package database;
 
-import model.Empleado;
-
 import java.sql.*;
 
 public class Main {
