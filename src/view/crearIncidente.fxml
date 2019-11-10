@@ -51,9 +51,9 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="dateFechaIncidencia" defaultColor="#b71c1c" layoutX="30.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" promptText="Fecha incidencia" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" />
+      <JFXDatePicker fx:id="dateFechaIncidencia" defaultColor="#b71c1c" layoutX="30.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" promptText="Fecha incidencia" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="540.0" />
       <JFXButton fx:id="btnGuardar" layoutX="609.0" layoutY="467.0" onAction="#crearIncidente" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #b71c1c;" text="GUARDAR" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0" />
-      <JFXTimePicker fx:id="timeFechaIncidencia" defaultColor="#b71c1c" layoutX="263.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="270.0" />
+      <JFXTimePicker fx:id="timeFechaIncidencia" defaultColor="#b71c1c" layoutX="263.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="540.0" />
       <Label layoutX="30.0" layoutY="77.0" text="Comunidad" AnchorPane.topAnchor="110.0">
          <font>
             <Font size="14.0" />
