@@ -128,26 +128,23 @@ public class MainController implements Initializable {
     @FXML
     void añadirIncidente(ActionEvent event) {
         try {
-            if(crearIncidenciaStage == null) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/view/crearIncidente.fxml"));
-                AnchorPane page = (AnchorPane) loader.load();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/crearIncidente.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
 
-                // Creación del Stage para el PlayLauncher
-                crearIncidenciaStage = new Stage();
-                NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
+            // Creación del Stage para el PlayLauncher
+            crearIncidenciaStage = new Stage();
+            NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
 
-                Image icon = new Image("img/logo_gesenco.jpg");
-                crearIncidenciaStage.getIcons().add(icon);
-                crearIncidenciaStage.setTitle("Creación incidencia");
+            Image icon = new Image("img/logo_gesenco.jpg");
+            crearIncidenciaStage.getIcons().add(icon);
+            crearIncidenciaStage.setTitle("Creación incidencia");
 
-                Scene scene = new Scene(page);
+            Scene scene = new Scene(page);
 
-                crearIncidenciaStage.setScene(scene);
-                crearIncidenciaStage.show();
-            } else {
-                crearIncidenciaStage.toFront();
-            }
+            crearIncidenciaStage.setOnCloseRequest(e->NewIncidentController.setCrearIncidenteStage(null));
+            crearIncidenciaStage.setScene(scene);
+            crearIncidenciaStage.show();
 
         } catch (Exception e){
             e.printStackTrace();
@@ -297,27 +294,23 @@ public class MainController implements Initializable {
     @FXML
     void showAyudaCodigos(ActionEvent event) {
         try {
-            if(showAyudaCodigo == null) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/view/ayudaCodigos.fxml"));
-                AnchorPane page = (AnchorPane) loader.load();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/ayudaCodigos.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
 
-                // Creación del Stage para el PlayLauncher
-                showAyudaCodigo = new Stage();
-                NewIncidentController.setCrearIncidenteStage(showAyudaCodigo);
+            // Creación del Stage para el PlayLauncher
+            showAyudaCodigo = new Stage();
+            AyudaCodigosController.setAyudaCodigosStage(showAyudaCodigo);
 
-                Image icon = new Image("img/logo_gesenco.jpg");
-                showAyudaCodigo.getIcons().add(icon);
-                showAyudaCodigo.setTitle("Ayuda códigos");
+            Image icon = new Image("img/logo_gesenco.jpg");
+            showAyudaCodigo.getIcons().add(icon);
+            showAyudaCodigo.setTitle("Ayuda códigos");
 
-                Scene scene = new Scene(page);
-                showAyudaCodigo.setResizable(false);
+            Scene scene = new Scene(page);
+            showAyudaCodigo.setResizable(false);
 
-                showAyudaCodigo.setScene(scene);
-                showAyudaCodigo.show();
-            } else {
-                showAyudaCodigo.toFront();
-            }
+            showAyudaCodigo.setScene(scene);
+            showAyudaCodigo.show();
 
         } catch (Exception e){
             e.printStackTrace();

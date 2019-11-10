@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.*;
 
 import java.net.URL;
@@ -46,6 +47,9 @@ public class AyudaCodigosController implements Initializable {
     @FXML
     private TableColumn<Empleado, String> colIdEmpleados, colEmpleados;
 
+    private static Stage ayudaCodigosStage;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inicializarTablaTiposReparacion();
@@ -67,8 +71,6 @@ public class AyudaCodigosController implements Initializable {
 
         colIdEmpleados.setCellValueFactory(new PropertyValueFactory<Empleado, String>("codigo"));
         colEmpleados.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombreCompleto"));
-
-
 
         ArrayList<TipoReparacion> tipoReparaciones;
         ArrayList<NivelUrgencia> nivelesUrgencia;
@@ -99,4 +101,13 @@ public class AyudaCodigosController implements Initializable {
         tableEmpleados.setItems(listaEmpleados);
 
     }
+
+    public static Stage getAyudaCodigosStage() {
+        return ayudaCodigosStage;
+    }
+
+    public static void setAyudaCodigosStage(Stage ayudaCodigosStage) {
+        AyudaCodigosController.ayudaCodigosStage = ayudaCodigosStage;
+    }
+
 }
