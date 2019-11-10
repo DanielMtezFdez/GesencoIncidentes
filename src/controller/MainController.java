@@ -40,7 +40,7 @@ public class MainController implements Initializable {
     private JFXTextField buscarPorCampo;
 
     @FXML
-    private JFXButton btnInciEditar, btnInciCompletar;
+    private JFXButton btnInciEditar, btnInciCompletar, btnAyudaCodigos;
 
     @FXML
     private TableView<Incidente> tablaIncidente;
@@ -291,6 +291,36 @@ public class MainController implements Initializable {
     @FXML
     void recargarTabla(MouseEvent event) {
         inicializarTablaIncidentes();
+    }
+
+
+    @FXML
+    void showAyudaCodigos(ActionEvent event) {
+        try {
+            if(crearIncidenciaStage == null) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/view/ayudaCodigos.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
+
+                // Creación del Stage para el PlayLauncher
+                crearIncidenciaStage = new Stage();
+                NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
+
+                Image icon = new Image("img/logo_gesenco.jpg");
+                crearIncidenciaStage.getIcons().add(icon);
+                crearIncidenciaStage.setTitle("Ayuda códigos");
+
+                Scene scene = new Scene(page);
+
+                crearIncidenciaStage.setScene(scene);
+                crearIncidenciaStage.show();
+            } else {
+                crearIncidenciaStage.toFront();
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

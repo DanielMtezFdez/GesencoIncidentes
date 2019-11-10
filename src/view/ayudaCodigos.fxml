@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AyudaCodigosController">
    <children>
-      <TableView fixedCellSize="0.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40.0">
+      <TableView fx:id="tableTipoReparacion" fixedCellSize="0.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40.0">
         <columns>
           <TableColumn fx:id="colIdTipoReparacion" prefWidth="73.0" text="ID" />
           <TableColumn fx:id="colTipoReparacion" prefWidth="163.0" text="TIPO REPARACION" />
@@ -18,7 +18,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fixedCellSize="0.0" layoutX="321.0" layoutY="40.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.topAnchor="40.0">
+      <TableView fx:id="tableNivelUrgencia" fixedCellSize="0.0" layoutX="321.0" layoutY="40.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.topAnchor="40.0">
          <columns>
             <TableColumn fx:id="colIdNivelUrgencia" prefWidth="73.0" text="ID" />
             <TableColumn fx:id="colNivelUrgencia" prefWidth="163.0" text="NIVEL URGENCIA" />
@@ -27,7 +27,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fixedCellSize="0.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
+      <TableView fx:id="tableTipoComunicacion" fixedCellSize="0.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
          <columns>
             <TableColumn fx:id="colIdTipoComunicacion" prefWidth="68.0" text="ID" />
             <TableColumn fx:id="colTipoComunicacion" prefWidth="168.0" text="TIPO COMUNICACION" />
@@ -51,7 +51,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TableView fixedCellSize="0.0" layoutX="133.0" layoutY="404.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.leftAnchor="150.0">
+      <TableView fx:id="tableComunidades" fixedCellSize="0.0" layoutX="133.0" layoutY="404.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.leftAnchor="150.0">
          <columns>
             <TableColumn fx:id="colIdComunidades" prefWidth="68.0" text="ID" />
             <TableColumn fx:id="colComunidades" prefWidth="168.0" text="COMUNIDADES" />
@@ -65,7 +65,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TableView fixedCellSize="0.0" layoutX="466.0" layoutY="404.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.rightAnchor="150.0">
+      <TableView fx:id="tableEmpleados" fixedCellSize="0.0" layoutX="466.0" layoutY="404.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.rightAnchor="150.0">
          <columns>
             <TableColumn fx:id="colIdEmpleados" prefWidth="68.0" text="ID" />
             <TableColumn fx:id="colEmpleados" prefWidth="168.0" text="EMPLEADOS" />
