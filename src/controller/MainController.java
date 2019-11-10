@@ -77,7 +77,7 @@ public class MainController implements Initializable {
 
     // Campos de filtro
     private int cantidadFiltros;
-    private Map<String, String> listaFiltros = new HashMap<String, String>();;
+    private Map<String, String> listaFiltros = new HashMap<String, String>();
 
     private Incidente incidenteSeleccionado;
 
@@ -128,23 +128,29 @@ public class MainController implements Initializable {
     @FXML
     void añadirIncidente(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/crearIncidente.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            if(NewIncidentController.estadoStageNewIncident == 0) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/view/crearIncidente.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
 
-            // Creación del Stage para el PlayLauncher
-            crearIncidenciaStage = new Stage();
-            NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
+                // Creación del Stage para el PlayLauncher
+                crearIncidenciaStage = new Stage();
+                NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
 
-            Image icon = new Image("img/logo_gesenco.jpg");
-            crearIncidenciaStage.getIcons().add(icon);
-            crearIncidenciaStage.setTitle("Creación incidencia");
+                Image icon = new Image("img/logo_gesenco.jpg");
+                crearIncidenciaStage.getIcons().add(icon);
+                crearIncidenciaStage.setTitle("Creación incidencia");
 
-            Scene scene = new Scene(page);
+                Scene scene = new Scene(page);
 
-            crearIncidenciaStage.setOnCloseRequest(e->NewIncidentController.setCrearIncidenteStage(null));
-            crearIncidenciaStage.setScene(scene);
-            crearIncidenciaStage.show();
+                crearIncidenciaStage.setOnCloseRequest(e->NewIncidentController.estadoStageNewIncident=1);
+
+                crearIncidenciaStage.setScene(scene);
+                crearIncidenciaStage.show();
+            } else {
+                crearIncidenciaStage.toFront();
+            }
+
 
         } catch (Exception e){
             e.printStackTrace();
@@ -294,23 +300,30 @@ public class MainController implements Initializable {
     @FXML
     void showAyudaCodigos(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/ayudaCodigos.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            if(AyudaCodigosController.estadoStageAyudaCodigos == 0){
+                AyudaCodigosController.estadoStageAyudaCodigos = 1;
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/view/ayudaCodigos.fxml"));
+                AnchorPane page = (AnchorPane) loader.load();
 
-            // Creación del Stage para el PlayLauncher
-            showAyudaCodigo = new Stage();
-            AyudaCodigosController.setAyudaCodigosStage(showAyudaCodigo);
+                // Creación del Stage para el PlayLauncher
+                showAyudaCodigo = new Stage();
+                AyudaCodigosController.setAyudaCodigosStage(showAyudaCodigo);
 
-            Image icon = new Image("img/logo_gesenco.jpg");
-            showAyudaCodigo.getIcons().add(icon);
-            showAyudaCodigo.setTitle("Ayuda códigos");
+                Image icon = new Image("img/logo_gesenco.jpg");
+                showAyudaCodigo.getIcons().add(icon);
+                showAyudaCodigo.setTitle("Ayuda códigos");
 
-            Scene scene = new Scene(page);
-            showAyudaCodigo.setResizable(false);
+                Scene scene = new Scene(page);
+                showAyudaCodigo.setResizable(false);
 
-            showAyudaCodigo.setScene(scene);
-            showAyudaCodigo.show();
+                showAyudaCodigo.setOnCloseRequest(e->AyudaCodigosController.estadoStageAyudaCodigos=0);
+                showAyudaCodigo.setScene(scene);
+                showAyudaCodigo.show();
+            } else{
+                showAyudaCodigo.toFront();
+            }
+
 
         } catch (Exception e){
             e.printStackTrace();

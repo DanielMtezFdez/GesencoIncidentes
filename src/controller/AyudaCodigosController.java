@@ -49,6 +49,8 @@ public class AyudaCodigosController implements Initializable {
 
     private static Stage ayudaCodigosStage;
 
+    public static int estadoStageAyudaCodigos = 0;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

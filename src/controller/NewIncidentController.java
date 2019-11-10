@@ -43,6 +43,7 @@ public class NewIncidentController implements Initializable {
     private JFXTimePicker timeFechaIncidencia;
 
     private MainController mainController;
+    public static int estadoStageNewIncident = 0;
 
 
     @Override
