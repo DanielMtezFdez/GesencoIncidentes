@@ -50,11 +50,13 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Incidente, String> colEmpleado;
     @FXML
-    private TableColumn<Incidente, Timestamp> colFechaJunta;
+    private TableColumn<Incidente, Timestamp> colFechaJunta, colFechaCreacion, colFechaFinalizacion;
     @FXML
     private TableColumn<Incidente, String> colNivelUrgencia;
     @FXML
     private TableColumn<Incidente, String> colComunicacionVia;
+    @FXML
+    private TableColumn<Incidente, String> colTipoReparacion;
     @FXML
     private TableColumn<Incidente, String> colCompleto;
 
@@ -241,6 +243,9 @@ public class MainController implements Initializable {
         colNivelUrgencia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("nivelUrgencia"));
         colComunicacionVia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoComunicado"));
         colCompleto.setCellValueFactory(new PropertyValueFactory<Incidente, String>("completo"));
+        colFechaCreacion.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaAlta"));
+        colFechaFinalizacion.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaFin"));
+        colTipoReparacion.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoReparacion"));
 
         ArrayList<Incidente> incidentes;
 
