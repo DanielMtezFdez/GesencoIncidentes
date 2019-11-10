@@ -3,6 +3,7 @@ package model;
 public class Empleado {
     private String codigo;
     private String nombre, apellidos;
+    private String nombreCompleto;
 
     public Empleado(){
 
@@ -12,6 +13,7 @@ public class Empleado {
     public Empleado(String nombre, String apellidos) {
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.nombreCompleto = nombre + " " + apellidos;
     }
 
 
@@ -19,6 +21,7 @@ public class Empleado {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.nombreCompleto = nombre + " " + apellidos;
     }
 
 

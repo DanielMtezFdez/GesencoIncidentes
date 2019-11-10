@@ -57,16 +57,16 @@ public class AyudaCodigosController implements Initializable {
         colTipoReparacion.setCellValueFactory(new PropertyValueFactory<TipoReparacion, String>("tipoReparacion"));
 
         colIdNivelUrgencia.setCellValueFactory(new PropertyValueFactory<NivelUrgencia, String>("id"));
-        colNivelUrgencia.setCellValueFactory(new PropertyValueFactory<NivelUrgencia, String>("tipoReparacion"));
+        colNivelUrgencia.setCellValueFactory(new PropertyValueFactory<NivelUrgencia, String>("nivelUrgencia"));
 
         colIdTipoComunicacion.setCellValueFactory(new PropertyValueFactory<TipoComunicado, String>("id"));
-        colTipoComunicacion.setCellValueFactory(new PropertyValueFactory<TipoComunicado, String>("tipoReparacion"));
+        colTipoComunicacion.setCellValueFactory(new PropertyValueFactory<TipoComunicado, String>("tipoComunicado"));
 
-        colIdComunidades.setCellValueFactory(new PropertyValueFactory<Comunidad, String>("id"));
-        colComunidades.setCellValueFactory(new PropertyValueFactory<Comunidad, String>("tipoReparacion"));
+        colIdComunidades.setCellValueFactory(new PropertyValueFactory<Comunidad, String>("codigo"));
+        colComunidades.setCellValueFactory(new PropertyValueFactory<Comunidad, String>("nombre"));
 
-        colIdEmpleados.setCellValueFactory(new PropertyValueFactory<Empleado, String>("id"));
-        colEmpleados.setCellValueFactory(new PropertyValueFactory<Empleado, String>("tipoReparacion"));
+        colIdEmpleados.setCellValueFactory(new PropertyValueFactory<Empleado, String>("codigo"));
+        colEmpleados.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombreCompleto"));
 
 
 

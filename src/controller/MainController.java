@@ -81,7 +81,7 @@ public class MainController implements Initializable {
 
     private Incidente incidenteSeleccionado;
 
-    private Stage crearIncidenciaStage;
+    private Stage crearIncidenciaStage, showAyudaCodigo;
 
 
     @Override
@@ -297,25 +297,26 @@ public class MainController implements Initializable {
     @FXML
     void showAyudaCodigos(ActionEvent event) {
         try {
-            if(crearIncidenciaStage == null) {
+            if(showAyudaCodigo == null) {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/view/ayudaCodigos.fxml"));
                 AnchorPane page = (AnchorPane) loader.load();
 
                 // Creación del Stage para el PlayLauncher
-                crearIncidenciaStage = new Stage();
-                NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
+                showAyudaCodigo = new Stage();
+                NewIncidentController.setCrearIncidenteStage(showAyudaCodigo);
 
                 Image icon = new Image("img/logo_gesenco.jpg");
-                crearIncidenciaStage.getIcons().add(icon);
-                crearIncidenciaStage.setTitle("Ayuda códigos");
+                showAyudaCodigo.getIcons().add(icon);
+                showAyudaCodigo.setTitle("Ayuda códigos");
 
                 Scene scene = new Scene(page);
+                showAyudaCodigo.setResizable(false);
 
-                crearIncidenciaStage.setScene(scene);
-                crearIncidenciaStage.show();
+                showAyudaCodigo.setScene(scene);
+                showAyudaCodigo.show();
             } else {
-                crearIncidenciaStage.toFront();
+                showAyudaCodigo.toFront();
             }
 
         } catch (Exception e){

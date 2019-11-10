@@ -51,10 +51,10 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TableView fx:id="tableComunidades" fixedCellSize="0.0" layoutX="133.0" layoutY="404.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.leftAnchor="150.0">
+      <TableView fx:id="tableComunidades" fixedCellSize="0.0" layoutX="133.0" layoutY="404.0" prefHeight="313.0" prefWidth="338.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="475.0">
          <columns>
-            <TableColumn fx:id="colIdComunidades" prefWidth="68.0" text="ID" />
-            <TableColumn fx:id="colComunidades" prefWidth="168.0" text="COMUNIDADES" />
+            <TableColumn fx:id="colIdComunidades" prefWidth="69.0" text="ID" />
+            <TableColumn fx:id="colComunidades" prefWidth="303.0" text="COMUNIDADES" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -65,10 +65,10 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TableView fx:id="tableEmpleados" fixedCellSize="0.0" layoutX="466.0" layoutY="404.0" prefHeight="313.0" prefWidth="238.0" AnchorPane.rightAnchor="150.0">
+      <TableView fx:id="tableEmpleados" fixedCellSize="0.0" layoutX="466.0" layoutY="404.0" prefHeight="313.0" prefWidth="347.0" AnchorPane.leftAnchor="475.0" AnchorPane.rightAnchor="30.0">
          <columns>
-            <TableColumn fx:id="colIdEmpleados" prefWidth="68.0" text="ID" />
-            <TableColumn fx:id="colEmpleados" prefWidth="168.0" text="EMPLEADOS" />
+            <TableColumn fx:id="colIdEmpleados" prefWidth="70.0" text="ID" />
+            <TableColumn fx:id="colEmpleados" prefWidth="302.0" text="EMPLEADOS" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
