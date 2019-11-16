@@ -51,6 +51,10 @@ public class NewIncidentController implements Initializable {
         rellenarCBComunidades();
         rellenarCBNivelUrgencia();
         rellenarCBTipoReparacion();
+
+
+        ParametrosController.limitTextField(tfTitulo, 100);
+        ParametrosController.limitTextField(tfEmpresaReparadora, 100);
     }
 
 
