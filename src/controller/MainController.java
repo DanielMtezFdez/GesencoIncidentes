@@ -40,7 +40,7 @@ public class MainController implements Initializable {
     private JFXTextField buscarPorCampo;
 
     @FXML
-    private JFXButton btnInciEditar, btnInciCompletar, btnAyudaCodigos;
+    private JFXButton btnInciEditar, btnInciCompletar, btnAyudaCodigos, btnRefresh, btnFiltrar;
 
     @FXML
     private TableView<Incidente> tablaIncidente;
@@ -70,9 +70,6 @@ public class MainController implements Initializable {
 
     @FXML
     private Label inciFechaJunta, inciFechaFinalizacion, inciComunidad, inciTipoReparacion, inciEmpresaReparadora;
-
-    @FXML
-    private ImageView btnSearch, btnRefresh;
 
     @FXML
     private Label lblFiltroComunidad, lblFiltroEmpleado, lblFiltroFechaJunta, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
@@ -189,7 +186,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void filtrarBusqueda(MouseEvent event) {
+    void filtrarBusqueda(ActionEvent event) {
 
         String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem().replace(" ", "").toLowerCase();
         String filtroCampoAplicado = buscarPorCampo.getText();
@@ -293,7 +290,7 @@ public class MainController implements Initializable {
 
 
     @FXML
-    void recargarTabla(MouseEvent event) {
+    void recargarTabla(ActionEvent event) {
         inicializarTablaIncidentes();
     }
 
