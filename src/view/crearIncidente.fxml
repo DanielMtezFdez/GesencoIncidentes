@@ -5,7 +5,6 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="736.0" stylesheets="@../css/field_error.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewIncidentController">
    <children>
-      <JFXTextArea fx:id="taDescripcion" focusColor="#b71c1c" layoutX="310.0" layoutY="128.0" prefHeight="299.0" prefWidth="370.0" promptText="Escribe aquí la descripción..." AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="128.0">
+      <JFXTextArea fx:id="taDescripcion" focusColor="#b71c1c" layoutX="310.0" layoutY="128.0" prefHeight="357.0" prefWidth="396.0" promptText="Escribe aquí la descripción..." AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="128.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></JFXTextArea>
@@ -46,14 +45,13 @@
          </font>
       </Label>
       <JFXComboBox fx:id="cbNivelUrgencia" focusColor="#b71c1c" layoutX="32.0" layoutY="334.0" prefHeight="25.0" prefWidth="233.0" promptText="Nivel de urgencia" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="380.0" />
-      <Label layoutX="30.0" layoutY="400.0" text="FECHA DE LA INCIDENCIA" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="510.0">
+      <Label layoutX="307.0" layoutY="498.0" text="FECHA DE LA INCIDENCIA" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="510.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="dateFechaIncidencia" defaultColor="#b71c1c" layoutX="30.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" promptText="Fecha incidencia" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="540.0" />
+      <JFXDatePicker fx:id="dateFechaIncidencia" defaultColor="#b71c1c" layoutX="307.0" layoutY="537.0" prefHeight="25.0" prefWidth="233.0" promptText="Fecha incidencia" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="540.0" />
       <JFXButton fx:id="btnGuardar" layoutX="609.0" layoutY="467.0" onAction="#crearIncidente" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #b71c1c;" text="GUARDAR" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0" />
-      <JFXTimePicker fx:id="timeFechaIncidencia" defaultColor="#b71c1c" layoutX="263.0" layoutY="449.0" prefHeight="25.0" prefWidth="233.0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="540.0" />
       <Label layoutX="30.0" layoutY="77.0" text="Comunidad" AnchorPane.topAnchor="110.0">
          <font>
             <Font size="14.0" />
@@ -66,5 +64,11 @@
          </font>
       </Label>
       <JFXComboBox fx:id="cbTipoReparacion" editable="true" focusColor="#b71c1c" layoutX="42.0" layoutY="344.0" prefHeight="25.0" prefWidth="233.0" promptText="Tipo reparacion" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="460.0" />
+      <JFXTextField fx:id="tfEmpresaReparadora" focusColor="#b71c1c" layoutX="30.0" layoutY="537.0" prefHeight="25.0" prefWidth="233.0" promptText="Empresa reparadora" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="540.0" />
+      <Label layoutX="30.0" layoutY="508.0" text="EMPRESA REPARADORA" AnchorPane.topAnchor="510.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

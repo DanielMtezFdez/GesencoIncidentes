@@ -28,7 +28,7 @@ public class NewIncidentController implements Initializable {
     private JFXTextArea taDescripcion;
 
     @FXML
-    private JFXTextField tfTitulo;
+    private JFXTextField tfTitulo, tfEmpresaReparadora;
 
     @FXML
     private JFXComboBox<String> cbEmpleado, cbTipoJunta, cbNivelUrgencia, cbComunidad, cbTipoReparacion;
@@ -38,9 +38,6 @@ public class NewIncidentController implements Initializable {
 
     @FXML
     private JFXButton btnGuardar;
-
-    @FXML
-    private JFXTimePicker timeFechaIncidencia;
 
     private MainController mainController;
 
@@ -89,6 +86,7 @@ public class NewIncidentController implements Initializable {
         Timestamp fechaJuntaCasted = null;
         String comunidad = "";
         int tipoReparacion = 0;
+        String empresaReparadora = "";
 
         boolean descripcionOK = false;
         boolean tituloOK = false;
@@ -176,16 +174,10 @@ public class NewIncidentController implements Initializable {
             String fechaJuntaFormatted = fechaJunta.replace("/", "-");
             // Eliminamos filtros de error
             dateFechaIncidencia.getStyleClass().remove("error_field");
-
-            if(timeFechaIncidencia.getValue() == null){
-                // campo vacio
-                timeFechaIncidencia.getStyleClass().add("error_field");
-                timeFechaIncidencia.setPromptText("CAMPO VACÍO");
-            } else {
-                DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD hh:mm");
+                DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
                 Date date = null;
                 try {
-                    date = formatter.parse(fechaJuntaFormatted + " " + timeFechaIncidencia.getValue());
+                    date = formatter.parse(fechaJuntaFormatted);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -194,34 +186,33 @@ public class NewIncidentController implements Initializable {
 
                 // Eliminamos filtros de error
                 dateFechaIncidencia.getStyleClass().remove("error_field");
-            }
-
-            if(cbComunidad.getSelectionModel().getSelectedItem().equals("")){
-                // campo vacio
-                cbComunidad.getStyleClass().add("error_field");
-                cbComunidad.setPromptText("CAMPO VACÍO");
-                //TODO chequear si está en BD
-            } else if (!ComunidadDAO.checkComunidad(cbComunidad.getSelectionModel().getSelectedItem())) {
-                // no está en bd
-                cbComunidad.getStyleClass().add("error_field");
-                cbComunidad.setPromptText("CAMPO ERRÓNEO");
-            } else {
-                comunidad = cbComunidad.getSelectionModel().getSelectedItem().split(" ")[0];
-                comunidadOK = true;
-            }
-
-            if(cbTipoReparacion.getSelectionModel().getSelectedItem() == null) {
-                tipoReparacion = 1;
-            } else {
-                int tipoReparacionFormatted = Integer.parseInt(cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0]);
-                tipoReparacion = tipoReparacionFormatted;
-            }
-
-
         }
 
+        if(cbComunidad.getSelectionModel().getSelectedItem().equals("")){
+            // campo vacio
+            cbComunidad.getStyleClass().add("error_field");
+            cbComunidad.setPromptText("CAMPO VACÍO");
+            //TODO chequear si está en BD
+        } else if (!ComunidadDAO.checkComunidad(cbComunidad.getSelectionModel().getSelectedItem())) {
+            // no está en bd
+            cbComunidad.getStyleClass().add("error_field");
+            cbComunidad.setPromptText("CAMPO ERRÓNEO");
+        } else {
+            comunidad = cbComunidad.getSelectionModel().getSelectedItem().split(" ")[0];
+            comunidadOK = true;
+        }
+
+        if(cbTipoReparacion.getSelectionModel().getSelectedItem() == null) {
+            tipoReparacion = 1;
+        } else {
+            int tipoReparacionFormatted = Integer.parseInt(cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0]);
+            tipoReparacion = tipoReparacionFormatted;
+        }
+
+        empresaReparadora = tfEmpresaReparadora.getText().toUpperCase();
+
         if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaOK && comunidadOK) {
-            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad, tipoReparacion);
+            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad, tipoReparacion, empresaReparadora);
             return incidente;
         } else {
             return null;

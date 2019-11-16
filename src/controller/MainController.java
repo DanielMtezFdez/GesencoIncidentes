@@ -59,12 +59,17 @@ public class MainController implements Initializable {
     private TableColumn<Incidente, String> colTipoReparacion;
     @FXML
     private TableColumn<Incidente, String> colCompleto;
+    @FXML
+    private TableColumn<Incidente, String> colEmpresaReparadora;
 
     @FXML
     private JFXTextArea inciDescripcion;
 
     @FXML
-    private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia,  inciFechaJunta, inciFechaFinalizacion, inciComunidad, inciTipoReparacion;
+    private Label inciEmpleado, inciTitulo, inciCreacion, inciComunicadoVia, inciNivelUrgencia;
+
+    @FXML
+    private Label inciFechaJunta, inciFechaFinalizacion, inciComunidad, inciTipoReparacion, inciEmpresaReparadora;
 
     @FXML
     private ImageView btnSearch, btnRefresh;
@@ -243,6 +248,7 @@ public class MainController implements Initializable {
         colFechaCreacion.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaAlta"));
         colFechaFinalizacion.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaFin"));
         colTipoReparacion.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoReparacion"));
+        colEmpresaReparadora.setCellValueFactory(new PropertyValueFactory<Incidente, String>("empresaReparadora"));
 
         ArrayList<Incidente> incidentes;
 
@@ -273,6 +279,7 @@ public class MainController implements Initializable {
         inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta().toString());
         inciComunidad.setText(incidenteSeleccionado.getCodComunidad().toUpperCase());
         inciTipoReparacion.setText(TipoReparacionDAO.getTipoById(incidenteSeleccionado.getTipoReparacion()));
+        inciEmpresaReparadora.setText(incidenteSeleccionado.getEmpresaReparadora());
 
         if(incidenteSeleccionado.getCompleto().equals("si")){
             inciFechaFinalizacion.setText(incidenteSeleccionado.getFechaFin().toString());

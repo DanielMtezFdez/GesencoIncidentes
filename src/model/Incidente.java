@@ -7,7 +7,7 @@ public class Incidente {
     private int idIncidente;
     private String codEmpleado;
     private String codComunidad;
-    private String titulo, descripcion,completo;
+    private String titulo, descripcion, completo, empresaReparadora;
     private Timestamp fechaAlta, fechaJunta, fechaFin;
     private int nivelUrgencia, tipoComunicado, tipoReparacion;
 
@@ -15,7 +15,8 @@ public class Incidente {
 
     }
 
-    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion) {
+    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin,
+                     int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion, String empresaReparadora) {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
@@ -38,9 +39,11 @@ public class Incidente {
         this.completo = completo.toLowerCase();
         this.codComunidad = codComunidad;
         this.tipoReparacion = tipoReparacion;
+        this.empresaReparadora = empresaReparadora.toUpperCase();
     }
 
-    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin, int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion) {
+    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin,
+                     int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion, String empresaReparadora) {
         this.idIncidente = idIncidente;
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
@@ -53,6 +56,7 @@ public class Incidente {
         this.completo = completo.toLowerCase();
         this.codComunidad = codComunidad;
         this.tipoReparacion = tipoReparacion;
+        this.empresaReparadora = empresaReparadora.toUpperCase();
     }
 
 
@@ -165,6 +169,13 @@ public class Incidente {
         this.codComunidad = codComunidad;
     }
 
+    public String getEmpresaReparadora() {
+        return empresaReparadora;
+    }
+
+    public void setEmpresaReparadora(String empresaReparadora) {
+        this.empresaReparadora = empresaReparadora;
+    }
 
     public int getTipoReparacion() {
         return tipoReparacion;

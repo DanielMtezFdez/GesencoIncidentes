@@ -19,12 +19,12 @@
    <children>
     <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="1321.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXComboBox fx:id="cbFiltroCampos" focusColor="#b71c1c" layoutX="144.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" promptText="Seleccionar campo" />
-            <Label layoutX="20.0" layoutY="22.0" text="BUSCAR POR:">
+            <JFXComboBox fx:id="cbFiltroCampos" focusColor="#b71c1c" layoutX="144.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" promptText="Seleccionar campo" AnchorPane.topAnchor="20.0" />
+            <Label layoutX="20.0" layoutY="22.0" text="BUSCAR POR:" AnchorPane.topAnchor="22.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <JFXTextField fx:id="buscarPorCampo" focusColor="#b71c1c" layoutX="424.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" />
+            <JFXTextField fx:id="buscarPorCampo" focusColor="#b71c1c" layoutX="424.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" AnchorPane.topAnchor="20.0" />
             <JFXButton fx:id="btnAñadirIncidente" layoutX="813.0" layoutY="11.0" onAction="#añadirIncidente" prefHeight="51.0" prefWidth="264.0" style="-fx-background-color: #b71c1c;" text="AÑADIR INCIDENTE" textFill="WHITE" AnchorPane.bottomAnchor="-20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -58,6 +58,7 @@
                         <TableColumn fx:id="colNivelUrgencia" prefWidth="51.0" text="NU" />
                         <TableColumn fx:id="colComunicacionVia" prefWidth="119.0" text="T. COM" />
                         <TableColumn fx:id="colTipoReparacion" prefWidth="75.0" text="T. REP" />
+                        <TableColumn fx:id="colEmpresaReparadora" prefWidth="75.0" text="E. REP" />
                         <TableColumn fx:id="colCompleto" prefWidth="104.0" text="COMPLETO" />
                         <TableColumn fx:id="colFechaFinalizacion" prefWidth="75.0" text="FECHA FIN." />
                     </columns>

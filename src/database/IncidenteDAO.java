@@ -24,7 +24,8 @@ public class IncidenteDAO {
     public static boolean registerIncident(Incidente incidente) {
 
 
-        sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo, Comunidad, TipoReparacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo, Comunidad, TipoReparacion, EmpresaReparadora) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -46,6 +47,7 @@ public class IncidenteDAO {
             ps.setString(7, incidente.getCompleto());
             ps.setString(8, incidente.getCodComunidad());
             ps.setInt(9, incidente.getTipoReparacion());
+            ps.setString(10, incidente.getEmpresaReparadora());
 
             ps.executeUpdate();
 
@@ -97,8 +99,10 @@ public class IncidenteDAO {
                 String completo = rs.getString(10);
                 String comunidad = rs.getString(11);
                 int tipoReparacion = rs.getInt(12);
+                String empresaReparadora = rs.getString(13);
 
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion);
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin,
+                        nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {
@@ -228,8 +232,10 @@ public class IncidenteDAO {
                 String completo = rs.getString(10);
                 String comunidad = rs.getString(11);
                 int tipoReparacion = rs.getInt(12);
+                String empresaReparadora = rs.getString(13);
 
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin, nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion);
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin,
+                        nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {
