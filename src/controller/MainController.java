@@ -136,8 +136,8 @@ public class MainController implements Initializable {
             crearIncidenciaStage = new Stage();
             NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
 
-            Image icon = new Image("img/logo_gesenco.jpg");
-            crearIncidenciaStage.getIcons().add(icon);
+            //Image icon = new Image("img/logo_gesenco.jpg");
+            //crearIncidenciaStage.getIcons().add(icon);
             crearIncidenciaStage.setTitle("Creación incidencia");
 
             Scene scene = new Scene(page);
@@ -302,8 +302,8 @@ public class MainController implements Initializable {
             showAyudaCodigo = new Stage();
             AyudaCodigosController.setAyudaCodigosStage(showAyudaCodigo);
 
-            Image icon = new Image("img/logo_gesenco.jpg");
-            showAyudaCodigo.getIcons().add(icon);
+            //Image icon = new Image("img/logo_gesenco.jpg");
+            //showAyudaCodigo.getIcons().add(icon);
             showAyudaCodigo.setTitle("Ayuda códigos");
 
             Scene scene = new Scene(page);
