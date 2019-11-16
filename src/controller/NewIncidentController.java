@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import model.*;
 
+import javafx.scene.input.MouseEvent;
+
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -209,13 +211,24 @@ public class NewIncidentController implements Initializable {
             tipoReparacion = tipoReparacionFormatted;
         }
 
-        empresaReparadora = tfEmpresaReparadora.getText().toUpperCase();
+        empresaReparadora = tfEmpresaReparadora.getText();
+
 
         if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaOK && comunidadOK) {
             Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad, tipoReparacion, empresaReparadora);
             return incidente;
         } else {
             return null;
+        }
+    }
+
+
+    @FXML
+    void comprobarTipoReparacion(MouseEvent event) {
+        if(cbTipoReparacion.getSelectionModel().getSelectedItem() == null || cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0] == "1") {
+            tfEmpresaReparadora.setDisable(true);
+        } else {
+            tfEmpresaReparadora.setDisable(false);
         }
     }
 
