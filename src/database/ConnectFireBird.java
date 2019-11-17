@@ -14,8 +14,8 @@ public class ConnectFireBird {
     // Constructor
     private ConnectFireBird() {
         String driver = "org.firebirdsql.jdbc.FBDriver";
-        String url = "jdbc:firebirdsql:localhost/3050:D:\\DISTR K\\HORIZONT\\Database\\HORIZONT.FDB";
-//        String url = "jdbc:firebirdsql:localhost/3050:C:\\DISTR K\\HORIZONT\\Database\\HORIZONT.FDB";
+//        String url = "jdbc:firebirdsql:localhost/3050:D:\\DISTR K\\HORIZONT\\Database\\HORIZONT.FDB";
+        String url = "jdbc:firebirdsql:localhost/3050:C:\\DISTR K\\HORIZONT\\Database\\HORIZONT.FDB";
         String user = "SYSDBA";
         String pass = "masterkey";
 
