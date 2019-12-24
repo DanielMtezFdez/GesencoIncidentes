@@ -23,13 +23,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Incidente;
+import model.TipoComunicado;
 
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainController implements Initializable {
 
@@ -235,6 +233,13 @@ public class MainController implements Initializable {
 
 
     private void inicializarTablaIncidentes() {
+
+        List<TipoComunicado> tiposDeComunicado = TipoComunicadoDAO.getTiposComunicados();
+        HashMap<Integer, String> mapTiposComunicados = new HashMap<>();
+
+        for(int i = 0; i<tiposDeComunicado.size(); i++) {
+            mapTiposComunicados.put(tiposDeComunicado.get(i).getId(), tiposDeComunicado.get(i).getTipoComunicado());
+        }
 
         colComunidad.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codComunidad"));
         colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codEmpleado"));
