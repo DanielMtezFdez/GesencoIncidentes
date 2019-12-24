@@ -273,8 +273,8 @@ public class MainController implements Initializable {
         inciComunicadoVia.setText(TipoComunicadoDAO.getTipoById(incidenteSeleccionado.getTipoComunicado()));
         inciNivelUrgencia.setText(NivelUrgenciaDAO.getNivelUrgenciaByID(incidenteSeleccionado.getNivelUrgencia()));
         inciCreacion.setText(incidenteSeleccionado.getFechaAlta().toString());
-        inciFechaJunta.setText(incidenteSeleccionado.getFechaJunta().toString());
-        inciComunidad.setText(incidenteSeleccionado.getCodComunidad().toUpperCase());
+        inciFechaJunta.setText(incidenteSeleccionado.getFechaComunicado().toString());
+        inciComunidad.setText(String.valueOf(incidenteSeleccionado.getCodComunidad()));
         inciTipoReparacion.setText(TipoReparacionDAO.getTipoById(incidenteSeleccionado.getTipoReparacion()));
         inciEmpresaReparadora.setText(incidenteSeleccionado.getEmpresaReparadora());
 

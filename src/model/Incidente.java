@@ -6,26 +6,26 @@ import java.util.Date;
 public class Incidente {
     private int idIncidente;
     private String codEmpleado;
-    private String codComunidad;
+    private int codComunidad;
     private String titulo, descripcion, completo, empresaReparadora;
-    private Timestamp fechaAlta, fechaJunta, fechaFin;
+    private Timestamp fechaAlta, fechaComunicado, fechaFin;
     private int nivelUrgencia, tipoComunicado, tipoReparacion;
 
     public Incidente() {
 
     }
 
-    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin,
-                     int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion, String empresaReparadora) {
+    public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaComunicado, Timestamp fechaFin,
+                     int nivelUrgencia, int tipoComunicado, String completo, int codComunidad, int tipoReparacion, String empresaReparadora) {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
         this.fechaAlta = fechaAlta;
 
-        if(fechaJunta != null) {
-            this.fechaJunta = fechaJunta;
+        if(fechaComunicado != null) {
+            this.fechaComunicado = fechaComunicado;
         } else {
-            this.fechaJunta = null;
+            this.fechaComunicado = null;
         }
 
         if(fechaFin != null) {
@@ -42,14 +42,14 @@ public class Incidente {
         this.empresaReparadora = empresaReparadora.toUpperCase();
     }
 
-    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaJunta, Timestamp fechaFin,
-                     int nivelUrgencia, int tipoComunicado, String completo, String codComunidad, int tipoReparacion, String empresaReparadora) {
+    public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaComunicado, Timestamp fechaFin,
+                     int nivelUrgencia, int tipoComunicado, String completo, int codComunidad, int tipoReparacion, String empresaReparadora) {
         this.idIncidente = idIncidente;
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion;
         this.fechaAlta = fechaAlta;
-        this.fechaJunta = fechaJunta;
+        this.fechaComunicado = fechaComunicado;
         this.fechaFin = fechaFin;
         this.nivelUrgencia = nivelUrgencia;
         this.tipoComunicado = tipoComunicado;
@@ -68,7 +68,7 @@ public class Incidente {
                 ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaAlta=" + fechaAlta +
-                ", fechaJunta=" + fechaJunta +
+                ", fechaComunicado=" + fechaComunicado +
                 ", fechaFin=" + fechaFin +
                 ", nivelUrgencia='" + nivelUrgencia + '\'' +
                 ", tipoComunicado='" + tipoComunicado + '\'' +
@@ -112,12 +112,12 @@ public class Incidente {
         this.fechaAlta = fechaAlta;
     }
 
-    public Timestamp getFechaJunta() {
-        return fechaJunta;
+    public Timestamp getFechaComunicado() {
+        return fechaComunicado;
     }
 
-    public void setFechaJunta(Timestamp fechaJunta) {
-        this.fechaJunta = fechaJunta;
+    public void setFechaComunicado(Timestamp fechaComunicado) {
+        this.fechaComunicado = fechaComunicado;
     }
 
     public Timestamp getFechaFin() {
@@ -161,11 +161,11 @@ public class Incidente {
     }
 
 
-    public String getCodComunidad() {
+    public int getCodComunidad() {
         return codComunidad;
     }
 
-    public void setCodComunidad(String codComunidad) {
+    public void setCodComunidad(int codComunidad) {
         this.codComunidad = codComunidad;
     }
 

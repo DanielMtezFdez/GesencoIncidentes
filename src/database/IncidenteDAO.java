@@ -24,7 +24,7 @@ public class IncidenteDAO {
     public static boolean registerIncident(Incidente incidente) {
 
 
-        sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaJunta, NivelUrgencia, TipoComunicado, Completo, Comunidad, TipoReparacion, EmpresaReparadora) " +
+        sql = "INSERT INTO incidente (Empleado, Titulo, Descripcion, FechaComunicado, NivelUrgencia, TipoComunicado, Completo, Comunidad, TipoReparacion, EmpresaReparadora) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
@@ -32,8 +32,8 @@ public class IncidenteDAO {
 
             // formateo de fecha
 
-            Timestamp fechaJunta = incidente.getFechaJunta();
-            java.util.Date date = new Date(fechaJunta.getTime());
+            Timestamp FechaComunicado = incidente.getFechaComunicado();
+            java.util.Date date = new Date(FechaComunicado.getTime());
             System.out.println(date);
 
             //
@@ -45,7 +45,7 @@ public class IncidenteDAO {
             ps.setInt(5, incidente.getNivelUrgencia());
             ps.setInt(6, incidente.getTipoComunicado());
             ps.setString(7, incidente.getCompleto());
-            ps.setString(8, incidente.getCodComunidad());
+            ps.setInt(8, incidente.getCodComunidad());
             ps.setInt(9, incidente.getTipoReparacion());
             ps.setString(10, incidente.getEmpresaReparadora());
 
@@ -66,7 +66,7 @@ public class IncidenteDAO {
 
         ArrayList<Incidente> incidentes = new ArrayList<>();
 
-        sql = "SELECT * FROM INCIDENTE ORDER BY FECHAJUNTA;";
+        sql = "SELECT * FROM INCIDENTE ORDER BY FechaComunicado;";
 
         incidente = null;
 
@@ -76,32 +76,33 @@ public class IncidenteDAO {
             while(rs.next()){
                 int idIncidente = rs.getInt(1);
                 String codEmpleado = rs.getString(2);
-                String titulo = rs.getString(3);
-                String descripcion = rs.getString(4);
-                Timestamp fechaAlta = rs.getTimestamp(5);
+                int comunidad = rs.getInt(3);
+                String titulo = rs.getString(4);
+                int tipoComunicado = rs.getInt(5);
 
-                Timestamp fechaJunta;
+                Timestamp fechaComunicado;
                 if(rs.getTimestamp(6) != null){
-                    fechaJunta = rs.getTimestamp(6);
+                    fechaComunicado = rs.getTimestamp(6);
                 } else {
-                    fechaJunta = null;
+                    fechaComunicado = null;
                 }
 
+                int tipoReparacion = rs.getInt(7);
+                int nivelUrgencia = rs.getInt(8);
+                String empresaReparadora = rs.getString(9);
+                String descripcion = rs.getString(10);
+                String completo = rs.getString(11);
+
                 Timestamp fechaFin;
-                if(rs.getTimestamp(7) != null){
-                    fechaFin = rs.getTimestamp(7);
+                if(rs.getTimestamp(12) != null){
+                    fechaFin = rs.getTimestamp(12);
                 } else {
                     fechaFin = null;
                 }
 
-                int nivelUrgencia = rs.getInt(8);
-                int tipoComunicado = rs.getInt(9);
-                String completo = rs.getString(10);
-                String comunidad = rs.getString(11);
-                int tipoReparacion = rs.getInt(12);
-                String empresaReparadora = rs.getString(13);
+                Timestamp fechaAlta = rs.getTimestamp(12);
 
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin,
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaComunicado, fechaFin,
                         nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora);
                 incidentes.add(incidente);
             }
@@ -181,18 +182,18 @@ public class IncidenteDAO {
         for(String key : mapKeys) {
             iterations +=1;
             if (iterations == 1) {
-                if(key.equals("fechajuntaantesde")){
-                    sql += " WHERE FechaJunta <= '" + listaFiltros.get(key) + "' ";
-                } else if (key.equals("fechajuntadespuesde")) {
-                    sql += " WHERE FechaJunta >= '" + listaFiltros.get(key) + "' ";
+                if(key.equals("FechaComunicadoantesde")){
+                    sql += " WHERE FechaComunicado <= '" + listaFiltros.get(key) + "' ";
+                } else if (key.equals("FechaComunicadodespuesde")) {
+                    sql += " WHERE FechaComunicado >= '" + listaFiltros.get(key) + "' ";
                 } else {
                     sql += " WHERE " + key + " = '" + listaFiltros.get(key) + "' ";
                 }
             } else {
-                if(key.equals("fechajuntaantes_e")){
-                    sql += " AND FechaJunta <= '" + listaFiltros.get(key) + "' ";
-                } else if (key.equals("fechajuntadespuesde")) {
-                    sql += " AND FechaJunta >= '" + listaFiltros.get(key) + "' ";
+                if(key.equals("FechaComunicadoantes_e")){
+                    sql += " AND FechaComunicado <= '" + listaFiltros.get(key) + "' ";
+                } else if (key.equals("FechaComunicadodespuesde")) {
+                    sql += " AND FechaComunicado >= '" + listaFiltros.get(key) + "' ";
                 }else {
                     sql += " AND " + key + " = '" + listaFiltros.get(key) + "' ";
                 }
@@ -201,7 +202,7 @@ public class IncidenteDAO {
 
         }
 
-        sql += " ORDER BY FECHAJUNTA;";
+        sql += " ORDER BY FechaComunicado;";
 
         try{
             stmt = conn.createStatement();
@@ -213,11 +214,11 @@ public class IncidenteDAO {
                 String descripcion = rs.getString(4);
                 Timestamp fechaAlta = rs.getTimestamp(5);
 
-                Timestamp fechaJunta;
+                Timestamp FechaComunicado;
                 if(rs.getTimestamp(6) != null){
-                    fechaJunta = rs.getTimestamp(6);
+                    FechaComunicado = rs.getTimestamp(6);
                 } else {
-                    fechaJunta = null;
+                    FechaComunicado = null;
                 }
 
                 Timestamp fechaFin;
@@ -230,11 +231,11 @@ public class IncidenteDAO {
                 int nivelUrgencia = rs.getInt(8);
                 int tipoComunicado = rs.getInt(9);
                 String completo = rs.getString(10);
-                String comunidad = rs.getString(11);
+                int comunidad = rs.getInt(3);
                 int tipoReparacion = rs.getInt(12);
                 String empresaReparadora = rs.getString(13);
 
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaJunta, fechaFin,
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, FechaComunicado, fechaFin,
                         nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora);
                 incidentes.add(incidente);
             }

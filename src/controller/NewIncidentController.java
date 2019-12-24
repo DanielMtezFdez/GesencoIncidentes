@@ -90,7 +90,7 @@ public class NewIncidentController implements Initializable {
         int tipoJunta = 0;
         int nivelUrgencia = 0;
         Timestamp fechaJuntaCasted = null;
-        String comunidad = "";
+        int comunidad = 0;
         int tipoReparacion = 0;
         String empresaReparadora = "";
 
@@ -204,7 +204,7 @@ public class NewIncidentController implements Initializable {
             cbComunidad.getStyleClass().add("error_field");
             cbComunidad.setPromptText("CAMPO ERRÓNEO");
         } else {
-            comunidad = cbComunidad.getSelectionModel().getSelectedItem().split(" ")[0];
+            comunidad = Integer.valueOf(cbComunidad.getSelectionModel().getSelectedItem().split(" ")[0]);
             comunidadOK = true;
         }
 

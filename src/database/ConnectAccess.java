@@ -16,8 +16,8 @@ public class ConnectAccess {
     // Constructor
     private ConnectAccess() {
         String driver = "net.ucanaccess.jdbc.UcanaccessDriver";
-        String url = "jdbc:ucanaccess://C:\\BD\\BDGsco\\BDIncidencias.accdb";
-//        String url = "jdbc:ucanaccess://C:\\BD\\BDGsco\\BDDani.accdb";
+//        String url = "jdbc:ucanaccess://C:\\BD\\BDGsco\\BDIncidencias.accdb";
+        String url = "jdbc:ucanaccess://E:\\Developer\\Gesenco\\BD\\BDGsco\\BDDani.accdb";
         String user = "gesenco";
         String pass = "gesenco";
 
