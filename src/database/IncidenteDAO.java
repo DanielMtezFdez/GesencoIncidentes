@@ -42,11 +42,11 @@ public class IncidenteDAO {
             ps.setString(2, incidente.getTitulo());
             ps.setString(3, incidente.getDescripcion());
             ps.setDate(4, new java.sql.Date(date.getTime()));
-            ps.setInt(5, incidente.getNivelUrgencia());
-            ps.setInt(6, incidente.getTipoComunicado());
+            ps.setString(5, incidente.getNivelUrgencia());
+            ps.setString(6, incidente.getTipoComunicado());
             ps.setString(7, incidente.getCompleto());
             ps.setInt(8, incidente.getCodComunidad());
-            ps.setInt(9, incidente.getTipoReparacion());
+            ps.setString(9, incidente.getTipoReparacion());
             ps.setString(10, incidente.getEmpresaReparadora());
 
             ps.executeUpdate();
@@ -66,7 +66,13 @@ public class IncidenteDAO {
 
         ArrayList<Incidente> incidentes = new ArrayList<>();
 
-        sql = "SELECT * FROM INCIDENTE ORDER BY FechaComunicado;";
+//        sql = "SELECT * FROM INCIDENTE ORDER BY FechaComunicado;";
+        sql = "SELECT i.IdIncidente, i.Empleado, i.Comunidad, i.Titulo, tc.TipoComunicado, i.FechaComunicado, tr.Reparacion, nu.NivelUrgencia, i.EmpresaReparadora, i.Descripcion, i.Completo, i.FechaFin, i.FechaAltaSistema, e.Nombre, e.Apellido " +
+                "FROM INCIDENTE i " +
+                "LEFT JOIN Empleado e ON i.Empleado = e.CodEmpleado " +
+                "LEFT JOIN TipoReparacion tr ON i.TipoReparacion = tr.id " +
+                "LEFT JOIN NivelUrgencia nu ON i.NivelUrgencia = nu.id " +
+                "LEFT JOIN TipoComunicado tc ON i.TipoComunicado = tc.id ";
 
         incidente = null;
 
@@ -78,7 +84,7 @@ public class IncidenteDAO {
                 String codEmpleado = rs.getString(2);
                 int comunidad = rs.getInt(3);
                 String titulo = rs.getString(4);
-                int tipoComunicado = rs.getInt(5);
+                String tipoComunicado = rs.getString(5);
 
                 Timestamp fechaComunicado;
                 if(rs.getTimestamp(6) != null){
@@ -87,8 +93,8 @@ public class IncidenteDAO {
                     fechaComunicado = null;
                 }
 
-                int tipoReparacion = rs.getInt(7);
-                int nivelUrgencia = rs.getInt(8);
+                String tipoReparacion = rs.getString(7);
+                String nivelUrgencia = rs.getString(8);
                 String empresaReparadora = rs.getString(9);
                 String descripcion = rs.getString(10);
                 String completo = rs.getString(11);
@@ -100,10 +106,18 @@ public class IncidenteDAO {
                     fechaFin = null;
                 }
 
-                Timestamp fechaAlta = rs.getTimestamp(12);
+                Timestamp fechaAlta = rs.getTimestamp(13);
+
+                String nombreEmpleado = rs.getString(14);
+                String apellidoEmpleado = rs.getString(15);
+
+                if(apellidoEmpleado == null) {
+                    apellidoEmpleado = "";
+                }
+                String nombreCompleto = nombreEmpleado + " " + apellidoEmpleado;
 
                 incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaComunicado, fechaFin,
-                        nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora);
+                        nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora, nombreCompleto);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {
@@ -173,7 +187,12 @@ public class IncidenteDAO {
     public static ArrayList<Incidente> getIncidentesConFiltro(Map<String,?> listaFiltros) {
 
         ArrayList<Incidente> incidentes = new ArrayList<>();
-        sql = "SELECT * FROM INCIDENTE ";
+        sql =   "SELECT i.IdIncidente, i.Empleado, i.Comunidad, i.Titulo, tc.TipoComunicado, i.FechaComunicado, tr.Reparacion, nu.NivelUrgencia, i.EmpresaReparadora, i.Descripcion, i.Completo, i.FechaFin, i.FechaAltaSistema, e.Nombre, e.Apellido " +
+                "FROM INCIDENTE i " +
+                "LEFT JOIN Empleados e ON i.Empleado = e.CodEmpleado " +
+                "LEFT JOIN TipoReparacion tr ON i.TipoReparacion = tr.id " +
+                "LEFT JOIN NivelUrgencia nu ON i.NivelUrgencia = nu.id " +
+                "LEFT JOIN TipoComunicado tc ON i.TipoComunicado = tc.id ";
 
         // Obtenemos todas las llaves del Map
         Set<String> mapKeys = listaFiltros.keySet();
@@ -210,33 +229,38 @@ public class IncidenteDAO {
             while(rs.next()){
                 int idIncidente = rs.getInt(1);
                 String codEmpleado = rs.getString(2);
-                String titulo = rs.getString(3);
-                String descripcion = rs.getString(4);
-                Timestamp fechaAlta = rs.getTimestamp(5);
+                int comunidad = rs.getInt(3);
+                String titulo = rs.getString(4);
+                String tipoComunicado = rs.getString(5);
 
-                Timestamp FechaComunicado;
+                Timestamp fechaComunicado;
                 if(rs.getTimestamp(6) != null){
-                    FechaComunicado = rs.getTimestamp(6);
+                    fechaComunicado = rs.getTimestamp(6);
                 } else {
-                    FechaComunicado = null;
+                    fechaComunicado = null;
                 }
 
+                String tipoReparacion = rs.getString(7);
+                String nivelUrgencia = rs.getString(8);
+                String empresaReparadora = rs.getString(9);
+                String descripcion = rs.getString(10);
+                String completo = rs.getString(11);
+
                 Timestamp fechaFin;
-                if(rs.getTimestamp(7) != null){
-                    fechaFin = rs.getTimestamp(7);
+                if(rs.getTimestamp(12) != null){
+                    fechaFin = rs.getTimestamp(12);
                 } else {
                     fechaFin = null;
                 }
 
-                int nivelUrgencia = rs.getInt(8);
-                int tipoComunicado = rs.getInt(9);
-                String completo = rs.getString(10);
-                int comunidad = rs.getInt(3);
-                int tipoReparacion = rs.getInt(12);
-                String empresaReparadora = rs.getString(13);
+                Timestamp fechaAlta = rs.getTimestamp(12);
 
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, FechaComunicado, fechaFin,
-                        nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora);
+                String nombreEmpleado = rs.getString(13);
+                String apellidoEmpleado = rs.getString(14);
+                String nombreCompleto = nombreEmpleado + " " + apellidoEmpleado;
+
+                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaComunicado, fechaFin,
+                        nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora, nombreEmpleado);
                 incidentes.add(incidente);
             }
         } catch (SQLException e) {

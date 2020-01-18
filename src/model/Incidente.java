@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Incidente {
@@ -9,14 +11,18 @@ public class Incidente {
     private int codComunidad;
     private String titulo, descripcion, completo, empresaReparadora;
     private Timestamp fechaAlta, fechaComunicado, fechaFin;
-    private int nivelUrgencia, tipoComunicado, tipoReparacion;
+    private String nivelUrgencia, tipoComunicado, tipoReparacion;
+
+    private String nombreEmpleado;
+
+    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     public Incidente() {
 
     }
 
     public Incidente(String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaComunicado, Timestamp fechaFin,
-                     int nivelUrgencia, int tipoComunicado, String completo, int codComunidad, int tipoReparacion, String empresaReparadora) {
+                     String nivelUrgencia, String tipoComunicado, String completo, int codComunidad, String tipoReparacion, String empresaReparadora, String nombreEmpleado) {
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
         this.descripcion = descripcion.toLowerCase();
@@ -40,10 +46,11 @@ public class Incidente {
         this.codComunidad = codComunidad;
         this.tipoReparacion = tipoReparacion;
         this.empresaReparadora = empresaReparadora.toUpperCase();
+        this.nombreEmpleado = nombreEmpleado;
     }
 
     public Incidente(int idIncidente, String codEmpleado, String titulo, String descripcion, Timestamp fechaAlta, Timestamp fechaComunicado, Timestamp fechaFin,
-                     int nivelUrgencia, int tipoComunicado, String completo, int codComunidad, int tipoReparacion, String empresaReparadora) {
+                     String nivelUrgencia, String tipoComunicado, String completo, int codComunidad, String tipoReparacion, String empresaReparadora, String nombreEmpleado) {
         this.idIncidente = idIncidente;
         this.codEmpleado = codEmpleado.toLowerCase();
         this.titulo = titulo.toLowerCase();
@@ -57,6 +64,7 @@ public class Incidente {
         this.codComunidad = codComunidad;
         this.tipoReparacion = tipoReparacion;
         this.empresaReparadora = empresaReparadora.toUpperCase();
+        this.nombreEmpleado = nombreEmpleado;
     }
 
 
@@ -128,19 +136,19 @@ public class Incidente {
         this.fechaFin = fechaFin;
     }
 
-    public int getNivelUrgencia() {
+    public String getNivelUrgencia() {
         return nivelUrgencia;
     }
 
-    public void setNivelUrgencia(int tipoIncidente) {
+    public void setNivelUrgencia(String tipoIncidente) {
         this.nivelUrgencia = tipoIncidente;
     }
 
-    public int getTipoComunicado() {
+    public String getTipoComunicado() {
         return tipoComunicado;
     }
 
-    public void setTipoComunicado(int tipoComunicado) {
+    public void setTipoComunicado(String tipoComunicado) {
         this.tipoComunicado = tipoComunicado;
     }
 
@@ -177,11 +185,19 @@ public class Incidente {
         this.empresaReparadora = empresaReparadora;
     }
 
-    public int getTipoReparacion() {
+    public String getTipoReparacion() {
         return tipoReparacion;
     }
 
-    public void setTipoReparacion(int tipoReparacion) {
+    public void setTipoReparacion(String tipoReparacion) {
         this.tipoReparacion = tipoReparacion;
+    }
+
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
     }
 }

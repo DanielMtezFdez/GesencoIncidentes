@@ -87,11 +87,11 @@ public class NewIncidentController implements Initializable {
         String descripcion = "";
         String titulo = "";
         String empleado = "";
-        int tipoJunta = 0;
-        int nivelUrgencia = 0;
+        String tipoJunta = "";
+        String nivelUrgencia = "0";
         Timestamp fechaJuntaCasted = null;
         int comunidad = 0;
-        int tipoReparacion = 0;
+        String tipoReparacion = "";
         String empresaReparadora = "";
 
         boolean descripcionOK = false;
@@ -152,7 +152,7 @@ public class NewIncidentController implements Initializable {
             cbTipoJunta.setPromptText("CAMPO VACÍO");
         } else {
 //            tipoJunta = cbTipoJunta.getSelectionModel().getSelectedItem();
-            tipoJunta = TipoComunicadoDAO.getIdByTipo(cbTipoJunta.getSelectionModel().getSelectedItem()) + 1;
+            tipoJunta = String.valueOf(TipoComunicadoDAO.getIdByTipo(cbTipoJunta.getSelectionModel().getSelectedItem()) + 1);
             tipoJuntaOK = true;
 
             // Eliminamos filtros de error
@@ -164,7 +164,7 @@ public class NewIncidentController implements Initializable {
             cbNivelUrgencia.getStyleClass().add("error_field");
             cbNivelUrgencia.setPromptText("CAMPO VACÍO");
         } else {
-            nivelUrgencia = NivelUrgenciaDAO.getIdByNivelUrgencia(cbNivelUrgencia.getSelectionModel().getSelectedItem()) + 1;
+            nivelUrgencia = String.valueOf(NivelUrgenciaDAO.getIdByNivelUrgencia(cbNivelUrgencia.getSelectionModel().getSelectedItem()) + 1);
             nivelUrgenciaOK = true;
 
             // Eliminamos filtros de error
@@ -209,17 +209,22 @@ public class NewIncidentController implements Initializable {
         }
 
         if(cbTipoReparacion.getSelectionModel().getSelectedItem() == null) {
-            tipoReparacion = 1;
+            tipoReparacion = "1";
         } else {
-            int tipoReparacionFormatted = Integer.parseInt(cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0]);
-            tipoReparacion = tipoReparacionFormatted;
+//            int tipoReparacionFormatted = String.valueOf(cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0]);
+//            tipoReparacion = tipoReparacionFormatted;
+
+            tipoReparacion = cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0];
+
         }
 
         empresaReparadora = tfEmpresaReparadora.getText();
 
+        String nombreEmpleado = EmpleadoDAO.getEmpleadoById(empleado);
+
 
         if(descripcionOK && tituloOK && empleadoOK && tipoJuntaOK && nivelUrgenciaOK && fechaJuntaOK && comunidadOK) {
-            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad, tipoReparacion, empresaReparadora);
+            Incidente incidente = new Incidente(empleado, titulo, descripcion, null, fechaJuntaCasted, null, nivelUrgencia, tipoJunta, "no", comunidad, tipoReparacion, empresaReparadora, nombreEmpleado);
             return incidente;
         } else {
             return null;
@@ -229,7 +234,7 @@ public class NewIncidentController implements Initializable {
 
     @FXML
     void comprobarTipoReparacion(MouseEvent event) {
-        if(cbTipoReparacion.getSelectionModel().getSelectedItem() == null || cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0] == "1") {
+        if(cbTipoReparacion.getSelectionModel().getSelectedItem() == null || cbTipoReparacion.getSelectionModel().getSelectedItem().split(" ")[0] == "0") {
             tfEmpresaReparadora.setDisable(true);
         } else {
             tfEmpresaReparadora.setDisable(false);
@@ -281,6 +286,9 @@ public class NewIncidentController implements Initializable {
         ObservableList<String> lista_empleados = FXCollections.observableArrayList();
 
         for(Empleado empleado : empleados) {
+            if(empleado.getApellidos() == null) {
+                empleado.setApellidos("");
+            }
             lista_empleados.add(empleado.getCodigo() + " - " + empleado.getNombre() + " " + empleado.getApellidos());
         }
 

@@ -83,4 +83,31 @@ public class EmpleadoDAO {
 
         return empleadoInDB;
     }
+
+    public static String getEmpleadoById(String codEmpleado) {
+        String nombreEmpleado = "";
+
+        sql = "SELECT Nombre, Apellido FROM EMPLEADO WHERE CodEmpleado = " + codEmpleado;
+
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            while(rs.next()){
+
+                String nombre = rs.getString(1);
+                String apellido = rs.getString(2);
+
+                nombreEmpleado = nombre + " " + apellido;
+            }
+
+
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return nombreEmpleado;
+    }
+
 }

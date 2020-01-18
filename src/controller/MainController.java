@@ -242,8 +242,8 @@ public class MainController implements Initializable {
         }
 
         colComunidad.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codComunidad"));
-        colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("codEmpleado"));
-        colFechaJunta.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaJunta"));
+        colEmpleado.setCellValueFactory(new PropertyValueFactory<Incidente, String>("nombreEmpleado"));
+        colFechaJunta.setCellValueFactory(new PropertyValueFactory<Incidente, Timestamp>("fechaComunicado"));
         colNivelUrgencia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("nivelUrgencia"));
         colComunicacionVia.setCellValueFactory(new PropertyValueFactory<Incidente, String>("tipoComunicado"));
         colCompleto.setCellValueFactory(new PropertyValueFactory<Incidente, String>("completo"));
@@ -273,14 +273,16 @@ public class MainController implements Initializable {
             return;
         }
         // Se establecen los labels con los datos correspondientes
-        inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado().toUpperCase());
+//        inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado().toUpperCase());
+        inciEmpleado.setText(incidenteSeleccionado.getNombreEmpleado());
         inciTitulo.setText(incidenteSeleccionado.getTitulo());
-        inciComunicadoVia.setText(TipoComunicadoDAO.getTipoById(incidenteSeleccionado.getTipoComunicado()));
-        inciNivelUrgencia.setText(NivelUrgenciaDAO.getNivelUrgenciaByID(incidenteSeleccionado.getNivelUrgencia()));
+//        inciComunicadoVia.setText(TipoComunicadoDAO.getTipoById(incidenteSeleccionado.getTipoComunicado()));
+        inciComunicadoVia.setText(incidenteSeleccionado.getTipoComunicado());
+        inciNivelUrgencia.setText(incidenteSeleccionado.getNivelUrgencia());
         inciCreacion.setText(incidenteSeleccionado.getFechaAlta().toString());
         inciFechaJunta.setText(incidenteSeleccionado.getFechaComunicado().toString());
         inciComunidad.setText(String.valueOf(incidenteSeleccionado.getCodComunidad()));
-        inciTipoReparacion.setText(TipoReparacionDAO.getTipoById(incidenteSeleccionado.getTipoReparacion()));
+        inciTipoReparacion.setText(incidenteSeleccionado.getTipoReparacion());
         inciEmpresaReparadora.setText(incidenteSeleccionado.getEmpresaReparadora());
 
         if(incidenteSeleccionado.getCompleto().equals("si")){

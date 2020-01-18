@@ -40,7 +40,7 @@ public class TipoReparacionDAO {
         return tiposComunicados;
     }
 
-    public static String getTipoById(int tipoReparacion) {
+    public static String getTipoById(String tipoReparacion) {
 
         String resultado = "";
 

@@ -46,7 +46,7 @@ public class NivelUrgenciaDAO {
     }
 
 
-    public static String getNivelUrgenciaByID(int nivelUrgencia) {
+    public static String getNivelUrgenciaByID(String nivelUrgencia) {
         String resultado = "";
 
         sql = String.format("SELECT NivelUrgencia FROM NIVELURGENCIA WHERE Id = %s;", nivelUrgencia);
