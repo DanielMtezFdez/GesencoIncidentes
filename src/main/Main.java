@@ -22,8 +22,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
         primaryStage.setTitle("Gesenco Incidentes");
 
-//        Image icon = new Image(new File("img/logo_gesenco.jpg").toURI().toString());
-//        primaryStage.getIcons().add(icon);
+        Image icon = new Image(new File("img/logo_gesenco.jpg").toURI().toString());
+        primaryStage.getIcons().add(icon);
 
         primaryStage.setScene(new Scene(root, 1315, 807));
 //        primaryStage.setResizable(false);

@@ -1,5 +1,6 @@
 package database;
 
+import model.Filtro;
 import model.Incidente;
 
 import java.sql.*;
@@ -62,17 +63,57 @@ public class IncidenteDAO {
     }
 
 
-    public static ArrayList<Incidente> getIncidentes() {
+    public static ArrayList<Incidente> getIncidentes(Filtro filtro) {
 
         ArrayList<Incidente> incidentes = new ArrayList<>();
 
-//        sql = "SELECT * FROM INCIDENTE ORDER BY FechaComunicado;";
         sql = "SELECT i.IdIncidente, i.Empleado, i.Comunidad, i.Titulo, tc.TipoComunicado, i.FechaComunicado, tr.Reparacion, nu.NivelUrgencia, i.EmpresaReparadora, i.Descripcion, i.Completo, i.FechaFin, i.FechaAltaSistema, e.Nombre, e.Apellido " +
                 "FROM INCIDENTE i " +
                 "LEFT JOIN Empleado e ON i.Empleado = e.CodEmpleado " +
                 "LEFT JOIN TipoReparacion tr ON i.TipoReparacion = tr.id " +
                 "LEFT JOIN NivelUrgencia nu ON i.NivelUrgencia = nu.id " +
-                "LEFT JOIN TipoComunicado tc ON i.TipoComunicado = tc.id ";
+                "LEFT JOIN TipoComunicado tc ON i.TipoComunicado = tc.id " +
+                "WHERE 1 = 1";
+
+        if(filtro.getCodComunidad() != null) {
+            sql += " AND i.Comunidad = " + filtro.getCodComunidad();
+        }
+        if(filtro.getCodEmpleado() != null) {
+            sql += " AND i.Empleado = " + filtro.getCodEmpleado();
+        }
+        if(filtro.getFechaJuntaAntesDe() != null) {
+            sql += " AND i.FechaComunicado <= " + filtro.getFechaJuntaAntesDe();
+        }
+        if(filtro.getFechaJuntaDespuesDe() != null) {
+            sql += " AND i.FechaComunicado >= " + filtro.getFechaJuntaDespuesDe();
+        }
+        if(filtro.getFechaAltaAntesDe() != null) {
+            sql += " AND i.FechaAltaSistema <= " + filtro.getFechaAltaAntesDe();
+        }
+        if(filtro.getFechaAltaDespuesDe() != null) {
+            sql += " AND i.FechaAltaSistema >= " + filtro.getFechaAltaDespuesDe();
+        }
+        if(filtro.getFechaFinalizacionAntesDe() != null) {
+            sql += " AND i.FechaFin <= " + filtro.getFechaFinalizacionAntesDe();
+        }
+        if(filtro.getFechaFinalizacionDespuesDe() != null) {
+            sql += " AND i.FechaFin >= " + filtro.getFechaFinalizacionDespuesDe();
+        }
+        if(filtro.getNivelUrgencia() != null) {
+            sql += " AND i.NivelUrgencia = " + filtro.getNivelUrgencia();
+        }
+        if(filtro.getTipoComunicado() != null) {
+            sql += " AND i.TipoComunicado = " + filtro.getTipoComunicado();
+        }
+        if(filtro.getTipoReparacion() != null) {
+            sql += " AND i.TipoReparacion = " + filtro.getTipoReparacion();
+        }
+        if(filtro.getEmpresaReparadora() != null) {
+            sql += " AND i.EmpresaReparadora = " + filtro.getEmpresaReparadora().toUpperCase();
+        }
+        if(filtro.getCompleto() != null) {
+            sql += " AND i.Completo= " + filtro.getCompleto().toLowerCase();
+        }
 
         incidente = null;
 
@@ -184,89 +225,4 @@ public class IncidenteDAO {
         }
     }
 
-    public static ArrayList<Incidente> getIncidentesConFiltro(Map<String,?> listaFiltros) {
-
-        ArrayList<Incidente> incidentes = new ArrayList<>();
-        sql =   "SELECT i.IdIncidente, i.Empleado, i.Comunidad, i.Titulo, tc.TipoComunicado, i.FechaComunicado, tr.Reparacion, nu.NivelUrgencia, i.EmpresaReparadora, i.Descripcion, i.Completo, i.FechaFin, i.FechaAltaSistema, e.Nombre, e.Apellido " +
-                "FROM INCIDENTE i " +
-                "LEFT JOIN Empleados e ON i.Empleado = e.CodEmpleado " +
-                "LEFT JOIN TipoReparacion tr ON i.TipoReparacion = tr.id " +
-                "LEFT JOIN NivelUrgencia nu ON i.NivelUrgencia = nu.id " +
-                "LEFT JOIN TipoComunicado tc ON i.TipoComunicado = tc.id ";
-
-        // Obtenemos todas las llaves del Map
-        Set<String> mapKeys = listaFiltros.keySet();
-        int iterations = 0;
-
-        for(String key : mapKeys) {
-            iterations +=1;
-            if (iterations == 1) {
-                if(key.equals("FechaComunicadoantesde")){
-                    sql += " WHERE FechaComunicado <= '" + listaFiltros.get(key) + "' ";
-                } else if (key.equals("FechaComunicadodespuesde")) {
-                    sql += " WHERE FechaComunicado >= '" + listaFiltros.get(key) + "' ";
-                } else {
-                    sql += " WHERE " + key + " = '" + listaFiltros.get(key) + "' ";
-                }
-            } else {
-                if(key.equals("FechaComunicadoantes_e")){
-                    sql += " AND FechaComunicado <= '" + listaFiltros.get(key) + "' ";
-                } else if (key.equals("FechaComunicadodespuesde")) {
-                    sql += " AND FechaComunicado >= '" + listaFiltros.get(key) + "' ";
-                }else {
-                    sql += " AND " + key + " = '" + listaFiltros.get(key) + "' ";
-                }
-
-            }
-
-        }
-
-        sql += " ORDER BY FechaComunicado;";
-
-        try{
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            while(rs.next()){
-                int idIncidente = rs.getInt(1);
-                String codEmpleado = rs.getString(2);
-                int comunidad = rs.getInt(3);
-                String titulo = rs.getString(4);
-                String tipoComunicado = rs.getString(5);
-
-                Timestamp fechaComunicado;
-                if(rs.getTimestamp(6) != null){
-                    fechaComunicado = rs.getTimestamp(6);
-                } else {
-                    fechaComunicado = null;
-                }
-
-                String tipoReparacion = rs.getString(7);
-                String nivelUrgencia = rs.getString(8);
-                String empresaReparadora = rs.getString(9);
-                String descripcion = rs.getString(10);
-                String completo = rs.getString(11);
-
-                Timestamp fechaFin;
-                if(rs.getTimestamp(12) != null){
-                    fechaFin = rs.getTimestamp(12);
-                } else {
-                    fechaFin = null;
-                }
-
-                Timestamp fechaAlta = rs.getTimestamp(12);
-
-                String nombreEmpleado = rs.getString(13);
-                String apellidoEmpleado = rs.getString(14);
-                String nombreCompleto = nombreEmpleado + " " + apellidoEmpleado;
-
-                incidente = new Incidente(idIncidente, codEmpleado, titulo, descripcion, fechaAlta, fechaComunicado, fechaFin,
-                        nivelUrgencia, tipoComunicado, completo, comunidad, tipoReparacion, empresaReparadora, nombreEmpleado);
-                incidentes.add(incidente);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return incidentes;
-    }
 }

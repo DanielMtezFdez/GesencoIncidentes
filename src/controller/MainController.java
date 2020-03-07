@@ -1,13 +1,8 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import database.IncidenteDAO;
-import database.NivelUrgenciaDAO;
 import database.TipoComunicadoDAO;
-import database.TipoReparacionDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,11 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Filtro;
 import model.Incidente;
 import model.TipoComunicado;
 
@@ -35,10 +30,13 @@ public class MainController implements Initializable {
     private JFXComboBox<String> cbFiltroCampos;
 
     @FXML
-    private JFXTextField buscarPorCampo;
+    private JFXTextField inputFiltro;
 
     @FXML
-    private JFXButton btnInciEditar, btnInciCompletar, btnAyudaCodigos, btnRefresh, btnFiltrar;
+    private JFXDatePicker dateFiltro;
+
+    @FXML
+    private JFXButton btnInciEditar, btnInciCompletar, btnAyudaCodigos, btnRefresh, btnFiltros;
 
     @FXML
     private TableView<Incidente> tablaIncidente;
@@ -73,7 +71,7 @@ public class MainController implements Initializable {
     private Label lblFiltroComunidad, lblFiltroEmpleado, lblFiltroFechaJunta, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
 
     @FXML
-    private ImageView btnDeleteFiltroComunidad, btnDeleteFiltroEmpleado, btnDeleteFiltroFechaJunta, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto;
+    private ImageView btnDeleteFiltroComunidad, btnDeleteFiltroEmpleado, btnDeleteFiltroFechaJunta, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto, btnFiltrar;
 
     // Campos de filtro
     private int cantidadFiltros;
@@ -82,6 +80,8 @@ public class MainController implements Initializable {
     private Incidente incidenteSeleccionado;
 
     private Stage crearIncidenciaStage, showAyudaCodigo;
+
+    private Filtro filtro;
 
 
     @Override
@@ -104,10 +104,16 @@ public class MainController implements Initializable {
         campos.add("Comunidad");
         campos.add("Empleado");
         campos.add("Nivel urgencia");
+        campos.add("Tipo comunicado");
+        campos.add("Tipo reparación");
+        campos.add("Empresa reparadora");
+        campos.add("Completo");
+        campos.add("Fecha de junta anterior a");
+        campos.add("Fecha de junta posterior a");
+        campos.add("Fecha de alta anterior a");
+        campos.add("Fecha de alta posterior a");
         campos.add("Fecha junta antes de");
         campos.add("Fecha junta despues de");
-        campos.add("Tipo comunicado");
-        campos.add("Completo");
 
         ObservableList<String> lista_campos = FXCollections.observableArrayList();
 
@@ -187,7 +193,32 @@ public class MainController implements Initializable {
     void filtrarBusqueda(ActionEvent event) {
 
         String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem().replace(" ", "").toLowerCase();
-        String filtroCampoAplicado = buscarPorCampo.getText();
+        String filtroCampoAplicado = null;
+
+//        campos.add("Comunidad");
+//        campos.add("Empleado");
+//        campos.add("Nivel urgencia");
+//        campos.add("Tipo comunicado");
+//        campos.add("Tipo reparación");
+//        campos.add("Empresa reparadora");
+//        campos.add("Completo");
+//        campos.add("Fecha de junta anterior a");
+//        campos.add("Fecha de junta posterior a");
+//        campos.add("Fecha de alta anterior a");
+//        campos.add("Fecha de alta posterior a");
+//        campos.add("Fecha junta antes de");
+//        campos.add("Fecha junta despues de");
+
+        switch(filtroAplicado){
+            case "Comunidad":
+            case "Empleado":
+            case "Nivel urgencia":
+            case "Tipo comunicado":
+            case "Tipo reparación":
+            case "Empresa reparadora":
+            case "Completo":
+        }
+
 
         listaFiltros.put(filtroAplicado, filtroCampoAplicado);
 
@@ -234,6 +265,13 @@ public class MainController implements Initializable {
 
     private void inicializarTablaIncidentes() {
 
+        filtro = new Filtro();
+
+        //TODO obtener filtros
+
+
+
+
         List<TipoComunicado> tiposDeComunicado = TipoComunicadoDAO.getTiposComunicados();
         HashMap<Integer, String> mapTiposComunicados = new HashMap<>();
 
@@ -254,11 +292,7 @@ public class MainController implements Initializable {
 
         ArrayList<Incidente> incidentes;
 
-        if(cantidadFiltros == 0) {
-            incidentes = IncidenteDAO.getIncidentes();
-        } else {
-            incidentes = IncidenteDAO.getIncidentesConFiltro(listaFiltros);
-        }
+        incidentes = IncidenteDAO.getIncidentes(filtro);
 
         ObservableList<Incidente> listaIncidentes = FXCollections.observableArrayList(incidentes);
         tablaIncidente.setItems(listaIncidentes);
@@ -274,6 +308,7 @@ public class MainController implements Initializable {
         }
         // Se establecen los labels con los datos correspondientes
 //        inciEmpleado.setText(incidenteSeleccionado.getCodEmpleado().toUpperCase());
+        inciEmpleado.setText(incidenteSeleccionado.getNombreEmpleado());
         inciEmpleado.setText(incidenteSeleccionado.getNombreEmpleado());
         inciTitulo.setText(incidenteSeleccionado.getTitulo());
 //        inciComunicadoVia.setText(TipoComunicadoDAO.getTipoById(incidenteSeleccionado.getTipoComunicado()));
@@ -301,6 +336,9 @@ public class MainController implements Initializable {
         inicializarTablaIncidentes();
     }
 
+    @FXML
+    void showFiltros(ActionEvent event) {
+    }
 
     @FXML
     void showAyudaCodigos(ActionEvent event) {
@@ -330,74 +368,18 @@ public class MainController implements Initializable {
 
 
     @FXML
-    void deleteFiltroCompleto(MouseEvent event) {
-        lblFiltroCompleto.setText("");
-        cantidadFiltros -= 1;
-        listaFiltros.remove("completo");
+    void recargarTipoBusqueda(MouseEvent event) {
 
-        // Recarga de la tabla
-        inicializarTablaIncidentes();
-    }
+        String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem().replace(" ", "").toLowerCase();
 
-
-    @FXML
-    void deleteFiltroComunicacionVia(MouseEvent event) {
-        lblFiltroComunicacionVia.setText("");
-        cantidadFiltros -= 1;
-        listaFiltros.remove("tipocomunicado");
-
-        // Recarga de la tabla
-        inicializarTablaIncidentes();
-    }
-
-
-    @FXML
-    void deleteFiltroEmpleado(MouseEvent event) {
-        lblFiltroEmpleado.setText("");
-        cantidadFiltros -= 1;
-        listaFiltros.remove("empleado");
-
-        // Recarga de la tabla
-        inicializarTablaIncidentes();
-    }
-
-
-    @FXML
-    void deleteFiltroNivelUrgencia(MouseEvent event) {
-        lblFiltroNivelUrgencia.setText("");
-        cantidadFiltros -= 1;
-        listaFiltros.remove("nivelurgencia");
-
-        // Recarga de la tabla
-        inicializarTablaIncidentes();
-    }
-
-
-    @FXML
-    void deleteFiltroFechaJunta(MouseEvent event) {
-        lblFiltroFechaJunta.setText("");
-        cantidadFiltros -= 1;
-        if(listaFiltros.containsKey("fechajuntaantesde")) {
-            listaFiltros.remove("fechajuntaantesde");
+        if(filtroAplicado.equals("Comunidad") | filtroAplicado.equals("Empleado") | filtroAplicado.equals("Nivel urgencia") | filtroAplicado.equals("Tipo comunicado")
+            | filtroAplicado.equals("Tipo reparación") |filtroAplicado.equals("Empresa reparadora") |filtroAplicado.equals("Completo")) {
+            inputFiltro.setVisible(true);
+            dateFiltro.setVisible(false);
+        } else {
+            inputFiltro.setVisible(false);
+            dateFiltro.setVisible(true);
         }
-
-        if(listaFiltros.containsKey("fechajuntadespuesde")) {
-            listaFiltros.remove("fechajuntadespuesde");
-        }
-
-
-        // Recarga de la tabla
-        inicializarTablaIncidentes();
     }
 
-
-    @FXML
-    void deleteFiltroComunidad(MouseEvent event) {
-        lblFiltroComunidad.setText("");
-        cantidadFiltros -= 1;
-        listaFiltros.remove("comunidad");
-
-        // Recarga de la tabla
-        inicializarTablaIncidentes();
-    }
 }

@@ -2,9 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -12,38 +12,43 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
-    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="1321.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="91.0" prefWidth="1321.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXComboBox fx:id="cbFiltroCampos" focusColor="#b71c1c" layoutX="144.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" promptText="Seleccionar campo" visible="false" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="20.0" />
-            <Label layoutX="20.0" layoutY="22.0" text="BUSCAR POR:" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="22.0">
+            <JFXComboBox fx:id="cbFiltroCampos" focusColor="#b71c1c" layoutX="125.0" layoutY="32.0" onMouseExited="#recargarTipoBusqueda" prefHeight="25.0" prefWidth="220.0" promptText="Seleccionar campo" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="32.0" />
+            <Label layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="98.0" text="BUSCAR POR:" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <JFXTextField fx:id="buscarPorCampo" focusColor="#b71c1c" layoutX="424.0" layoutY="18.0" prefHeight="25.0" prefWidth="220.0" visible="false" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="20.0" />
-            <JFXButton fx:id="btnAñadirIncidente" layoutX="813.0" layoutY="11.0" onAction="#añadirIncidente" prefHeight="51.0" prefWidth="264.0" style="-fx-background-color: #b71c1c;" text="AÑADIR INCIDENTE" textFill="WHITE" AnchorPane.bottomAnchor="-20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+            <JFXTextField fx:id="inputFiltro" focusColor="#b71c1c" layoutX="371.0" layoutY="32.0" prefHeight="25.0" prefWidth="220.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="371.0" AnchorPane.topAnchor="32.0" />
+            <JFXButton fx:id="btnAñadirIncidente" layoutX="813.0" layoutY="11.0" onAction="#añadirIncidente" prefHeight="51.0" prefWidth="264.0" style="-fx-background-color: #b71c1c;" text="AÑADIR INCIDENTE" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></JFXButton>
-            <JFXButton fx:id="btnAyudaCodigos" layoutX="929.0" layoutY="31.0" onAction="#showAyudaCodigos" prefHeight="51.0" prefWidth="106.0" style="-fx-background-color: #b71c1c;" text="AYUDA" textFill="WHITE" AnchorPane.bottomAnchor="-20.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="20.0">
+            <JFXButton fx:id="btnAyudaCodigos" layoutX="929.0" layoutY="31.0" onAction="#showAyudaCodigos" prefHeight="51.0" prefWidth="106.0" style="-fx-background-color: #b71c1c;" text="AYUDA" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="-20.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnFiltrar" layoutX="717.0" layoutY="12.0" onAction="#filtrarBusqueda" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #b71c1c;" text="FILTRAR" textFill="WHITE" visible="false" AnchorPane.leftAnchor="675.0" AnchorPane.topAnchor="16.0">
+            <JFXButton fx:id="btnRefresh" layoutX="890.0" layoutY="22.0" onAction="#recargarTabla" prefHeight="51.0" prefWidth="106.0" style="-fx-background-color: #b71c1c;" text="ACTUALIZAR" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="325.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnRefresh" layoutX="727.0" layoutY="22.0" onAction="#recargarTabla" prefHeight="51.0" prefWidth="106.0" style="-fx-background-color: #b71c1c;" text="ACTUALIZAR" textFill="WHITE" AnchorPane.rightAnchor="460.0">
+            <ImageView fx:id="btnFiltrar" fitHeight="30.0" fitWidth="34.0" layoutX="616.0" layoutY="31.0" onMouseClicked="#filtrarBusqueda" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="30.0" AnchorPane.topAnchor="30.0">
+               <image>
+                  <Image url="@../../img/ic_search.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btnFiltros" layoutX="749.0" layoutY="22.0" onAction="#showFiltros" prefHeight="51.0" prefWidth="106.0" style="-fx-background-color: #b71c1c;" text="FILTROS" textFill="WHITE" AnchorPane.bottomAnchor="20.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
+            <JFXDatePicker fx:id="dateFiltro" defaultColor="#b71c1c" layoutX="369.0" layoutY="36.0" prefHeight="25.0" prefWidth="225.0" visible="false" />
          </children></AnchorPane>
       <SplitPane layoutY="92.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="714.0" prefWidth="1321.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
         <items>
@@ -187,87 +192,5 @@
                </children></AnchorPane>
         </items>
       </SplitPane>
-      <HBox layoutY="64.0" prefHeight="30.0" prefWidth="806.0" visible="false">
-         <children>
-            <Label fx:id="lblFiltroComunidad" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="btnDeleteFiltroComunidad" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroComunidad" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ic_delete.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-            <Label fx:id="lblFiltroEmpleado" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="btnDeleteFiltroEmpleado" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroEmpleado" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ic_delete.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-            <Label fx:id="lblFiltroFechaJunta" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="btnDeleteFiltroFechaJunta" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroFechaJunta" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ic_delete.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-            <Label fx:id="lblFiltroNivelUrgencia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="btnDeleteFiltroNivelUrgencia" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroNivelUrgencia" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ic_delete.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-            <Label fx:id="lblFiltroComunicacionVia" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="btnDeleteFiltroComunicacionVia" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroComunicacionVia" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ic_delete.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-            <Label fx:id="lblFiltroCompleto" alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="btnDeleteFiltroCompleto" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#deleteFiltroCompleto" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ic_delete.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-         </children>
-      </HBox>
    </children>
 </AnchorPane>
