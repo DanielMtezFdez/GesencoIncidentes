@@ -2,8 +2,6 @@ package controller;
 
 import com.jfoenix.controls.*;
 import database.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +15,6 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -46,12 +43,11 @@ public class NewIncidentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        rellenarCBEmpleados();
-        rellenarCBTipoJunta();
-        rellenarCBComunidades();
-        rellenarCBNivelUrgencia();
-        rellenarCBTipoReparacion();
-
+        cbEmpleado.setItems(RellenarComboBox.rellenarCBEmpleados());
+        cbTipoJunta.setItems(RellenarComboBox.rellenarCBTipoComunicado());
+        cbComunidad.setItems(RellenarComboBox.rellenarCBComunidades());
+        cbNivelUrgencia.setItems(RellenarComboBox.rellenarCBNivelUrgencia());
+        cbTipoReparacion.setItems(RellenarComboBox.rellenarCBTipoReparacion());
 
         ParametrosController.limitTextField(tfTitulo, 100);
         ParametrosController.limitTextField(tfEmpresaReparadora, 100);
@@ -242,84 +238,84 @@ public class NewIncidentController implements Initializable {
     }
 
 
-    /**
-     * Created 11/10/2019 by dmartinez
-     * Rellena el ComboBox de niveles de urgencia con los diferentes campos
-     */
-    private void rellenarCBNivelUrgencia() {
-        ArrayList<NivelUrgencia> nivelesUrgencia = NivelUrgenciaDAO.getNivelesUrgencia();
-
-        ObservableList<String> lista_campos = FXCollections.observableArrayList();
-
-        for(NivelUrgencia nivelUrgencia : nivelesUrgencia) {
-            lista_campos.add(nivelUrgencia.getNivelUrgencia());
-        }
-
-        cbNivelUrgencia.setItems(lista_campos);
-    }
-
-
-    /**
-     * Created 11/10/2019 by dmartinez
-     * Rellena el ComboBox de tipos de junta con los diferentes campos
-     */
-    private void rellenarCBTipoJunta() {
-        ArrayList<TipoComunicado> tiposComunicados = TipoComunicadoDAO.getTiposComunicados();
-
-        ObservableList<String> lista_campos = FXCollections.observableArrayList();
-
-        for(TipoComunicado tipoComunicado : tiposComunicados) {
-            lista_campos.add(tipoComunicado.getTipoComunicado());
-        }
-
-        cbTipoJunta.setItems(lista_campos);
-    }
+//    /**
+//     * Created 11/10/2019 by dmartinez
+//     * Rellena el ComboBox de niveles de urgencia con los diferentes campos
+//     */
+//    private void rellenarCBNivelUrgencia() {
+//        ArrayList<NivelUrgencia> nivelesUrgencia = NivelUrgenciaDAO.getNivelesUrgencia();
+//
+//        ObservableList<String> lista_campos = FXCollections.observableArrayList();
+//
+//        for(NivelUrgencia nivelUrgencia : nivelesUrgencia) {
+//            lista_campos.add(nivelUrgencia.getNivelUrgencia());
+//        }
+//
+//        cbNivelUrgencia.setItems(lista_campos);
+//    }
 
 
-    /**
-     * Created 11/10/2019 by dmartinez
-     * Rellena el ComboBox de empleados con los diferentes campos
-     */
-    private void rellenarCBEmpleados() {
-        ArrayList<Empleado> empleados = EmpleadoDAO.getEmpleados();
+//    /**
+//     * Created 11/10/2019 by dmartinez
+//     * Rellena el ComboBox de tipos de junta con los diferentes campos
+//     */
+//    private void rellenarCBTipoComunicado() {
+//        ArrayList<TipoComunicado> tiposComunicados = TipoComunicadoDAO.getTiposComunicados();
+//
+//        ObservableList<String> lista_campos = FXCollections.observableArrayList();
+//
+//        for(TipoComunicado tipoComunicado : tiposComunicados) {
+//            lista_campos.add(tipoComunicado.getTipoComunicado());
+//        }
+//
+//        cbTipoJunta.setItems(lista_campos);
+//    }
 
-        ObservableList<String> lista_empleados = FXCollections.observableArrayList();
+//
+//    /**
+//     * Created 11/10/2019 by dmartinez
+//     * Rellena el ComboBox de empleados con los diferentes campos
+//     */
+//    private void rellenarCBEmpleados() {
+//        ArrayList<Empleado> empleados = EmpleadoDAO.getEmpleados();
+//
+//        ObservableList<String> lista_empleados = FXCollections.observableArrayList();
+//
+//        for(Empleado empleado : empleados) {
+//            if(empleado.getApellidos() == null) {
+//                empleado.setApellidos("");
+//            }
+//            lista_empleados.add(empleado.getCodigo() + " - " + empleado.getNombre() + " " + empleado.getApellidos());
+//        }
+//
+//        cbEmpleado.setItems(lista_empleados);
+//    }
 
-        for(Empleado empleado : empleados) {
-            if(empleado.getApellidos() == null) {
-                empleado.setApellidos("");
-            }
-            lista_empleados.add(empleado.getCodigo() + " - " + empleado.getNombre() + " " + empleado.getApellidos());
-        }
 
-        cbEmpleado.setItems(lista_empleados);
-    }
+//    private void rellenarCBTipoReparacion() {
+//        ArrayList<TipoReparacion> tiposReparaciones = TipoReparacionDAO.getTiposReparaciones();
+//
+//        ObservableList<String> listaTiposReparaciones = FXCollections.observableArrayList();
+//
+//        for(TipoReparacion tr : tiposReparaciones) {
+//            listaTiposReparaciones.add(tr.getId() + " - " + tr.gettipoReparacion());
+//        }
+//
+//        cbTipoReparacion.setItems(listaTiposReparaciones);
+//    }
 
-
-    private void rellenarCBTipoReparacion() {
-        ArrayList<TipoReparacion> tiposReparaciones = TipoReparacionDAO.getTiposReparaciones();
-
-        ObservableList<String> listaTiposReparaciones = FXCollections.observableArrayList();
-
-        for(TipoReparacion tr : tiposReparaciones) {
-            listaTiposReparaciones.add(tr.getId() + " - " + tr.gettipoReparacion());
-        }
-
-        cbTipoReparacion.setItems(listaTiposReparaciones);
-    }
-
-    private void rellenarCBComunidades() {
-        ArrayList<Comunidad> comunidades = ComunidadDAO.getComunidades();
-
-        ObservableList<String> listaComunidades = FXCollections.observableArrayList();
-
-        for(Comunidad comunidad : comunidades) {
-            listaComunidades.add(comunidad.getCodigo() + " - " + comunidad.getNombre());
-        }
-
-        cbComunidad.setItems(listaComunidades);
-
-    }
+//    private void rellenarCBComunidades() {
+//        ArrayList<Comunidad> comunidades = ComunidadDAO.getComunidades();
+//
+//        ObservableList<String> listaComunidades = FXCollections.observableArrayList();
+//
+//        for(Comunidad comunidad : comunidades) {
+//            listaComunidades.add(comunidad.getCodigo() + " - " + comunidad.getNombre());
+//        }
+//
+//        cbComunidad.setItems(listaComunidades);
+//
+//    }
 
 
     public static Stage getCrearIncidenteStage() {

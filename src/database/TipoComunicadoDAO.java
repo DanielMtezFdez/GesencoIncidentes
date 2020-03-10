@@ -42,7 +42,7 @@ public class TipoComunicadoDAO {
 
     public static String getTipoById(String tipoComunicado) {
 
-        String resultado = "";
+         String resultado = "";
 
         sql = String.format("SELECT TipoComunicado FROM TIPOCOMUNICADO WHERE Id = %s;", tipoComunicado);
 

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +21,7 @@ import model.Filtro;
 import model.Incidente;
 import model.TipoComunicado;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.*;
@@ -27,7 +29,7 @@ import java.util.*;
 public class MainController implements Initializable {
 
     @FXML
-    private JFXComboBox<String> cbFiltroCampos;
+    private JFXComboBox<String> cbFiltroCampos, cbFiltro;
 
     @FXML
     private JFXTextField inputFiltro;
@@ -36,7 +38,7 @@ public class MainController implements Initializable {
     private JFXDatePicker dateFiltro;
 
     @FXML
-    private JFXButton btnInciEditar, btnInciCompletar, btnAyudaCodigos, btnRefresh, btnFiltros;
+    private JFXButton btnInciEditar, btnInciCompletar, btnAyudaCodigos, btnRefresh, btnFiltros, btnBuscar;
 
     @FXML
     private TableView<Incidente> tablaIncidente;
@@ -70,9 +72,6 @@ public class MainController implements Initializable {
     @FXML
     private Label lblFiltroComunidad, lblFiltroEmpleado, lblFiltroFechaJunta, lblFiltroNivelUrgencia, lblFiltroComunicacionVia, lblFiltroCompleto;
 
-    @FXML
-    private ImageView btnDeleteFiltroComunidad, btnDeleteFiltroEmpleado, btnDeleteFiltroFechaJunta, btnDeleteFiltroNivelUrgencia, btnDeleteFiltroComunicacionVia, btnDeleteFiltroCompleto, btnFiltrar;
-
     // Campos de filtro
     private int cantidadFiltros;
     private Map<String, String> listaFiltros = new HashMap<String, String>();;
@@ -83,13 +82,13 @@ public class MainController implements Initializable {
 
     private Filtro filtro;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+//        Image searchIcon = new Image(new File("img/ic_search.png").toURI().toString());
+//        btnFiltrar.setImage(searchIcon);
         fillCamposBusqueda();
-
-        cantidadFiltros = 0;
-
+        filtro = new Filtro();
+//        cantidadFiltros = 0;
         inicializarTablaIncidentes();
     }
 
@@ -112,8 +111,8 @@ public class MainController implements Initializable {
         campos.add("Fecha de junta posterior a");
         campos.add("Fecha de alta anterior a");
         campos.add("Fecha de alta posterior a");
-        campos.add("Fecha junta antes de");
-        campos.add("Fecha junta despues de");
+        campos.add("Fecha finalizacion antes de");
+        campos.add("Fecha finalizacion despues de");
 
         ObservableList<String> lista_campos = FXCollections.observableArrayList();
 
@@ -192,68 +191,50 @@ public class MainController implements Initializable {
     @FXML
     void filtrarBusqueda(ActionEvent event) {
 
-        String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem().replace(" ", "").toLowerCase();
-        String filtroCampoAplicado = null;
-
-//        campos.add("Comunidad");
-//        campos.add("Empleado");
-//        campos.add("Nivel urgencia");
-//        campos.add("Tipo comunicado");
-//        campos.add("Tipo reparación");
-//        campos.add("Empresa reparadora");
-//        campos.add("Completo");
-//        campos.add("Fecha de junta anterior a");
-//        campos.add("Fecha de junta posterior a");
-//        campos.add("Fecha de alta anterior a");
-//        campos.add("Fecha de alta posterior a");
-//        campos.add("Fecha junta antes de");
-//        campos.add("Fecha junta despues de");
+        String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem();
 
         switch(filtroAplicado){
             case "Comunidad":
+                filtro.setCodComunidad(cbFiltro.getSelectionModel().getSelectedItem().split(" ")[0]);
+                break;
             case "Empleado":
+                filtro.setCodEmpleado(cbFiltro.getSelectionModel().getSelectedItem().split(" ")[0]);
+                break;
             case "Nivel urgencia":
+                filtro.setNivelUrgencia(cbFiltro.getSelectionModel().getSelectedItem().split(" ")[0]);
+                break;
             case "Tipo comunicado":
+                filtro.setTipoComunicado(cbFiltro.getSelectionModel().getSelectedItem().split(" ")[0]);
+                break;
             case "Tipo reparación":
+                filtro.setTipoReparacion(cbFiltro.getSelectionModel().getSelectedItem().split(" ")[0]);
+                break;
             case "Empresa reparadora":
+                filtro.setEmpresaReparadora(cbFiltro.getSelectionModel().getSelectedItem());
+                break;
             case "Completo":
-        }
-
-
-        listaFiltros.put(filtroAplicado, filtroCampoAplicado);
-
-        cantidadFiltros += 1;
-
-        switch (filtroAplicado) {
-            case "comunidad":
-                lblFiltroComunidad.setText(filtroCampoAplicado);
+                if(cbFiltro.getSelectionModel().getSelectedItem().toLowerCase().equals("sí")){
+                    cbFiltro.getSelectionModel().getSelectedItem().replace("í", "i");
+                }
+                filtro.setCompleto(cbFiltro.getSelectionModel().getSelectedItem().toLowerCase());
                 break;
-
-            case "empleado":
-                lblFiltroEmpleado.setText(filtroCampoAplicado);
+            case "Fecha de junta anterior a":
+                filtro.setFechaJuntaAntesDe(Timestamp.valueOf(dateFiltro.getValue().atStartOfDay()));
                 break;
-
-            case "nivelurgencia":
-                lblFiltroNivelUrgencia.setText(filtroCampoAplicado);
+            case "Fecha de junta posterior a":
+                filtro.setFechaJuntaDespuesDe(Timestamp.valueOf(dateFiltro.getValue().atStartOfDay()));
                 break;
-
-            case "fechajuntaantesde":
-                lblFiltroFechaJunta.setText("Antes de " + filtroCampoAplicado);
+            case "Fecha de alta anterior a":
+                filtro.setFechaAltaAntesDe(Timestamp.valueOf(dateFiltro.getValue().atStartOfDay()));
                 break;
-
-            case "fechajuntadespuesde":
-                lblFiltroFechaJunta.setText("Despues de " + filtroCampoAplicado);
+            case "Fecha de alta posterior a":
+                filtro.setFechaAltaDespuesDe(Timestamp.valueOf(dateFiltro.getValue().atStartOfDay()));
                 break;
-
-            case "tipocomunicado":
-                lblFiltroComunicacionVia.setText(filtroCampoAplicado);
+            case "Fecha finalizacion antes de":
+                filtro.setFechaFinalizacionAntesDe(Timestamp.valueOf(dateFiltro.getValue().atStartOfDay()));
                 break;
-
-            case "completo":
-                lblFiltroCompleto.setText(filtroCampoAplicado);
-                break;
-
-            default:
+            case "Fecha finalizacion despues de":
+                filtro.setFechaFinalizacionDespuesDe(Timestamp.valueOf(dateFiltro.getValue().atStartOfDay()));
                 break;
         }
 
@@ -264,13 +245,6 @@ public class MainController implements Initializable {
 
 
     private void inicializarTablaIncidentes() {
-
-        filtro = new Filtro();
-
-        //TODO obtener filtros
-
-
-
 
         List<TipoComunicado> tiposDeComunicado = TipoComunicadoDAO.getTiposComunicados();
         HashMap<Integer, String> mapTiposComunicados = new HashMap<>();
@@ -368,18 +342,61 @@ public class MainController implements Initializable {
 
 
     @FXML
-    void recargarTipoBusqueda(MouseEvent event) {
+    void recargarTipoBusqueda(ActionEvent event) {
 
-        String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem().replace(" ", "").toLowerCase();
+        String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem();
+
+        if(filtroAplicado == null) {
+            return;
+        }
 
         if(filtroAplicado.equals("Comunidad") | filtroAplicado.equals("Empleado") | filtroAplicado.equals("Nivel urgencia") | filtroAplicado.equals("Tipo comunicado")
             | filtroAplicado.equals("Tipo reparación") |filtroAplicado.equals("Empresa reparadora") |filtroAplicado.equals("Completo")) {
-            inputFiltro.setVisible(true);
+//            inputFiltro.setVisible(true);
+            cbFiltro.setVisible(true);
+            cbFiltro.setDisable(false);
             dateFiltro.setVisible(false);
-        } else {
-            inputFiltro.setVisible(false);
+            dateFiltro.setDisable(true);
+        } else if (filtroAplicado.equals("Fecha de junta anterior a") | filtroAplicado.equals("Fecha de junta posterior a") |
+                filtroAplicado.equals("Fecha de alta anterior a") | filtroAplicado.equals("Fecha de alta anterior a") |
+                filtroAplicado.equals("Fecha finalizacion antes de") | filtroAplicado.equals("Fecha finalizacion despues de")){
+//            inputFiltro.setVisible(false);
             dateFiltro.setVisible(true);
+            dateFiltro.setDisable(false);
+            cbFiltro.setDisable(false);
+            cbFiltro.setVisible(false);
+        } else {
+            cbFiltro.setVisible(true);
+            cbFiltro.setDisable(true);
+            dateFiltro.setVisible(false);
+            dateFiltro.setDisable(true);
+        }
+
+        switch (filtroAplicado) {
+            case "Comunidad":
+                cbFiltro.setItems(RellenarComboBox.rellenarCBComunidades());
+                break;
+            case "Empleado":
+                cbFiltro.setItems(RellenarComboBox.rellenarCBEmpleados());
+                break;
+            case "Nivel urgencia":
+                cbFiltro.setItems(RellenarComboBox.rellenarCBNivelUrgencia());
+                break;
+            case "Tipo comunicado":
+                cbFiltro.setItems(RellenarComboBox.rellenarCBTipoComunicado());
+                break;
+            case "Tipo reparación":
+                cbFiltro.setItems(RellenarComboBox.rellenarCBTipoReparacion());
+                break;
+            case "Empresa reparadora":
+                cbFiltro.setItems(RellenarComboBox.rellenarCBEmpresasReparadoras());
+                break;
+            case "Completo":
+                cbFiltro.setItems(RellenarComboBox.rellenarCBCompleto());
+                break;
         }
     }
+
+
 
 }

@@ -112,7 +112,7 @@ public class IncidenteDAO {
             sql += " AND i.EmpresaReparadora = " + filtro.getEmpresaReparadora().toUpperCase();
         }
         if(filtro.getCompleto() != null) {
-            sql += " AND i.Completo= " + filtro.getCompleto().toLowerCase();
+            sql += " AND i.Completo= \"" + filtro.getCompleto().toLowerCase() + "\"";
         }
 
         incidente = null;
@@ -223,6 +223,27 @@ public class IncidenteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    public static ArrayList<String> getEmpresasReparadoras() {
+
+        ArrayList<String> empresasReparadoras = new ArrayList<>();
+
+        sql = "SELECT DISTINCT EmpresaReparadora FROM INCIDENTE";
+
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                empresasReparadoras.add(rs.getString("EmpresaReparadora"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return empresasReparadoras;
     }
 
 }
