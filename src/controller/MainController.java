@@ -141,7 +141,7 @@ public class MainController implements Initializable {
             crearIncidenciaStage = new Stage();
             NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
 
-            Image icon = new Image("img/logo_gesenco.jpg");
+            Image icon = new Image(new File("img/logo_gesenco.jpg").toURI().toString());
             crearIncidenciaStage.getIcons().add(icon);
             crearIncidenciaStage.setTitle("Creación incidencia");
 
@@ -191,6 +191,13 @@ public class MainController implements Initializable {
     @FXML
     void filtrarBusqueda(ActionEvent event) {
 
+        if (cbFiltro.getSelectionModel().getSelectedItem().equals("") && cbFiltro.isVisible()){
+            return;
+        }
+        if (dateFiltro.getValue() == null && dateFiltro.isVisible()){
+            return;
+        }
+
         String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem();
 
         switch(filtroAplicado){
@@ -238,11 +245,9 @@ public class MainController implements Initializable {
                 break;
         }
 
-
         inicializarTablaIncidentes();
 
     }
-
 
     private void inicializarTablaIncidentes() {
 
@@ -321,7 +326,7 @@ public class MainController implements Initializable {
             showFiltrosAplicadosStage = new Stage();
             FiltrosAplicadosController.setShowFiltrosStage(showFiltrosAplicadosStage);
 
-            Image icon = new Image("img/logo_gesenco.jpg");
+            Image icon = new Image(new File("img/logo_gesenco.jpg").toURI().toString());
             showFiltrosAplicadosStage.getIcons().add(icon);
             showFiltrosAplicadosStage.setTitle("Filtros aplicados");
 

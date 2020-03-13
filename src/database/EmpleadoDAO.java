@@ -115,4 +115,33 @@ public class EmpleadoDAO {
         return nombreEmpleado;
     }
 
+    public static String getEmpleadoByName(String nombreCompleto) {
+        String codEmpleado = "";
+
+        if(nombreCompleto == null) {
+            return codEmpleado;
+        }
+
+        String nombre = "";
+        String apellido = "";
+
+        for(int i = 1; i < nombreCompleto.split(" ").length; i++)
+            if(i!=1){
+                apellido += " ";
+            }
+            apellido += nombreCompleto.split(" ");
+
+        sql = String.format("SELECT CodEmpleado FROM EMPLEADO WHERE Nombre = \"%s\" AND Apellido =\"%s\"", nombre, apellido);
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                codEmpleado = rs.getString(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return codEmpleado;
+    }
 }
