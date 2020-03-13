@@ -85,6 +85,11 @@ public class EmpleadoDAO {
     }
 
     public static String getEmpleadoById(String codEmpleado) {
+
+        if(codEmpleado == null) {
+            return "";
+        }
+
         String nombreEmpleado = "";
 
         sql = "SELECT Nombre, Apellido FROM EMPLEADO WHERE CodEmpleado = " + codEmpleado;

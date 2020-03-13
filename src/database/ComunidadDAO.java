@@ -59,6 +59,31 @@ public class ComunidadDAO {
         return codInDB;
     }
 
+    public static String getComunidadById (String codComunidad) {
+
+        String comunidad = "";
+
+        if(codComunidad == null) {
+            return comunidad;
+        }
+
+        sql = "SELECT * FROM COMUNID WHERE CODIGO = \"" + codComunidad + "\"";
+
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            if(rs.next()){
+                comunidad = rs.getString("NOMBRE");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return comunidad;
+    }
+
 
 
 

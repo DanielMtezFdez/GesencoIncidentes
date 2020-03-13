@@ -78,9 +78,9 @@ public class MainController implements Initializable {
 
     private Incidente incidenteSeleccionado;
 
-    private Stage crearIncidenciaStage, showAyudaCodigo;
+    private Stage crearIncidenciaStage, showAyudaCodigo, showFiltrosAplicadosStage;
 
-    private Filtro filtro;
+    private static Filtro filtro;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -141,8 +141,8 @@ public class MainController implements Initializable {
             crearIncidenciaStage = new Stage();
             NewIncidentController.setCrearIncidenteStage(crearIncidenciaStage);
 
-            //Image icon = new Image("img/logo_gesenco.jpg");
-            //crearIncidenciaStage.getIcons().add(icon);
+            Image icon = new Image("img/logo_gesenco.jpg");
+            crearIncidenciaStage.getIcons().add(icon);
             crearIncidenciaStage.setTitle("Creación incidencia");
 
             Scene scene = new Scene(page);
@@ -312,6 +312,28 @@ public class MainController implements Initializable {
 
     @FXML
     void showFiltros(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/filtrosAplicados.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Creación del Stage para el PlayLauncher
+            showFiltrosAplicadosStage = new Stage();
+            FiltrosAplicadosController.setShowFiltrosStage(showFiltrosAplicadosStage);
+
+            Image icon = new Image("img/logo_gesenco.jpg");
+            showFiltrosAplicadosStage.getIcons().add(icon);
+            showFiltrosAplicadosStage.setTitle("Filtros aplicados");
+
+            Scene scene = new Scene(page);
+
+            showFiltrosAplicadosStage.setOnCloseRequest(e->FiltrosAplicadosController.setShowFiltrosStage(null));
+            showFiltrosAplicadosStage.setScene(scene);
+            showFiltrosAplicadosStage.show();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -352,7 +374,6 @@ public class MainController implements Initializable {
 
         if(filtroAplicado.equals("Comunidad") | filtroAplicado.equals("Empleado") | filtroAplicado.equals("Nivel urgencia") | filtroAplicado.equals("Tipo comunicado")
             | filtroAplicado.equals("Tipo reparación") |filtroAplicado.equals("Empresa reparadora") |filtroAplicado.equals("Completo")) {
-//            inputFiltro.setVisible(true);
             cbFiltro.setVisible(true);
             cbFiltro.setDisable(false);
             dateFiltro.setVisible(false);
@@ -360,7 +381,6 @@ public class MainController implements Initializable {
         } else if (filtroAplicado.equals("Fecha de junta anterior a") | filtroAplicado.equals("Fecha de junta posterior a") |
                 filtroAplicado.equals("Fecha de alta anterior a") | filtroAplicado.equals("Fecha de alta anterior a") |
                 filtroAplicado.equals("Fecha finalizacion antes de") | filtroAplicado.equals("Fecha finalizacion despues de")){
-//            inputFiltro.setVisible(false);
             dateFiltro.setVisible(true);
             dateFiltro.setDisable(false);
             cbFiltro.setDisable(false);
@@ -398,5 +418,11 @@ public class MainController implements Initializable {
     }
 
 
+    public static Filtro getFiltro() {
+        return filtro;
+    }
 
+    public static void setFiltro(Filtro filtro) {
+        filtro = filtro;
+    }
 }
