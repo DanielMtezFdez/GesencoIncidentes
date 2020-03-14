@@ -4,9 +4,9 @@ import model.Filtro;
 import model.Incidente;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
 
 public class IncidenteDAO {
 
@@ -82,22 +82,28 @@ public class IncidenteDAO {
             sql += " AND i.Empleado = " + filtro.getCodEmpleado();
         }
         if(filtro.getFechaJuntaAntesDe() != null) {
-            sql += " AND i.FechaComunicado <= " + filtro.getFechaJuntaAntesDe();
+            String dateFormatted = formatDate(filtro.getFechaJuntaAntesDe().toString());
+            sql += String.format(" AND i.FechaComunicado <= #%s#", dateFormatted);
         }
         if(filtro.getFechaJuntaDespuesDe() != null) {
-            sql += " AND i.FechaComunicado >= " + filtro.getFechaJuntaDespuesDe();
+            String dateFormatted = formatDate(filtro.getFechaJuntaDespuesDe().toString());
+            sql += String.format(" AND i.FechaComunicado >= #%s#", dateFormatted);
         }
         if(filtro.getFechaAltaAntesDe() != null) {
-            sql += " AND i.FechaAltaSistema <= " + filtro.getFechaAltaAntesDe();
+            String dateFormatted = formatDate(filtro.getFechaAltaAntesDe().toString());
+            sql += String.format(" AND i.FechaAltaSistema <= #%s#", dateFormatted);
         }
         if(filtro.getFechaAltaDespuesDe() != null) {
-            sql += " AND i.FechaAltaSistema >= " + filtro.getFechaAltaDespuesDe();
+            String dateFormatted = formatDate(filtro.getFechaAltaDespuesDe().toString());
+            sql += String.format(" AND i.FechaAltaSistema >= #%s#", dateFormatted);
         }
         if(filtro.getFechaFinalizacionAntesDe() != null) {
-            sql += " AND i.FechaFin <= " + filtro.getFechaFinalizacionAntesDe();
+            String dateFormatted = formatDate(filtro.getFechaFinalizacionAntesDe().toString());
+            sql += String.format(" AND i.FechaFin <= #%s#", dateFormatted);
         }
         if(filtro.getFechaFinalizacionDespuesDe() != null) {
-            sql += " AND i.FechaFin >= " + filtro.getFechaFinalizacionDespuesDe();
+            String dateFormatted = formatDate(filtro.getFechaFinalizacionDespuesDe().toString());
+            sql += String.format(" AND i.FechaFin >= #%s#", dateFormatted);
         }
         if(filtro.getNivelUrgencia() != null) {
             sql += " AND i.NivelUrgencia = " + filtro.getNivelUrgencia();
@@ -109,10 +115,10 @@ public class IncidenteDAO {
             sql += " AND i.TipoReparacion = " + filtro.getTipoReparacion();
         }
         if(filtro.getEmpresaReparadora() != null) {
-            sql += " AND i.EmpresaReparadora = " + filtro.getEmpresaReparadora().toUpperCase();
+            sql += String.format(" AND i.EmpresaReparadora = \"%s\"", filtro.getEmpresaReparadora().toUpperCase());
         }
         if(filtro.getCompleto() != null) {
-            sql += " AND i.Completo= \"" + filtro.getCompleto().toLowerCase() + "\"";
+            sql += String.format(" AND i.Completo= \"%s\"", filtro.getCompleto().toLowerCase());
         }
 
         incidente = null;
@@ -246,4 +252,10 @@ public class IncidenteDAO {
         return empresasReparadoras;
     }
 
+
+    public static String formatDate(String date){
+        String dateFormatted = null;
+        dateFormatted = date.split(" ")[0];
+        return dateFormatted;
+    }
 }

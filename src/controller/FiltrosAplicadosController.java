@@ -124,7 +124,7 @@ public class FiltrosAplicadosController implements Initializable {
             lblFechaAltaAnteriorA.setText(filtro.getFechaAltaAntesDe().toString());
         }
 
-        if(filtro.getFechaJuntaDespuesDe() == null) {
+        if(filtro.getFechaAltaDespuesDe() == null) {
             lblFechaAltaPosteriorA.setText("");
         }else{
             lblFechaAltaPosteriorA.setText(filtro.getFechaAltaDespuesDe().toString());

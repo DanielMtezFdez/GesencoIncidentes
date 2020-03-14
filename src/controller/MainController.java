@@ -191,11 +191,15 @@ public class MainController implements Initializable {
     @FXML
     void filtrarBusqueda(ActionEvent event) {
 
-        if (cbFiltro.getSelectionModel().getSelectedItem().equals("") && cbFiltro.isVisible()){
-            return;
+        if (cbFiltro.isVisible()){
+            if(cbFiltro.getSelectionModel().getSelectedItem().equals("")) {
+                return;
+            }
         }
-        if (dateFiltro.getValue() == null && dateFiltro.isVisible()){
-            return;
+        if (dateFiltro.isVisible()){
+            if(dateFiltro.getValue() == null){
+                return;
+            }
         }
 
         String filtroAplicado = cbFiltroCampos.getSelectionModel().getSelectedItem();
@@ -341,32 +345,6 @@ public class MainController implements Initializable {
         }
     }
 
-    @FXML
-    void showAyudaCodigos(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/ayudaCodigos.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Creación del Stage para el PlayLauncher
-            showAyudaCodigo = new Stage();
-            AyudaCodigosController.setAyudaCodigosStage(showAyudaCodigo);
-
-            //Image icon = new Image("img/logo_gesenco.jpg");
-            //showAyudaCodigo.getIcons().add(icon);
-            showAyudaCodigo.setTitle("Ayuda códigos");
-
-            Scene scene = new Scene(page);
-            showAyudaCodigo.setResizable(false);
-
-            showAyudaCodigo.setScene(scene);
-            showAyudaCodigo.show();
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
 
     @FXML
     void recargarTipoBusqueda(ActionEvent event) {
@@ -384,7 +362,7 @@ public class MainController implements Initializable {
             dateFiltro.setVisible(false);
             dateFiltro.setDisable(true);
         } else if (filtroAplicado.equals("Fecha de junta anterior a") | filtroAplicado.equals("Fecha de junta posterior a") |
-                filtroAplicado.equals("Fecha de alta anterior a") | filtroAplicado.equals("Fecha de alta anterior a") |
+                filtroAplicado.equals("Fecha de alta anterior a") | filtroAplicado.equals("Fecha de alta posterior a") |
                 filtroAplicado.equals("Fecha finalizacion antes de") | filtroAplicado.equals("Fecha finalizacion despues de")){
             dateFiltro.setVisible(true);
             dateFiltro.setDisable(false);
