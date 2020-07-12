@@ -87,6 +87,7 @@ public class RellenarComboBox {
         ArrayList<TipoReparacion> tiposReparaciones = TipoReparacionDAO.getTiposReparaciones();
 
         ObservableList<String> listaTiposReparaciones = FXCollections.observableArrayList();
+        listaTiposReparaciones.add("0 - Ninguna");
 
         for(TipoReparacion tr : tiposReparaciones) {
             listaTiposReparaciones.add(tr.getId() + " - " + tr.gettipoReparacion());
